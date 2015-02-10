@@ -10,6 +10,7 @@
 #import "QuizViewController.h"
 #import "SettingsViewController.h"
 #import "AboutViewController.h"
+#import "PopAnimationButton.h"
 
 
 @interface MenuViewController ()
@@ -80,7 +81,8 @@
 
 - (void)configureUI
 {
-	self.view.backgroundColor = [UIColor colorWithRed:0.05 green:0.32 blue:0.41 alpha:1];
+    UIColor *backgroundColor = [UIColor colorWithRed:0.05 green:0.32 blue:0.41 alpha:1];
+	self.view.backgroundColor = backgroundColor;
 	
 	float cornerRadius = self.startButton.bounds.size.height/2;
 	self.startButton.layer.cornerRadius = cornerRadius;

@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import <pop/POP.h>
+#import "AboutViewController.h"
 
 
 @interface SettingsViewController ()
@@ -21,10 +22,15 @@
 
 
 @implementation SettingsViewController
+{
+    CGFloat _duration;
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _duration = 0.4;
 	[self configureUI];
 }
 
@@ -33,13 +39,13 @@
 
 - (IBAction)aboutButtonTapped:(id)sender
 {
-	[self popAnimation];
+	[self performSelector:@selector(showViewController:) withObject:sender afterDelay:_duration];
 }
 
 
 - (IBAction)soundEffectButtonTapped:(id)sender
 {
-	
+	[self performSelector:@selector(showViewController:) withObject:sender afterDelay:_duration];
 }
 
 
@@ -55,9 +61,46 @@
 }
 
 
+//Button X
 - (IBAction)dismissButtonTapped:(id)sender
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+#pragma mark - Show ViewController
+
+- (void)showViewController:(id)sender
+{
+    if (sender == self.aboutButton)
+    {
+        AboutViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
+        controller.view.frame = self.view.bounds;
+        [controller presentInParentViewController:self];
+    }
+    else if (sender == self.soundEffectButton)
+    {
+        SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+        [self presentViewController:controller animated:YES completion:^{ }];
+    }
+    else if (sender == self.sendMailButton)
+    {
+        NSLog(@"senaMail button tapped");
+    }
+    else if (sender == self.feedbackButton)
+    {
+        NSLog(@"feedback button tapped");
+    }
+}
+
+
+#pragma mark - Gesture: TouchesBegan
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
