@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B97DC294D8C6E50512C47F4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4335BFEC03F1675186383896 /* libPods.a */; };
 		C1400EC11A89DAEC00867496 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC01A89DAEC00867496 /* main.m */; };
 		C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC31A89DAEC00867496 /* AppDelegate.m */; };
 		C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC61A89DAEC00867496 /* QuizViewController.m */; };
@@ -17,6 +18,9 @@
 		C1400EE71A89DBB400867496 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EE61A89DBB400867496 /* MenuViewController.m */; };
 		C1400EEA1A89DC5E00867496 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EE91A89DC5E00867496 /* AboutViewController.m */; };
 		C1400EEF1A89DCD000867496 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EEE1A89DCD000867496 /* GradientView.m */; };
+		C1400EF21A89E3C800867496 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EF11A89E3C800867496 /* SettingsViewController.m */; };
+		C1400EF61A89E77B00867496 /* PopAnimationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EF51A89E77B00867496 /* PopAnimationButton.m */; };
+		C1400F001A89ED0B00867496 /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = C1400EFF1A89ED0B00867496 /* AFNetworking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4335BFEC03F1675186383896 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		55C41846C9C4A9A3FF714D22 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A93D3854E72A579DC09E0303 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C1400EBB1A89DAEC00867496 /* QuizKorean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizKorean.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1400EBF1A89DAEC00867496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1400EC01A89DAEC00867496 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,6 +56,11 @@
 		C1400EE91A89DC5E00867496 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		C1400EED1A89DCD000867496 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		C1400EEE1A89DCD000867496 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		C1400EF01A89E3C800867496 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		C1400EF11A89E3C800867496 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		C1400EF41A89E77B00867496 /* PopAnimationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopAnimationButton.h; sourceTree = "<group>"; };
+		C1400EF51A89E77B00867496 /* PopAnimationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopAnimationButton.m; sourceTree = "<group>"; };
+		C1400EFF1A89ED0B00867496 /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AFNetworking; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B97DC294D8C6E50512C47F4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,12 +82,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1964551D55526615F0E43451 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4335BFEC03F1675186383896 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C1400EB21A89DAEC00867496 = {
 			isa = PBXGroup;
 			children = (
 				C1400EBD1A89DAEC00867496 /* QuizKorean */,
 				C1400ED71A89DAEC00867496 /* QuizKoreanTests */,
 				C1400EBC1A89DAEC00867496 /* Products */,
+				C3CF64C71C41425DFB9E90E7 /* Pods */,
+				1964551D55526615F0E43451 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,9 +113,11 @@
 		C1400EBD1A89DAEC00867496 /* QuizKorean */ = {
 			isa = PBXGroup;
 			children = (
-				C1400EEB1A89DC8C00867496 /* UI */,
+				C1400EFF1A89ED0B00867496 /* AFNetworking */,
+				C1400EF31A89E75900867496 /* PopButton */,
 				C1400EEC1A89DCAD00867496 /* Views */,
 				C1400EE41A89DB7E00867496 /* Controllers */,
+				C1400EEB1A89DC8C00867496 /* UI */,
 				C1400EBE1A89DAEC00867496 /* Supporting Files */,
 			);
 			path = QuizKorean;
@@ -133,6 +158,8 @@
 				C1400EE61A89DBB400867496 /* MenuViewController.m */,
 				C1400EC51A89DAEC00867496 /* QuizViewController.h */,
 				C1400EC61A89DAEC00867496 /* QuizViewController.m */,
+				C1400EF01A89E3C800867496 /* SettingsViewController.h */,
+				C1400EF11A89E3C800867496 /* SettingsViewController.m */,
 				C1400EE81A89DC5E00867496 /* AboutViewController.h */,
 				C1400EE91A89DC5E00867496 /* AboutViewController.m */,
 			);
@@ -158,6 +185,24 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		C1400EF31A89E75900867496 /* PopButton */ = {
+			isa = PBXGroup;
+			children = (
+				C1400EF41A89E77B00867496 /* PopAnimationButton.h */,
+				C1400EF51A89E77B00867496 /* PopAnimationButton.m */,
+			);
+			name = PopButton;
+			sourceTree = "<group>";
+		};
+		C3CF64C71C41425DFB9E90E7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				55C41846C9C4A9A3FF714D22 /* Pods.debug.xcconfig */,
+				A93D3854E72A579DC09E0303 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -165,9 +210,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C1400EDE1A89DAEC00867496 /* Build configuration list for PBXNativeTarget "QuizKorean" */;
 			buildPhases = (
+				492E01909D264213415415A1 /* Check Pods Manifest.lock */,
 				C1400EB71A89DAEC00867496 /* Sources */,
 				C1400EB81A89DAEC00867496 /* Frameworks */,
 				C1400EB91A89DAEC00867496 /* Resources */,
+				FAEA831B0E7D55506D76D81A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,6 +288,7 @@
 				C1400ECA1A89DAEC00867496 /* Main.storyboard in Resources */,
 				C1400ECF1A89DAEC00867496 /* LaunchScreen.xib in Resources */,
 				C1400ECC1A89DAEC00867496 /* Images.xcassets in Resources */,
+				C1400F001A89ED0B00867496 /* AFNetworking in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +301,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		492E01909D264213415415A1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FAEA831B0E7D55506D76D81A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C1400EB71A89DAEC00867496 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -260,10 +341,12 @@
 			files = (
 				C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */,
 				C1400EEA1A89DC5E00867496 /* AboutViewController.m in Sources */,
+				C1400EF61A89E77B00867496 /* PopAnimationButton.m in Sources */,
 				C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */,
 				C1400EC11A89DAEC00867496 /* main.m in Sources */,
 				C1400EEF1A89DCD000867496 /* GradientView.m in Sources */,
 				C1400EE71A89DBB400867496 /* MenuViewController.m in Sources */,
+				C1400EF21A89E3C800867496 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -377,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -387,9 +470,11 @@
 		};
 		C1400EDF1A89DAEC00867496 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55C41846C9C4A9A3FF714D22 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = QuizKorean/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -397,9 +482,11 @@
 		};
 		C1400EE01A89DAEC00867496 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A93D3854E72A579DC09E0303 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = QuizKorean/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -418,6 +505,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = QuizKoreanTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuizKorean.app/QuizKorean";
@@ -433,6 +521,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = QuizKoreanTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuizKorean.app/QuizKorean";
@@ -458,6 +547,7 @@
 				C1400EE01A89DAEC00867496 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C1400EE11A89DAEC00867496 /* Build configuration list for PBXNativeTarget "QuizKoreanTests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +556,7 @@
 				C1400EE31A89DAEC00867496 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

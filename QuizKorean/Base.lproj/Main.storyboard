@@ -15,11 +15,34 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9L-0g-1RC">
+                                <rect key="frame" x="200" y="275" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3zf-vi-xhE"/>
+                                    <constraint firstAttribute="width" constant="200" id="oC9-C7-ErY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal" title="Dismiss">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lqk-IC-8I8"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="W9L-0g-1RC" secondAttribute="centerY" id="9K6-Hb-RWY"/>
+                            <constraint firstAttribute="centerX" secondItem="W9L-0g-1RC" secondAttribute="centerX" id="BWy-az-qup"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1337" y="395"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="kDx-TO-5mj">
@@ -84,7 +107,47 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTE-gn-mSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1137" y="421"/>
+            <point key="canvasLocation" x="1337" y="1065"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="xt5-h0-RBe">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="mhd-ah-6Vd" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d04-GD-XLL"/>
+                        <viewControllerLayoutGuide type="bottom" id="zsI-bZ-Fiq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ucK-2U-B2q">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dcm-1Z-3sq">
+                                <rect key="frame" x="200" y="275" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="DpQ-ze-xEd"/>
+                                    <constraint firstAttribute="width" constant="200" id="j9e-WL-6Ek"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal" title="Dismiss">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonTapped:" destination="mhd-ah-6Vd" eventType="touchUpInside" id="FY0-PJ-otX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="Dcm-1Z-3sq" secondAttribute="centerY" id="CjR-hq-7N8"/>
+                            <constraint firstAttribute="centerX" secondItem="Dcm-1Z-3sq" secondAttribute="centerX" id="hXw-zb-bd6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0fO-0H-fPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1337" y="1735"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="2vz-rM-jvT">
@@ -98,30 +161,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWt-n1-Bk6">
-                                <rect key="frame" x="283" y="282" width="35" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOr-YR-pc5" userLabel="SettingsButton" customClass="PopAnimationButton">
+                                <rect key="frame" x="200" y="275" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="3Cp-Aj-jCU"/>
+                                    <constraint firstAttribute="height" constant="50" id="fUo-Ll-HKL"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="정보">
+                                <state key="normal" title="설정">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="aboutButtonTapped:" destination="Qhu-wo-ihA" eventType="touchUpInside" id="BNX-E7-1In"/>
+                                    <action selector="settingsButtonTapped:" destination="Qhu-wo-ihA" eventType="touchUpInside" id="eg6-C2-73x"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXc-yD-5gj" userLabel="AboutButton" customClass="PopAnimationButton">
+                                <rect key="frame" x="200" y="355" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="정보">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="aboutButtonTapped:" destination="Qhu-wo-ihA" eventType="touchUpInside" id="5F8-dO-FxB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWt-n1-Bk6" userLabel="StartButton" customClass="PopAnimationButton">
+                                <rect key="frame" x="200" y="195" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="시작">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startButtonTapped:" destination="Qhu-wo-ihA" eventType="touchUpInside" id="ZN5-q0-CGP"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="uWt-n1-Bk6" secondAttribute="centerX" id="5nt-zb-q4B"/>
-                            <constraint firstAttribute="centerY" secondItem="uWt-n1-Bk6" secondAttribute="centerY" id="m4y-Lu-lbe"/>
+                            <constraint firstItem="WXc-yD-5gj" firstAttribute="height" secondItem="XOr-YR-pc5" secondAttribute="height" id="57X-Ny-jZx"/>
+                            <constraint firstItem="XOr-YR-pc5" firstAttribute="top" secondItem="uWt-n1-Bk6" secondAttribute="bottom" constant="30" id="8ub-cb-Lun"/>
+                            <constraint firstAttribute="centerY" secondItem="XOr-YR-pc5" secondAttribute="centerY" id="Bgb-p4-AXW"/>
+                            <constraint firstItem="XOr-YR-pc5" firstAttribute="height" secondItem="uWt-n1-Bk6" secondAttribute="height" id="Cl0-3l-GcW"/>
+                            <constraint firstItem="WXc-yD-5gj" firstAttribute="width" secondItem="XOr-YR-pc5" secondAttribute="width" id="Gj4-X7-3PU"/>
+                            <constraint firstItem="XOr-YR-pc5" firstAttribute="centerX" secondItem="uWt-n1-Bk6" secondAttribute="centerX" id="WOc-QE-ciS"/>
+                            <constraint firstAttribute="centerX" secondItem="XOr-YR-pc5" secondAttribute="centerX" id="aUR-xh-N0F"/>
+                            <constraint firstItem="WXc-yD-5gj" firstAttribute="centerX" secondItem="XOr-YR-pc5" secondAttribute="centerX" id="dvC-J9-Ect"/>
+                            <constraint firstItem="XOr-YR-pc5" firstAttribute="width" secondItem="uWt-n1-Bk6" secondAttribute="width" id="fbT-5B-xRO"/>
+                            <constraint firstItem="WXc-yD-5gj" firstAttribute="top" secondItem="XOr-YR-pc5" secondAttribute="bottom" constant="30" id="n4k-yk-3Q8"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="aboutButton" destination="uWt-n1-Bk6" id="2CS-ZD-a2x"/>
+                        <outlet property="aboutButton" destination="WXc-yD-5gj" id="dD8-X8-7Qg"/>
+                        <outlet property="settingsButton" destination="XOr-YR-pc5" id="Hmq-VD-4th"/>
+                        <outlet property="startButton" destination="uWt-n1-Bk6" id="8fn-Bu-kLA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujV-7U-yDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="488" y="1111"/>
+            <point key="canvasLocation" x="676" y="1065"/>
         </scene>
     </scenes>
 </document>

@@ -1,23 +1,22 @@
 //
-//  ViewController.m
+//  SettingsViewController.m
 //  QuizKorean
 //
 //  Created by jun on 2/10/15.
 //  Copyright (c) 2015 jun. All rights reserved.
 //
 
-#import "QuizViewController.h"
+#import "SettingsViewController.h"
 
-@interface QuizViewController ()
+@interface SettingsViewController ()
 
 @end
 
-
-@implementation QuizViewController
+@implementation SettingsViewController
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
 }
 
 
