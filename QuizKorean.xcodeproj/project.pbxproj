@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		C1400EC11A89DAEC00867496 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC01A89DAEC00867496 /* main.m */; };
 		C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC31A89DAEC00867496 /* AppDelegate.m */; };
-		C1400EC71A89DAEC00867496 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC61A89DAEC00867496 /* ViewController.m */; };
+		C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC61A89DAEC00867496 /* QuizViewController.m */; };
 		C1400ECA1A89DAEC00867496 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1400EC81A89DAEC00867496 /* Main.storyboard */; };
 		C1400ECC1A89DAEC00867496 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1400ECB1A89DAEC00867496 /* Images.xcassets */; };
 		C1400ECF1A89DAEC00867496 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1400ECD1A89DAEC00867496 /* LaunchScreen.xib */; };
 		C1400EDB1A89DAEC00867496 /* QuizKoreanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EDA1A89DAEC00867496 /* QuizKoreanTests.m */; };
+		C1400EE71A89DBB400867496 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EE61A89DBB400867496 /* MenuViewController.m */; };
+		C1400EEA1A89DC5E00867496 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EE91A89DC5E00867496 /* AboutViewController.m */; };
+		C1400EEF1A89DCD000867496 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EEE1A89DCD000867496 /* GradientView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +35,20 @@
 		C1400EC01A89DAEC00867496 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C1400EC21A89DAEC00867496 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C1400EC31A89DAEC00867496 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C1400EC51A89DAEC00867496 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C1400EC61A89DAEC00867496 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C1400EC51A89DAEC00867496 /* QuizViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuizViewController.h; sourceTree = "<group>"; };
+		C1400EC61A89DAEC00867496 /* QuizViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuizViewController.m; sourceTree = "<group>"; };
 		C1400EC91A89DAEC00867496 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C1400ECB1A89DAEC00867496 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C1400ECE1A89DAEC00867496 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C1400ED41A89DAEC00867496 /* QuizKoreanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizKoreanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1400ED91A89DAEC00867496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1400EDA1A89DAEC00867496 /* QuizKoreanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuizKoreanTests.m; sourceTree = "<group>"; };
+		C1400EE51A89DBB400867496 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		C1400EE61A89DBB400867496 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		C1400EE81A89DC5E00867496 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		C1400EE91A89DC5E00867496 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		C1400EED1A89DCD000867496 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		C1400EEE1A89DCD000867496 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +90,9 @@
 		C1400EBD1A89DAEC00867496 /* QuizKorean */ = {
 			isa = PBXGroup;
 			children = (
-				C1400EC21A89DAEC00867496 /* AppDelegate.h */,
-				C1400EC31A89DAEC00867496 /* AppDelegate.m */,
-				C1400EC51A89DAEC00867496 /* ViewController.h */,
-				C1400EC61A89DAEC00867496 /* ViewController.m */,
-				C1400EC81A89DAEC00867496 /* Main.storyboard */,
-				C1400ECB1A89DAEC00867496 /* Images.xcassets */,
-				C1400ECD1A89DAEC00867496 /* LaunchScreen.xib */,
+				C1400EEB1A89DC8C00867496 /* UI */,
+				C1400EEC1A89DCAD00867496 /* Views */,
+				C1400EE41A89DB7E00867496 /* Controllers */,
 				C1400EBE1A89DAEC00867496 /* Supporting Files */,
 			);
 			path = QuizKorean;
@@ -117,6 +122,40 @@
 				C1400ED91A89DAEC00867496 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C1400EE41A89DB7E00867496 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C1400EC21A89DAEC00867496 /* AppDelegate.h */,
+				C1400EC31A89DAEC00867496 /* AppDelegate.m */,
+				C1400EE51A89DBB400867496 /* MenuViewController.h */,
+				C1400EE61A89DBB400867496 /* MenuViewController.m */,
+				C1400EC51A89DAEC00867496 /* QuizViewController.h */,
+				C1400EC61A89DAEC00867496 /* QuizViewController.m */,
+				C1400EE81A89DC5E00867496 /* AboutViewController.h */,
+				C1400EE91A89DC5E00867496 /* AboutViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C1400EEB1A89DC8C00867496 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C1400EC81A89DAEC00867496 /* Main.storyboard */,
+				C1400ECD1A89DAEC00867496 /* LaunchScreen.xib */,
+				C1400ECB1A89DAEC00867496 /* Images.xcassets */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		C1400EEC1A89DCAD00867496 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C1400EED1A89DCD000867496 /* GradientView.h */,
+				C1400EEE1A89DCD000867496 /* GradientView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +258,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1400EC71A89DAEC00867496 /* ViewController.m in Sources */,
+				C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */,
+				C1400EEA1A89DC5E00867496 /* AboutViewController.m in Sources */,
 				C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */,
 				C1400EC11A89DAEC00867496 /* main.m in Sources */,
+				C1400EEF1A89DCD000867496 /* GradientView.m in Sources */,
+				C1400EE71A89DBB400867496 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

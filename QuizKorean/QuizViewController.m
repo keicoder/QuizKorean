@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 jun. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "QuizViewController.h"
 
-@interface ViewController ()
+@interface QuizViewController ()
 
 @end
 
-@implementation ViewController
+@implementation QuizViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
