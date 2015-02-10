@@ -7,6 +7,12 @@
 //
 
 #import "QuizViewController.h"
+#import "AFNetworking.h"
+#import "Quiz.h"
+#import "MenuViewController.h"
+#import "POP.h"
+#import <AudioToolbox/AudioToolbox.h>
+
 
 @interface QuizViewController ()
 

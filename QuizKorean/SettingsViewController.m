@@ -7,7 +7,7 @@
 //
 
 #import "SettingsViewController.h"
-#import <pop/POP.h>
+#import "POP.h"
 #import "AboutViewController.h"
 
 
@@ -92,15 +92,6 @@
     {
         NSLog(@"feedback button tapped");
     }
-}
-
-
-#pragma mark - Gesture: TouchesBegan
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
