@@ -31,6 +31,7 @@
 		C1B2A7FE1A8AD21C00FC80C2 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7F31A8AD21C00FC80C2 /* AFURLRequestSerialization.m */; };
 		C1B2A7FF1A8AD21C00FC80C2 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7F51A8AD21C00FC80C2 /* AFURLResponseSerialization.m */; };
 		C1B2A8001A8AD21C00FC80C2 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7F71A8AD21C00FC80C2 /* AFURLSessionManager.m */; };
+		C1B2A8041A8AE48C00FC80C2 /* UIImage+ChangeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A8031A8AE48C00FC80C2 /* UIImage+ChangeColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		C1B2A7F51A8AD21C00FC80C2 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		C1B2A7F61A8AD21C00FC80C2 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		C1B2A7F71A8AD21C00FC80C2 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		C1B2A8021A8AE48C00FC80C2 /* UIImage+ChangeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ChangeColor.h"; sourceTree = "<group>"; };
+		C1B2A8031A8AE48C00FC80C2 /* UIImage+ChangeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ChangeColor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				C1B2A7E41A8AD21C00FC80C2 /* AFNetworking */,
+				C1B2A8011A8AE48C00FC80C2 /* Categories */,
 				C1400EF31A89E75900867496 /* PopButton */,
 				C1400EEC1A89DCAD00867496 /* Views */,
 				C1400EE41A89DB7E00867496 /* Controllers */,
@@ -268,6 +272,15 @@
 				C1B2A7F71A8AD21C00FC80C2 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		C1B2A8011A8AE48C00FC80C2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C1B2A8021A8AE48C00FC80C2 /* UIImage+ChangeColor.h */,
+				C1B2A8031A8AE48C00FC80C2 /* UIImage+ChangeColor.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		C3CF64C71C41425DFB9E90E7 /* Pods */ = {
@@ -415,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B2A8041A8AE48C00FC80C2 /* UIImage+ChangeColor.m in Sources */,
 				C1B2A7FC1A8AD21C00FC80C2 /* AFSecurityPolicy.m in Sources */,
 				C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */,
 				C1B2A7FB1A8AD21C00FC80C2 /* AFNetworkReachabilityManager.m in Sources */,
