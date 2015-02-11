@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _duration = 0.4;
+    _duration = 0.5;
 	[self configureUI];
 }
 
@@ -39,34 +39,54 @@
 
 - (IBAction)aboutButtonTapped:(id)sender
 {
+	[self popAnimation:sender];
 	[self performSelector:@selector(showViewController:) withObject:sender afterDelay:_duration];
 }
 
 
 - (IBAction)soundEffectButtonTapped:(id)sender
 {
+	[self popAnimation:sender];
 	[self performSelector:@selector(showViewController:) withObject:sender afterDelay:_duration];
 }
 
 
 - (IBAction)sendMailButtonTapped:(id)sender
 {
-	
+	[self popAnimation:sender];
 }
 
 
 - (IBAction)feedbackButtonTapped:(id)sender
 {
+	[self popAnimation:sender];
+}
+
+
+- (IBAction)dismissButtonTapped:(id)sender
+{
+	[self popAnimation:sender];
+	[self performSelector:@selector(dismissView) withObject:self afterDelay:0.3];
 	
 }
 
 
-//Button X
-- (IBAction)dismissButtonTapped:(id)sender
+- (void)dismissView
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+#pragma mark - Pop Animation: Sprint
+
+- (void)popAnimation:(id)sender
+{
+	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
+	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(2, 2)];
+	sprintAnimation.springBounciness = 20.f;
+	[sender pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
+}
 
 
 #pragma mark - Show ViewController
@@ -92,17 +112,6 @@
     {
         NSLog(@"feedback button tapped");
     }
-}
-
-
-#pragma mark - Pop Animation
-
-- (void)popAnimation
-{
-	POPBasicAnimation *scaleAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPViewScaleXY];
-	scaleAnimation.duration = 0.1;
-	scaleAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-	[self.aboutButton pop_addAnimation:scaleAnimation forKey:@"scalingUp"];
 }
 
 

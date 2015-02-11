@@ -19,6 +19,9 @@
 #define debug 1
 
 
+#define kODD_COLOR [UIColor colorWithRed:0.05 green:0.32 blue:0.41 alpha:1]
+#define kEVEN_COLOR [UIColor colorWithRed:0.000 green:0.277 blue:0.361 alpha:1.000]
+
 @interface QuizViewController ()
 
 @property (nonatomic, strong) Quiz *quiz;
@@ -73,7 +76,23 @@
 - (void)fetchJSONData
 {
 	self.quiz = [[Quiz alloc] init];
-	[self.quiz fetchJSON];
+	
+	CGFloat duration = 0.2f;
+	CGFloat alpha = 0.0f;
+	
+	[UIView animateWithDuration:duration animations:^{
+		
+		self.questionLabel.alpha = alpha;
+		self.answerLabel1.alpha = alpha;
+		self.answerLabel2.alpha = alpha;
+		self.answerLabel3.alpha = alpha;
+		self.answerLabel4.alpha = alpha;
+		
+	}completion:^(BOOL finished) {
+		
+		[self.quiz fetchJSON];
+	}];
+	
 }
 
 
@@ -89,50 +108,87 @@
 {
 	if ([[notification name] isEqualToString:@"ParseJSONDictionaryFinishedNotification"])
 	{
+		_quiz1 = self.quiz.quizArray[0];
+		_quiz2 = self.quiz.quizArray[1];
+		_quiz3 = self.quiz.quizArray[2];
+		_quiz4 = self.quiz.quizArray[3];
+		
 		POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
 		sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-		sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(2, 2)];
+		sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(4, 4)];
 		sprintAnimation.springBounciness = 20.f;
-		[self.questionLabel pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
 		
-		_quiz1 = self.quiz.quizArray[0];
-		self.questionLabel.text = _quiz1.question;
-		self.answerLabel1.text = _quiz1.answer;
-		NSLog (@"quiz1.correct: %@\n", _quiz1.correct);
+		CGFloat duration = 0.2f;
+		CGFloat alpha = 1.0f;
 		
-		_quiz2 = self.quiz.quizArray[1];
-		self.answerLabel2.text = _quiz2.answer;
-		NSLog (@"quiz2.correct: %@\n", _quiz2.correct);
-		
-		_quiz3 = self.quiz.quizArray[2];
-		self.answerLabel3.text = _quiz3.answer;
-		NSLog (@"quiz3.correct: %@\n", _quiz3.correct);
-		
-		_quiz4 = self.quiz.quizArray[3];
-		self.answerLabel4.text = _quiz4.answer;
-		NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
+		[UIView animateWithDuration:duration animations:^{
+			self.questionLabel.alpha = alpha;
+			[self.questionLabel pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
+			self.questionLabel.text = _quiz1.question;
+		}completion:^(BOOL finished) {
+			[UIView animateWithDuration:duration animations:^{
+				self.answerLabel1.alpha = alpha;
+				self.answerLabel1.text = _quiz1.answer;
+				NSLog (@"quiz1.correct: %@\n", _quiz1.correct);
+			}completion:^(BOOL finished) {
+				[UIView animateWithDuration:duration animations:^{
+					self.answerLabel2.alpha = alpha;
+					self.answerLabel2.text = _quiz2.answer;
+					NSLog (@"quiz2.correct: %@\n", _quiz2.correct);
+				}completion:^(BOOL finished) {
+					[UIView animateWithDuration:duration animations:^{
+						self.answerLabel3.alpha = alpha;
+						self.answerLabel3.text = _quiz3.answer;
+						NSLog (@"quiz3.correct: %@\n", _quiz3.correct);
+					}completion:^(BOOL finished) {
+						[UIView animateWithDuration:duration animations:^{
+							self.answerLabel4.alpha = alpha;
+							self.answerLabel4.text = _quiz4.answer;
+							NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
+						}completion:^(BOOL finished) { }];
+					}];
+				}];
+			}];
+		}];
 	}
 }
 
 
-#pragma mark - Answer Button Action
+#pragma mark - Button Action
 
 - (IBAction)answerButtonPressed:(id)sender
 {
-	UIColor *highlightedColor = [UIColor colorWithRed:0.07 green:0.14 blue:0.26 alpha:1];
-	UIColor *normalColor = [UIColor clearColor];
-	
 	CGFloat duration = 0.2f;
-	[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-		[sender setBackgroundColor:highlightedColor];
+	
+	[UIView animateWithDuration:0.3 delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+		[sender setBackgroundColor:[UIColor orangeColor]];
 	} completion:^(BOOL finished) {
 		
-		[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-			[sender setBackgroundColor:normalColor];
-		} completion:^(BOOL finished) {
-			
-			[self inquireAnswer:sender];
-		}];
+		if (sender == self.answerButton1) {
+			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+				[sender setBackgroundColor:kODD_COLOR];
+			} completion:^(BOOL finished) {
+				[self inquireAnswer:sender];
+			}];
+		} else if (sender == self.answerButton2) {
+			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+				[sender setBackgroundColor:kEVEN_COLOR];
+			} completion:^(BOOL finished) {
+				[self inquireAnswer:sender];
+			}];
+		} else if (sender == self.answerButton3) {
+			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+				[sender setBackgroundColor:kODD_COLOR];
+			} completion:^(BOOL finished) {
+				[self inquireAnswer:sender];
+			}];
+		} else if (sender == self.answerButton4) {
+			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+				[sender setBackgroundColor:kEVEN_COLOR];
+			} completion:^(BOOL finished) {
+				[self inquireAnswer:sender];
+			}];
+		}
 	}];
 }
 
@@ -151,8 +207,8 @@
 	
 	//POP Sprint Animation
 	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
-	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.1, 1.1)];
-	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(2, 2)];
+	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(4, 4)];
 	sprintAnimation.springBounciness = 20.f;
 	
 	//오답일 때
@@ -161,44 +217,44 @@
 	shakeAnimation.springBounciness = 20;
 	shakeAnimation.velocity = @(3000);
 	
-	CGFloat delay = 1.0f;
+	CGFloat delay = 1.3f;
 	
 	if (sender == self.answerButton1) {
 		if ([_quiz1.correct isEqualToString:correct]) {
-			[self.answerButton1.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
+			[self.answerLabel1.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self playCorrectSound:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
-			[self.answerButton1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			[self.answerLabel1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
 		}
 	} else if (sender == self.answerButton2) {
 		if ([_quiz2.correct isEqualToString:correct]) {
-			[self.answerButton2.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
+			[self.answerLabel2.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self playCorrectSound:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
-			[self.answerButton2.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			[self.answerLabel2.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
 		}
 	}
 	else if (sender == self.answerButton3) {
 		if ([_quiz3.correct isEqualToString:correct]) {
-			[self.answerButton3.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
+			[self.answerLabel3.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self playCorrectSound:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
-			[self.answerButton3.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			[self.answerLabel3.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
 		}
 	}else if (sender == self.answerButton4) {
 		if ([_quiz4.correct isEqualToString:correct]) {
-			[self.answerButton4.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
+			[self.answerLabel4.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self playCorrectSound:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
-			[self.answerButton4.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			[self.answerLabel4.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
 		}
 	}
 }
@@ -227,24 +283,30 @@
 	[self.answerButton3 setTitle:blank forState:UIControlStateNormal];
 	[self.answerButton4 setTitle:blank forState:UIControlStateNormal];
 	
-	UIColor *whiteColor = [UIColor whiteColor];
+	self.questionLabel.text = blank;
+	self.answerLabel1.text = blank;
+	self.answerLabel2.text = blank;
+	self.answerLabel3.text = blank;
+	self.answerLabel4.text = blank;
 	
 	self.view.backgroundColor = [UIColor colorWithRed:0.11 green:0.67 blue:0.85 alpha:1];
 	
 	self.questionContainerView.backgroundColor = [UIColor clearColor];
-	self.answerContainerView.backgroundColor = whiteColor;
+	self.answerContainerView.backgroundColor = [UIColor whiteColor];
 	
 	self.infoView.backgroundColor = [UIColor colorWithRed:0.548 green:0.828 blue:0.921 alpha:1.000];
 	self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.324 green:0.634 blue:0.737 alpha:1.000];
 	
+	UIColor *clearColor = [UIColor clearColor];
+	self.answerLabel1.backgroundColor = clearColor;
+	self.answerLabel2.backgroundColor = clearColor;
+	self.answerLabel3.backgroundColor = clearColor;
+	self.answerLabel4.backgroundColor = clearColor;
 	
-	
-	UIColor *oddColor = [UIColor colorWithRed:0.05 green:0.32 blue:0.41 alpha:1];
-	UIColor *evenColor = [UIColor colorWithRed:0.000 green:0.277 blue:0.361 alpha:1.000];
-	self.answerButton1.backgroundColor = oddColor;
-	self.answerButton2.backgroundColor = evenColor;
-	self.answerButton3.backgroundColor = oddColor;
-	self.answerButton4.backgroundColor = evenColor;
+	self.answerButton1.backgroundColor = kODD_COLOR;
+	self.answerButton2.backgroundColor = kEVEN_COLOR;
+	self.answerButton3.backgroundColor = kODD_COLOR;
+	self.answerButton4.backgroundColor = kEVEN_COLOR;
 }
 
 

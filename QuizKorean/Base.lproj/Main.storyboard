@@ -146,6 +146,49 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vq7-0f-ZE0" userLabel="AnswerContainerView">
                                 <rect key="frame" x="0.0" y="300" width="600" height="300"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDP-SU-zF2" userLabel="AnswerButton1">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="UkD-6x-SuE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="AnswerButton1">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0aU-SZ-89Y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nuc-Wh-px5" userLabel="AnswerButton2">
+                                        <rect key="frame" x="0.0" y="75" width="600" height="75"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="AnswerButton2">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="doo-H3-CoV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKh-wo-vs1" userLabel="AnswerButton3">
+                                        <rect key="frame" x="0.0" y="150" width="600" height="75"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="AnswerButton3">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5VY-7d-Nsf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlv-jO-qi6" userLabel="AnswerButton4">
+                                        <rect key="frame" x="0.0" y="225" width="600" height="75"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="AnswerButton4">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WUO-NI-z5u"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="Dll-tu-ddo" userLabel="AnswerLabel1">
                                         <rect key="frame" x="20" y="0.0" width="560" height="75"/>
                                         <color key="backgroundColor" red="1" green="0.52167034149169922" blue="0.16747227311134338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,22 +224,39 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.69699001312255859" blue="0.95705920457839966" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="DDP-SU-zF2" secondAttribute="centerX" id="1HI-Ko-qSC"/>
+                                    <constraint firstItem="Nuc-Wh-px5" firstAttribute="top" secondItem="DDP-SU-zF2" secondAttribute="bottom" id="1J0-HI-vW6"/>
+                                    <constraint firstItem="qKh-wo-vs1" firstAttribute="height" secondItem="Rlv-jO-qi6" secondAttribute="height" id="1Me-ws-nbP"/>
                                     <constraint firstItem="dg6-n8-PEo" firstAttribute="top" secondItem="Dll-tu-ddo" secondAttribute="bottom" id="6E1-sq-JlM"/>
+                                    <constraint firstItem="qKh-wo-vs1" firstAttribute="width" secondItem="Rlv-jO-qi6" secondAttribute="width" id="6Lw-2X-BRi"/>
                                     <constraint firstAttribute="trailing" secondItem="Dll-tu-ddo" secondAttribute="trailing" constant="20" id="9dL-pQ-tB1"/>
                                     <constraint firstItem="Dll-tu-ddo" firstAttribute="leading" secondItem="Vq7-0f-ZE0" secondAttribute="leading" constant="20" id="EMb-Ep-Bux"/>
+                                    <constraint firstItem="qKh-wo-vs1" firstAttribute="centerX" secondItem="Rlv-jO-qi6" secondAttribute="centerX" id="Eva-VI-iS9"/>
+                                    <constraint firstItem="DDP-SU-zF2" firstAttribute="top" secondItem="Vq7-0f-ZE0" secondAttribute="top" id="HLy-TX-aE4"/>
+                                    <constraint firstItem="qKh-wo-vs1" firstAttribute="height" secondItem="Nuc-Wh-px5" secondAttribute="height" id="HVa-Jw-XM8"/>
                                     <constraint firstItem="4JN-uH-SiH" firstAttribute="width" secondItem="RGa-0d-UGf" secondAttribute="width" id="LrN-Z7-o0K"/>
                                     <constraint firstAttribute="bottom" secondItem="4JN-uH-SiH" secondAttribute="bottom" id="Mzf-dr-iDp"/>
+                                    <constraint firstItem="Nuc-Wh-px5" firstAttribute="height" secondItem="DDP-SU-zF2" secondAttribute="height" id="OUJ-2q-aep"/>
+                                    <constraint firstItem="qKh-wo-vs1" firstAttribute="top" secondItem="Nuc-Wh-px5" secondAttribute="bottom" id="QDz-Vn-ghk"/>
                                     <constraint firstItem="4JN-uH-SiH" firstAttribute="height" secondItem="RGa-0d-UGf" secondAttribute="height" id="RTL-zS-KQN"/>
                                     <constraint firstItem="dg6-n8-PEo" firstAttribute="height" secondItem="Dll-tu-ddo" secondAttribute="height" id="Raq-Zt-89c"/>
                                     <constraint firstItem="dg6-n8-PEo" firstAttribute="centerX" secondItem="RGa-0d-UGf" secondAttribute="centerX" id="Ryc-5A-Z1a"/>
                                     <constraint firstAttribute="centerX" secondItem="Dll-tu-ddo" secondAttribute="centerX" id="Vkq-WM-lPb"/>
                                     <constraint firstItem="dg6-n8-PEo" firstAttribute="width" secondItem="Dll-tu-ddo" secondAttribute="width" id="WJs-g8-eQ9"/>
+                                    <constraint firstAttribute="trailing" secondItem="DDP-SU-zF2" secondAttribute="trailing" id="X7h-jG-K9h"/>
+                                    <constraint firstItem="Rlv-jO-qi6" firstAttribute="top" secondItem="qKh-wo-vs1" secondAttribute="bottom" id="ZJK-1i-Jyv"/>
+                                    <constraint firstItem="DDP-SU-zF2" firstAttribute="leading" secondItem="Vq7-0f-ZE0" secondAttribute="leading" id="frX-cJ-OS7"/>
                                     <constraint firstItem="dg6-n8-PEo" firstAttribute="centerX" secondItem="Dll-tu-ddo" secondAttribute="centerX" id="hxj-Dh-mA0"/>
                                     <constraint firstItem="dg6-n8-PEo" firstAttribute="width" secondItem="RGa-0d-UGf" secondAttribute="width" id="jQX-4A-Mfi"/>
                                     <constraint firstItem="Dll-tu-ddo" firstAttribute="top" secondItem="Vq7-0f-ZE0" secondAttribute="top" id="lCa-kb-JSP"/>
                                     <constraint firstItem="4JN-uH-SiH" firstAttribute="centerX" secondItem="RGa-0d-UGf" secondAttribute="centerX" id="pQ0-sw-7s0"/>
+                                    <constraint firstItem="Nuc-Wh-px5" firstAttribute="width" secondItem="DDP-SU-zF2" secondAttribute="width" id="pn6-fj-W5X"/>
                                     <constraint firstItem="dg6-n8-PEo" firstAttribute="height" secondItem="RGa-0d-UGf" secondAttribute="height" id="q9J-sx-UGT"/>
+                                    <constraint firstItem="qKh-wo-vs1" firstAttribute="width" secondItem="Nuc-Wh-px5" secondAttribute="width" id="sbi-zI-4rP"/>
                                     <constraint firstItem="RGa-0d-UGf" firstAttribute="top" secondItem="dg6-n8-PEo" secondAttribute="bottom" id="t6y-e7-XOP"/>
+                                    <constraint firstItem="Nuc-Wh-px5" firstAttribute="centerX" secondItem="DDP-SU-zF2" secondAttribute="centerX" id="vWX-4h-bcs"/>
+                                    <constraint firstItem="qKh-wo-vs1" firstAttribute="centerX" secondItem="Nuc-Wh-px5" secondAttribute="centerX" id="wzP-3b-RrE"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rlv-jO-qi6" secondAttribute="bottom" id="xJH-WU-QMr"/>
                                     <constraint firstItem="4JN-uH-SiH" firstAttribute="top" secondItem="RGa-0d-UGf" secondAttribute="bottom" id="yOJ-Vx-Ess"/>
                                 </constraints>
                             </view>
@@ -242,6 +302,10 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="answerButton1" destination="DDP-SU-zF2" id="H18-4T-qTf"/>
+                        <outlet property="answerButton2" destination="Nuc-Wh-px5" id="QTL-uQ-Col"/>
+                        <outlet property="answerButton3" destination="qKh-wo-vs1" id="gCT-gc-OY1"/>
+                        <outlet property="answerButton4" destination="Rlv-jO-qi6" id="CMw-yC-PQK"/>
                         <outlet property="answerContainerView" destination="Vq7-0f-ZE0" id="u48-TL-Tyg"/>
                         <outlet property="answerLabel1" destination="Dll-tu-ddo" id="G0R-O3-lB9"/>
                         <outlet property="answerLabel2" destination="dg6-n8-PEo" id="crm-av-psJ"/>
