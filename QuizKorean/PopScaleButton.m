@@ -8,8 +8,13 @@
 
 #define debug 1
 
+#define kHightlightTextColor [UIColor colorWithRed:1.000 green:0.473 blue:0.247 alpha:1.000]
+#define kNormalBgColor [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000]
+#define khighlightBgColor [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000]
+
 #import "PopScaleButton.h"
 #import <pop/POP.h>
+
 
 @interface PopScaleButton ()
 
@@ -34,6 +39,11 @@
 	
 	if (self) {
 		
+		UIColor *normalBgColor = [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000];
+		UIColor *hightlightTextColor = [UIColor colorWithWhite:0.908 alpha:1.000];
+		
+		[self setBackgroundColor:normalBgColor];
+		[self setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
 	}
 	
 	return self;
