@@ -12,6 +12,7 @@
 
 @implementation PopAnimationButton
 
+
 #pragma mark - Handle touches with a nice interaction animations
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -19,7 +20,7 @@
 	POPSpringAnimation *scale = [self pop_animationForKey:@"scale"];
 	POPSpringAnimation *rotate = [self.layer pop_animationForKey:@"rotate"];
 	
-	CGFloat size = 0.88;
+	CGFloat size = 0.88f;
 	
 	if (scale) {
 		scale.toValue = [NSValue valueWithCGPoint:CGPointMake(size, size)];
@@ -31,11 +32,12 @@
 		[self pop_addAnimation:scale forKey:@"scale"];
 	}
 	
+	CGFloat value = 6;
 	if (rotate) {
-		rotate.toValue = @(M_PI/6);
+		rotate.toValue = @(M_PI/value);
 	} else {
 		rotate = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
-		rotate.toValue = @(M_PI/6);
+		rotate.toValue = @(M_PI/value);
 		rotate.springBounciness = 20;
 		rotate.springSpeed = 18.0f;
 		[self.layer pop_addAnimation:rotate forKey:@"rotate"];
