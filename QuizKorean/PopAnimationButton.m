@@ -6,14 +6,42 @@
 //  Copyright (c) 2015 jun. All rights reserved.
 //
 
+#define kNormalBgColor [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000]
+#define khighlightBgColor [UIColor colorWithRed:0.044 green:0.132 blue:0.247 alpha:1.000]
+#define kNormalTextColor [UIColor whiteColor]
+#define kHightlightTextColor [UIColor whiteColor]
+
+
 #import "PopAnimationButton.h"
 #import <pop/POP.h>
 
 
 @implementation PopAnimationButton
+{
+	CGFloat _duration;
+}
 
 
-#pragma mark - Handle touches with a nice interaction animations
+#pragma mark - Init
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+	self = [super initWithCoder:coder];
+	
+	if (self) {
+		
+		_duration = 0.2f;
+		
+		[self setBackgroundColor:kNormalBgColor];
+		[self setTitleColor:kNormalTextColor forState:UIControlStateNormal];
+		[self setTitleColor:kHightlightTextColor forState:UIControlStateHighlighted];
+	}
+	
+	return self;
+}
+
+
+#pragma mark - Handle touches with a nice pop animations
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -34,14 +62,18 @@
 	
 	CGFloat value = 6;
 	if (rotate) {
-		rotate.toValue = @(M_PI/value);
+		rotate.toValue = @(-M_PI/value);
 	} else {
 		rotate = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
-		rotate.toValue = @(M_PI/value);
+		rotate.toValue = @(-M_PI/value);
 		rotate.springBounciness = 20;
 		rotate.springSpeed = 18.0f;
 		[self.layer pop_addAnimation:rotate forKey:@"rotate"];
 	}
+	
+	[UIView animateWithDuration:_duration animations:^{
+		[self setBackgroundColor:khighlightBgColor];
+	}completion:^(BOOL finished) { }];
 	
 	[super touchesBegan:touches withEvent:event];
 }
@@ -73,7 +105,12 @@
 		[self.layer pop_addAnimation:rotate forKey:@"rotate"];
 	}
 	
+	[UIView animateWithDuration:_duration animations:^{
+		[self setBackgroundColor:kNormalBgColor];
+	}completion:^(BOOL finished) { }];
+	
 	[super touchesEnded:touches withEvent:event];
 }
+
 
 @end

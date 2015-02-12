@@ -33,6 +33,7 @@
 		C1B2A7FF1A8AD21C00FC80C2 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7F51A8AD21C00FC80C2 /* AFURLResponseSerialization.m */; };
 		C1B2A8001A8AD21C00FC80C2 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7F71A8AD21C00FC80C2 /* AFURLSessionManager.m */; };
 		C1B2A8041A8AE48C00FC80C2 /* UIImage+ChangeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A8031A8AE48C00FC80C2 /* UIImage+ChangeColor.m */; };
+		C1E4F52E1A8C7E0200A924F7 /* PopAnimationClearButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E4F52D1A8C7E0200A924F7 /* PopAnimationClearButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,8 @@
 		C1B2A7F71A8AD21C00FC80C2 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		C1B2A8021A8AE48C00FC80C2 /* UIImage+ChangeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ChangeColor.h"; sourceTree = "<group>"; };
 		C1B2A8031A8AE48C00FC80C2 /* UIImage+ChangeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ChangeColor.m"; sourceTree = "<group>"; };
+		C1E4F52C1A8C7E0200A924F7 /* PopAnimationClearButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopAnimationClearButton.h; sourceTree = "<group>"; };
+		C1E4F52D1A8C7E0200A924F7 /* PopAnimationClearButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopAnimationClearButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,8 @@
 				C1400EF51A89E77B00867496 /* PopAnimationButton.m */,
 				C11EE55D1A8C241C00393FC1 /* PopScaleButton.h */,
 				C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */,
+				C1E4F52C1A8C7E0200A924F7 /* PopAnimationClearButton.h */,
+				C1E4F52D1A8C7E0200A924F7 /* PopAnimationClearButton.m */,
 			);
 			name = PopButton;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1B2A8041A8AE48C00FC80C2 /* UIImage+ChangeColor.m in Sources */,
+				C1E4F52E1A8C7E0200A924F7 /* PopAnimationClearButton.m in Sources */,
 				C1B2A7FC1A8AD21C00FC80C2 /* AFSecurityPolicy.m in Sources */,
 				C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */,
 				C1B2A7FB1A8AD21C00FC80C2 /* AFNetworkReachabilityManager.m in Sources */,

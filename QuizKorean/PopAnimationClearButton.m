@@ -1,5 +1,5 @@
 //
-//  PopScaleButton.m
+//  PopAnimationClearButton.m
 //  QuizKorean
 //
 //  Created by jun on 2/12/15.
@@ -7,17 +7,15 @@
 //
 
 
-#define kNormalBgColor [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000]
-#define khighlightBgColor [UIColor colorWithRed:0.044 green:0.132 blue:0.247 alpha:1.000]
-#define kNormalTextColor [UIColor whiteColor]
-#define kHightlightTextColor [UIColor whiteColor]
+#define kNormalTextColor [UIColor colorWithRed:0.084 green:0.469 blue:0.715 alpha:1.000]
+#define kHightlightTextColor [UIColor colorWithRed:0.072 green:0.284 blue:0.410 alpha:1.000]
 
 
-#import "PopScaleButton.h"
+#import "PopAnimationClearButton.h"
 #import <pop/POP.h>
 
 
-@implementation PopScaleButton
+@implementation PopAnimationClearButton
 {
 	CGFloat _duration;
 }
@@ -32,10 +30,6 @@
 	if (self) {
 		
 		_duration = 0.2f;
-		
-		[self setBackgroundColor:kNormalBgColor];
-		[self setTitleColor:kNormalTextColor forState:UIControlStateNormal];
-		[self setTitleColor:kHightlightTextColor forState:UIControlStateHighlighted];
 	}
 	
 	return self;
@@ -47,8 +41,9 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	POPSpringAnimation *scale = [self pop_animationForKey:@"scale"];
+	POPSpringAnimation *rotate = [self.layer pop_animationForKey:@"rotate"];
 	
-	CGFloat size = 0.88f;
+	CGFloat size = 1.2f;
 	
 	if (scale) {
 		scale.toValue = [NSValue valueWithCGPoint:CGPointMake(size, size)];
@@ -60,9 +55,16 @@
 		[self pop_addAnimation:scale forKey:@"scale"];
 	}
 	
-	[UIView animateWithDuration:_duration animations:^{
-		[self setBackgroundColor:khighlightBgColor];
-	}completion:^(BOOL finished) { }];
+	CGFloat value = 6;
+	if (rotate) {
+		rotate.toValue = @(M_PI/value);
+	} else {
+		rotate = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
+		rotate.toValue = @(M_PI/value);
+		rotate.springBounciness = 20;
+		rotate.springSpeed = 18.0f;
+		[self.layer pop_addAnimation:rotate forKey:@"rotate"];
+	}
 	
 	[super touchesBegan:touches withEvent:event];
 }
@@ -70,8 +72,9 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	POPSpringAnimation *scale = [self pop_animationForKey:@"scale"];
+	POPSpringAnimation *rotate = [self pop_animationForKey:@"rotate"];
 	
-	CGFloat size = 1.0;
+	CGFloat size = 1.0f;
 	
 	if (scale) {
 		scale.toValue = [NSValue valueWithCGPoint:CGPointMake(size, size)];
@@ -83,9 +86,15 @@
 		[self pop_addAnimation:scale forKey:@"scale"];
 	}
 	
-	[UIView animateWithDuration:_duration animations:^{
-		[self setBackgroundColor:kNormalBgColor];
-	}completion:^(BOOL finished) { }];
+	if (rotate) {
+		rotate.toValue = @(0);
+	} else {
+		rotate = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
+		rotate.toValue = @(0);
+		rotate.springBounciness = 20;
+		rotate.springSpeed = 18.0f;
+		[self.layer pop_addAnimation:rotate forKey:@"rotate"];
+	}
 	
 	[super touchesEnded:touches withEvent:event];
 }

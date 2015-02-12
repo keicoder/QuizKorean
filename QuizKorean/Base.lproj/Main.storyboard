@@ -455,7 +455,7 @@
                                     <action selector="feedbackButtonTapped:" destination="mhd-ah-6Vd" eventType="touchUpInside" id="NLa-eM-PGD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb1-pA-R78">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb1-pA-R78" customClass="PopAnimationClearButton">
                                 <rect key="frame" x="536" y="20" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="RIU-My-BL5"/>
@@ -498,6 +498,7 @@
                         <outlet property="feedbackButton" destination="vUK-zp-hDH" id="peP-b5-fGw"/>
                         <outlet property="sendMailButton" destination="ksS-N6-UrC" id="BDR-Th-Ox6"/>
                         <outlet property="soundEffectButton" destination="Tjt-Wl-oWX" id="s6L-LP-tae"/>
+                        <outlet property="xButton" destination="bb1-pA-R78" id="O7X-xx-48U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0fO-0H-fPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
