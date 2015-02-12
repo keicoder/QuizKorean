@@ -122,21 +122,21 @@
 	self.sendMailButton.layer.cornerRadius = cornerRadius;
 	self.feedbackButton.layer.cornerRadius = cornerRadius;
 	
-	UIColor *hightlightTextColor = [UIColor colorWithRed:1.000 green:0.473 blue:0.247 alpha:1.000];
-	UIColor *normalBgColor = [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000];
-	UIColor *highlightBgColor = [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000];
-	
-	[self.aboutButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
-	[self.aboutButton setBackgroundColor:normalBgColor];
-	
-	[self.soundEffectButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
-	[self.soundEffectButton setBackgroundColor:normalBgColor];
-	
-	[self.sendMailButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
-	[self.sendMailButton setBackgroundColor:normalBgColor];
-	
-	[self.feedbackButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
-	[self.feedbackButton setBackgroundColor:normalBgColor];
+//	UIColor *hightlightTextColor = [UIColor colorWithRed:1.000 green:0.473 blue:0.247 alpha:1.000];
+//	UIColor *normalBgColor = [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000];
+//	UIColor *highlightBgColor = [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000];
+//	
+//	[self.aboutButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
+//	[self.aboutButton setBackgroundColor:normalBgColor];
+//	
+//	[self.soundEffectButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
+//	[self.soundEffectButton setBackgroundColor:normalBgColor];
+//	
+//	[self.sendMailButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
+//	[self.sendMailButton setBackgroundColor:normalBgColor];
+//	
+//	[self.feedbackButton setTitleColor:hightlightTextColor forState:UIControlStateHighlighted];
+//	[self.feedbackButton setBackgroundColor:normalBgColor];
 }
 
 
