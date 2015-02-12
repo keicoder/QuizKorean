@@ -41,9 +41,8 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	POPSpringAnimation *scale = [self pop_animationForKey:@"scale"];
-	POPSpringAnimation *rotate = [self.layer pop_animationForKey:@"rotate"];
 	
-	CGFloat size = 1.2f;
+	CGFloat size = 1.3f;
 	
 	if (scale) {
 		scale.toValue = [NSValue valueWithCGPoint:CGPointMake(size, size)];
@@ -55,24 +54,13 @@
 		[self pop_addAnimation:scale forKey:@"scale"];
 	}
 	
-	CGFloat value = 6;
-	if (rotate) {
-		rotate.toValue = @(M_PI/value);
-	} else {
-		rotate = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
-		rotate.toValue = @(M_PI/value);
-		rotate.springBounciness = 20;
-		rotate.springSpeed = 18.0f;
-		[self.layer pop_addAnimation:rotate forKey:@"rotate"];
-	}
-	
 	[super touchesBegan:touches withEvent:event];
 }
+
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	POPSpringAnimation *scale = [self pop_animationForKey:@"scale"];
-	POPSpringAnimation *rotate = [self pop_animationForKey:@"rotate"];
 	
 	CGFloat size = 1.0f;
 	
@@ -84,16 +72,6 @@
 		scale.springBounciness = 20;
 		scale.springSpeed = 18.0f;
 		[self pop_addAnimation:scale forKey:@"scale"];
-	}
-	
-	if (rotate) {
-		rotate.toValue = @(0);
-	} else {
-		rotate = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
-		rotate.toValue = @(0);
-		rotate.springBounciness = 20;
-		rotate.springSpeed = 18.0f;
-		[self.layer pop_addAnimation:rotate forKey:@"rotate"];
 	}
 	
 	[super touchesEnded:touches withEvent:event];

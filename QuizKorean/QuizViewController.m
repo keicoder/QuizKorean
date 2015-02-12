@@ -273,43 +273,6 @@
 }
 
 
-#pragma mark - ConfigureUI
-
-- (void)configureUI
-{
-	NSString *blank = @"";
-	[self.answerButton1 setTitle:blank forState:UIControlStateNormal];
-	[self.answerButton2 setTitle:blank forState:UIControlStateNormal];
-	[self.answerButton3 setTitle:blank forState:UIControlStateNormal];
-	[self.answerButton4 setTitle:blank forState:UIControlStateNormal];
-	
-	self.questionLabel.text = blank;
-	self.answerLabel1.text = blank;
-	self.answerLabel2.text = blank;
-	self.answerLabel3.text = blank;
-	self.answerLabel4.text = blank;
-	
-	self.view.backgroundColor = [UIColor colorWithRed:0.11 green:0.67 blue:0.85 alpha:1];
-	
-	self.questionContainerView.backgroundColor = [UIColor clearColor];
-	self.answerContainerView.backgroundColor = [UIColor whiteColor];
-	
-	self.infoView.backgroundColor = [UIColor colorWithRed:0.548 green:0.828 blue:0.921 alpha:1.000];
-	self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.324 green:0.634 blue:0.737 alpha:1.000];
-	
-	UIColor *clearColor = [UIColor clearColor];
-	self.answerLabel1.backgroundColor = clearColor;
-	self.answerLabel2.backgroundColor = clearColor;
-	self.answerLabel3.backgroundColor = clearColor;
-	self.answerLabel4.backgroundColor = clearColor;
-	
-	self.answerButton1.backgroundColor = kODD_COLOR;
-	self.answerButton2.backgroundColor = kEVEN_COLOR;
-	self.answerButton3.backgroundColor = kODD_COLOR;
-	self.answerButton4.backgroundColor = kEVEN_COLOR;
-}
-
-
 #pragma mark - Menu Button Action
 
 - (IBAction)homeButtonTapped:(id)sender
@@ -322,6 +285,61 @@
 {
 	SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
 	[self showViewController:controller sender:sender];
+}
+
+
+#pragma mark - ConfigureUI
+
+- (void)configureUI
+{
+	NSString *blank = @"";
+	
+	//Text
+	[self.answerButton1 setTitle:blank forState:UIControlStateNormal];
+	[self.answerButton2 setTitle:blank forState:UIControlStateNormal];
+	[self.answerButton3 setTitle:blank forState:UIControlStateNormal];
+	[self.answerButton4 setTitle:blank forState:UIControlStateNormal];
+	self.questionLabel.text = blank;
+	self.answerLabel1.text = blank;
+	self.answerLabel2.text = blank;
+	self.answerLabel3.text = blank;
+	self.answerLabel4.text = blank;
+	
+	//Color
+	UIColor *whiteColor = [UIColor whiteColor];
+	UIColor *clearColor = [UIColor clearColor];
+	UIColor *deepBlue = [UIColor colorWithRed:0.044 green:0.132 blue:0.247 alpha:1.000];
+	UIColor *lightRed = [UIColor colorWithRed:0.993 green:0.391 blue:0.279 alpha:1.000];
+	
+	//View
+	self.view.backgroundColor = whiteColor;
+	self.questionContainerView.backgroundColor = whiteColor;
+	self.answerContainerView.backgroundColor = whiteColor;
+	self.infoView.backgroundColor = whiteColor;
+	self.questionScrollView.backgroundColor = whiteColor;
+	
+	//Label
+	self.questionLabel.textColor = deepBlue;
+	self.answerLabel1.backgroundColor = clearColor;
+	self.answerLabel2.backgroundColor = clearColor;
+	self.answerLabel3.backgroundColor = clearColor;
+	self.answerLabel4.backgroundColor = clearColor;
+	
+	//Button
+	self.answerButton1.backgroundColor = kODD_COLOR;
+	self.answerButton2.backgroundColor = kEVEN_COLOR;
+	self.answerButton3.backgroundColor = kODD_COLOR;
+	self.answerButton4.backgroundColor = kEVEN_COLOR;
+	
+	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:deepBlue];
+	UIImage *menuImageHighlight = [UIImage imageForChangingColor:@"menu" color:lightRed];
+	[self.menuButton setImage:menuImageNormal forState:UIControlStateNormal];
+	[self.menuButton setImage:menuImageHighlight forState:UIControlStateHighlighted];
+	
+	UIImage *settingsImageNormal = [UIImage imageForChangingColor:@"settings" color:deepBlue];
+	UIImage *settingsImageHighlight = [UIImage imageForChangingColor:@"settings" color:lightRed];
+	[self.settingsButton setImage:settingsImageNormal forState:UIControlStateNormal];
+	[self.settingsButton setImage:settingsImageHighlight forState:UIControlStateHighlighted];
 }
 
 

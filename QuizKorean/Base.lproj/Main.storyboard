@@ -22,7 +22,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14k-HL-lre" userLabel="InfoView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqj-wP-fyw" userLabel="MenuButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqj-wP-fyw" userLabel="MenuButton" customClass="PopAnimationClearButton">
                                                 <rect key="frame" x="20" y="16" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="O1g-te-ZA4"/>
@@ -36,13 +36,13 @@
                                                     <action selector="homeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NBh-s7-Mt6"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WH-Na-3Va" userLabel="SettingsButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WH-Na-3Va" userLabel="SettingsButton" customClass="PopAnimationClearButton">
                                                 <rect key="frame" x="536" y="16" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="hd7-gD-kvT"/>
                                                     <constraint firstAttribute="height" constant="44" id="uIA-LO-OuW"/>
                                                 </constraints>
-                                                <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                                <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
                                                 <state key="normal" image="settings">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
