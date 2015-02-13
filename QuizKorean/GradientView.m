@@ -23,7 +23,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-  const CGFloat components[8] = { 0.0f, 0.0f, 0.0f, 0.3f, 0.0f, 0.0f, 0.0f, 0.7f };
+  const CGFloat components[8] = { 0.0f, 0.0f, 0.0f, 0.3f, 0.0f, 0.0f, 0.0f, 0.4f };
   const CGFloat locations[2] = { 0.0f, 1.0f };
 
   CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();

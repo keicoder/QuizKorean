@@ -338,6 +338,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pj1-Yk-ecs" userLabel="ContainerView">
                                 <rect key="frame" x="160" y="160" width="280" height="280"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smiley" translatesAutoresizingMaskIntoConstraints="NO" id="6gH-qo-mxq">
+                                        <rect key="frame" x="125" y="-15" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="88v-sJ-wvT"/>
+                                            <constraint firstAttribute="width" constant="30" id="JXr-eZ-pRh"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1P-d3-zqV" userLabel="AboutLabel">
                                         <rect key="frame" x="20" y="131" width="240" height="19"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
@@ -362,9 +369,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.84303140640258789" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="6gH-qo-mxq" firstAttribute="top" secondItem="pj1-Yk-ecs" secondAttribute="top" constant="-15" id="0Uv-we-KRD"/>
                                     <constraint firstItem="f1P-d3-zqV" firstAttribute="leading" secondItem="pj1-Yk-ecs" secondAttribute="leading" constant="20" id="Dpz-l2-9AO"/>
                                     <constraint firstAttribute="trailing" secondItem="f1P-d3-zqV" secondAttribute="trailing" constant="20" id="EgA-RH-Sdl"/>
                                     <constraint firstAttribute="centerY" secondItem="f1P-d3-zqV" secondAttribute="centerY" id="GuQ-Du-Jbi"/>
+                                    <constraint firstAttribute="centerX" secondItem="6gH-qo-mxq" secondAttribute="centerX" id="HD7-6w-Caz"/>
                                     <constraint firstAttribute="height" constant="280" id="HE8-lt-dcg"/>
                                     <constraint firstAttribute="width" constant="280" id="dIj-P3-jkw"/>
                                     <constraint firstAttribute="centerX" secondItem="f1P-d3-zqV" secondAttribute="centerX" id="gt0-DN-O21"/>
@@ -382,6 +391,7 @@
                     <connections>
                         <outlet property="aboutLabel" destination="f1P-d3-zqV" id="kLx-bK-iaL"/>
                         <outlet property="containerView" destination="pj1-Yk-ecs" id="zaZ-Lg-BHl"/>
+                        <outlet property="smileyImageView" destination="6gH-qo-mxq" id="heu-tK-70f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTE-gn-mSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -588,5 +598,6 @@
     <resources>
         <image name="menu" width="43" height="35"/>
         <image name="settings" width="46" height="47"/>
+        <image name="smiley" width="49" height="50"/>
     </resources>
 </document>

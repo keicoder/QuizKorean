@@ -9,13 +9,14 @@
 #import "SettingsViewController.h"
 #import "POP.h"
 #import "AboutViewController.h"
+#import <MessageUI/MessageUI.h>
 
 
 #define kTURN_ON [UIColor colorWithRed:1 green:0.73 blue:0.2 alpha:1]
 #define kTURN_OFF [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000]
 
 
-@interface SettingsViewController ()
+@interface SettingsViewController () <MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 @property (weak, nonatomic) IBOutlet UIButton *soundEffectButton;
@@ -71,7 +72,7 @@
 
 - (IBAction)sendMailButtonTapped:(id)sender
 {
-	
+	[self sendFeedbackEmail];
 }
 
 
@@ -144,6 +145,59 @@
     {
         NSLog(@"feedback button tapped");
     }
+}
+
+
+#pragma mark 이메일 공유
+#pragma mark 메일 컴포즈 컨트롤러
+
+- (void)sendFeedbackEmail
+{
+	if (![MFMailComposeViewController canSendMail])
+	{
+		NSLog(@"Can't send email");
+		return;
+	}
+	
+	MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+	mailViewController.mailComposeDelegate = self;
+	[mailViewController setToRecipients:@[@"lovejun.soft@gmail.com"]];
+	
+	
+	NSString *versionString = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+	NSString *buildNumberString = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+	
+	NSString *messageSubject = @"QuizKorean iOS Feedback";
+	NSString *messageBody = [NSString stringWithFormat:@"QuizKorean iOS Version %@ (Build %@)\n\n\n", versionString, buildNumberString];
+	[mailViewController setSubject:NSLocalizedString(messageSubject, messageSubject)];
+	[mailViewController setMessageBody:NSLocalizedString(messageBody, messageBody) isHTML:NO];
+	
+	[self presentViewController:mailViewController animated:YES completion:^{ }];
+}
+
+
+#pragma mark 델리게이트 메소드 (MFMailComposeViewControllerDelegate)
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			NSLog(@"mail composer cancelled");
+			break;
+		case MFMailComposeResultSaved:
+			NSLog(@"mail composer saved");
+			break;
+		case MFMailComposeResultSent:
+			NSLog(@"mail composer sent");
+			break;
+		case MFMailComposeResultFailed:
+			NSLog(@"mail composer failed");
+			break;
+	}
+	[controller dismissViewControllerAnimated:YES completion:^{
+		
+	}];
 }
 
 

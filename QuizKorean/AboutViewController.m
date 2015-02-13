@@ -8,11 +8,14 @@
 
 #import "AboutViewController.h"
 #import "GradientView.h"
+#import "UIImage+ChangeColor.h"
+
 
 @interface AboutViewController () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UILabel *aboutLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *smileyImageView;
 
 @end
 
@@ -127,8 +130,11 @@
 {
 	self.view.tintColor = [UIColor colorWithRed:20/255.0f green:160/255.0f blue:160/255.0f alpha:1.0f];
 	self.view.backgroundColor = [UIColor clearColor];
-	self.containerView.backgroundColor = [UIColor colorWithRed:0.89 green:0.733 blue:0.549 alpha:1];
+	self.containerView.backgroundColor = [UIColor colorWithRed:0.05 green:0.32 blue:0.41 alpha:1];
 	self.containerView.layer.cornerRadius = 10.0f;
+	
+	UIImage *smiley = [UIImage imageForChangingColor:@"smiley" color:[UIColor whiteColor]];
+	self.smileyImageView.image = smiley;
 }
 
 

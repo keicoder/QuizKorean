@@ -53,6 +53,7 @@
 		C11EE55D1A8C241C00393FC1 /* PopScaleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopScaleButton.h; sourceTree = "<group>"; };
 		C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopScaleButton.m; sourceTree = "<group>"; };
 		C13B92661A8DA22B00F37C82 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		C13B92671A8DBC6700F37C82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C1400EBB1A89DAEC00867496 /* QuizKorean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizKorean.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1400EBF1A89DAEC00867496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1400EC01A89DAEC00867496 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 		1964551D55526615F0E43451 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C13B92671A8DBC6700F37C82 /* MessageUI.framework */,
 				4335BFEC03F1675186383896 /* libPods.a */,
 			);
 			name = Frameworks;
