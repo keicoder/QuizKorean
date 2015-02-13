@@ -10,4 +10,6 @@
 
 @interface PopScaleButton : UIButton
 
+@property (nonatomic, strong) UIColor *backgroundColorNormal;
+
 @end

@@ -9,8 +9,6 @@
 
 #define kNormalBgColor [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000]
 #define khighlightBgColor [UIColor colorWithRed:0.044 green:0.132 blue:0.247 alpha:1.000]
-#define kNormalTextColor [UIColor whiteColor]
-#define kHightlightTextColor [UIColor whiteColor]
 
 
 #import "PopScaleButton.h"
@@ -34,8 +32,7 @@
 		_duration = 0.2f;
 		
 		[self setBackgroundColor:kNormalBgColor];
-		[self setTitleColor:kNormalTextColor forState:UIControlStateNormal];
-		[self setTitleColor:kHightlightTextColor forState:UIControlStateHighlighted];
+		self.backgroundColorNormal = kNormalBgColor;
 	}
 	
 	return self;
@@ -84,7 +81,7 @@
 	}
 	
 	[UIView animateWithDuration:_duration animations:^{
-		[self setBackgroundColor:kNormalBgColor];
+		[self setBackgroundColor:self.backgroundColorNormal];
 	}completion:^(BOOL finished) { }];
 	
 	[super touchesEnded:touches withEvent:event];

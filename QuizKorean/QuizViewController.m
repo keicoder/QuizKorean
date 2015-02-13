@@ -57,6 +57,8 @@
 	Quiz *_quiz2;
 	Quiz *_quiz3;
 	Quiz *_quiz4;
+	
+	NSString *_soundEffect;
 }
 
 
@@ -223,7 +225,7 @@
 		if ([_quiz1.correct isEqualToString:correct]) {
 			[self.answerLabel1.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self playCorrectSound:sender];
+			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
 			[self.answerLabel1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
@@ -232,7 +234,7 @@
 		if ([_quiz2.correct isEqualToString:correct]) {
 			[self.answerLabel2.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self playCorrectSound:sender];
+			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
 			[self.answerLabel2.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
@@ -242,7 +244,7 @@
 		if ([_quiz3.correct isEqualToString:correct]) {
 			[self.answerLabel3.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self playCorrectSound:sender];
+			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
 			[self.answerLabel3.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
@@ -251,7 +253,7 @@
 		if ([_quiz4.correct isEqualToString:correct]) {
 			[self.answerLabel4.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self playCorrectSound:sender];
+			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
 		} else {
 			[self.answerLabel4.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
@@ -260,8 +262,26 @@
 }
 
 
+#pragma mark - Get the stored NSUserDefaults data and check to play SoundEffect
 
-#pragma mark - Play Sound
+- (void)checkToPlaySoundEffect:(id)sender
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	_soundEffect = [defaults objectForKey:@"_soundEffect"];
+	NSLog (@"_soundEffect: %@\n", _soundEffect);
+	
+	if (_soundEffect == nil) {
+		_soundEffect = @"효과음 > 켜짐";
+		[self playCorrectSound:sender];
+	} else if ([_soundEffect isEqualToString: @"효과음 > 켜짐"]) {
+		[self playCorrectSound:sender];
+	} else if ([_soundEffect isEqualToString: @"효과음 > 꺼짐"]) {
+		NSLog(@"No SoundEffect");
+	}
+	
+	NSLog (@"_soundEffect: %@\n", _soundEffect);
+}
+
 
 - (void)playCorrectSound:(id)sender
 {
