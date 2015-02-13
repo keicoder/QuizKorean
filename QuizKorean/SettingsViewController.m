@@ -12,8 +12,9 @@
 #import <MessageUI/MessageUI.h>
 
 
-#define kTURN_ON [UIColor colorWithRed:1 green:0.73 blue:0.2 alpha:1]
+#define kTURN_ON  [UIColor colorWithRed:1 green:0.73 blue:0.2 alpha:1]
 #define kTURN_OFF [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000]
+#define iPad      [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
 
 
 @interface SettingsViewController () <MFMailComposeViewControllerDelegate>
@@ -172,7 +173,22 @@
 	[mailViewController setSubject:NSLocalizedString(messageSubject, messageSubject)];
 	[mailViewController setMessageBody:NSLocalizedString(messageBody, messageBody) isHTML:NO];
 	
+	[self setupMailComposeViewModalTransitionStyle:mailViewController];
+	mailViewController.modalPresentationCapturesStatusBarAppearance = YES;
+	
 	[self presentViewController:mailViewController animated:YES completion:^{ }];
+}
+
+
+#pragma mark 이메일 공유 (Mail ComposeView Modal Transition Style)
+
+- (void)setupMailComposeViewModalTransitionStyle:(MFMailComposeViewController *)mailViewController
+{
+	if (iPad) {
+		mailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+	} else {
+		mailViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+	}
 }
 
 
