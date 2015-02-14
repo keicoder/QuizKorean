@@ -561,10 +561,10 @@
                                     <action selector="aboutButtonTapped:" destination="Qhu-wo-ihA" eventType="touchUpInside" id="5F8-dO-FxB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리말 겨루기" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-Xq-SAd">
-                                <rect key="frame" x="191" y="166" width="219" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리말 퀴즈" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-Xq-SAd">
+                                <rect key="frame" x="208" y="166" width="185" height="48"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="40"/>
-                                <color key="textColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.21766415238380432" green="0.40978914499282837" blue="0.61733728647232056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -588,6 +588,7 @@
                         <outlet property="aboutButton" destination="WXc-yD-5gj" id="dD8-X8-7Qg"/>
                         <outlet property="settingsButton" destination="XOr-YR-pc5" id="Hmq-VD-4th"/>
                         <outlet property="startButton" destination="uWt-n1-Bk6" id="8fn-Bu-kLA"/>
+                        <outlet property="titleLabel" destination="3ci-Xq-SAd" id="R78-VX-9RU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujV-7U-yDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
