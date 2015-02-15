@@ -10,6 +10,7 @@
 #import "POP.h"
 #import "AboutViewController.h"
 #import <MessageUI/MessageUI.h>
+#import "iRate.h"
 
 
 #define kTURN_ON  [UIColor colorWithRed:1 green:0.73 blue:0.2 alpha:1]
@@ -22,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 @property (weak, nonatomic) IBOutlet UIButton *soundEffectButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendMailButton;
-@property (weak, nonatomic) IBOutlet UIButton *feedbackButton;
 @property (weak, nonatomic) IBOutlet UIButton *returnButton;
 
 @end
@@ -77,12 +77,6 @@
 }
 
 
-- (IBAction)feedbackButtonTapped:(id)sender
-{
-	
-}
-
-
 - (IBAction)dismissButtonTapped:(id)sender
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
@@ -111,18 +105,6 @@
 }
 
 
-#pragma mark - Pop Animation: Sprint
-
-- (void)popAnimation:(id)sender
-{
-	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
-	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(2, 2)];
-	sprintAnimation.springBounciness = 20.f;
-	[sender pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-}
-
-
 #pragma mark - Show ViewController
 
 - (void)showViewController:(id)sender
@@ -132,19 +114,6 @@
         AboutViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
         controller.view.frame = self.view.bounds;
         [controller presentInParentViewController:self];
-    }
-    else if (sender == self.soundEffectButton)
-    {
-        SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-        [self presentViewController:controller animated:YES completion:^{ }];
-    }
-    else if (sender == self.sendMailButton)
-    {
-        NSLog(@"senaMail button tapped");
-    }
-    else if (sender == self.feedbackButton)
-    {
-        NSLog(@"feedback button tapped");
     }
 }
 
@@ -225,7 +194,6 @@
 	self.aboutButton.layer.cornerRadius = cornerRadius;
 	self.soundEffectButton.layer.cornerRadius = cornerRadius;
 	self.sendMailButton.layer.cornerRadius = cornerRadius;
-	self.feedbackButton.layer.cornerRadius = cornerRadius;
 	self.returnButton.layer.cornerRadius = cornerRadius;
 	[self.returnButton setBackgroundColor: [UIColor colorWithRed:1.000 green:0.541 blue:0.213 alpha:1.000]];
 }
