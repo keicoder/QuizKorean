@@ -53,6 +53,10 @@
 		[self parseJSONDictionary:response];
 		
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		
+		//Post a notification when success
+		[[NSNotificationCenter defaultCenter] postNotificationName: @"ParseJSONDictionaryFailedNotification" object:nil userInfo:nil];
+		
 		if (operation.isCancelled) {
 			NSLog(@"AFHTTPRequestOperation Cancelled");
 			return;

@@ -68,7 +68,7 @@
 {
 	[super viewDidLoad];
 	[self configureUI];
-	[self addObserverForParseJSONDictionaryFinishedNotification];
+	[self addObserverForParseJSONDictionaryNotification];
 	[self fetchJSONData];
 }
 
@@ -100,9 +100,10 @@
 
 #pragma mark - Listening Notification
 
-- (void)addObserverForParseJSONDictionaryFinishedNotification
+- (void)addObserverForParseJSONDictionaryNotification
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFinishedNotification:) name:@"ParseJSONDictionaryFinishedNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFailedNotification:) name:@"ParseJSONDictionaryFailedNotification" object:nil];
 }
 
 
@@ -156,74 +157,49 @@
 }
 
 
+- (void)didReceiveParseJSONDictionaryFailedNotification:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"ParseJSONDictionaryFailedNotification"])
+	{
+		NSString *title = @"에러";
+		NSString *message = @"인터넷에 연결할 수 없습니다.";
+		
+		UIAlertController *sheet = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+		[sheet addAction:[UIAlertAction actionWithTitle:@"다시 시도" style:UIAlertActionStyleDefault handler:^void (UIAlertAction *action) {
+			NSLog(@"You tapped OK");
+		}]];
+		
+		sheet.popoverPresentationController.sourceView = self.view;
+		sheet.popoverPresentationController.sourceRect = self.view.frame;
+		
+		[self presentViewController:sheet animated:YES completion:nil];
+	}
+}
+
+
 #pragma mark - Button Action
 
 - (IBAction)answerButtonPressed:(id)sender
 {
-	CGFloat duration = 0.2f;
-	
-	[UIView animateWithDuration:0.3 delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-		[sender setBackgroundColor:[UIColor orangeColor]];
-	} completion:^(BOOL finished) {
-		
-		if (sender == self.answerButton1) {
-			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-				[sender setBackgroundColor:kODD_COLOR];
-			} completion:^(BOOL finished) {
-				[self inquireAnswer:sender];
-			}];
-		} else if (sender == self.answerButton2) {
-			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-				[sender setBackgroundColor:kEVEN_COLOR];
-			} completion:^(BOOL finished) {
-				[self inquireAnswer:sender];
-			}];
-		} else if (sender == self.answerButton3) {
-			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-				[sender setBackgroundColor:kODD_COLOR];
-			} completion:^(BOOL finished) {
-				[self inquireAnswer:sender];
-			}];
-		} else if (sender == self.answerButton4) {
-			[UIView animateWithDuration:duration delay: 0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-				[sender setBackgroundColor:kEVEN_COLOR];
-			} completion:^(BOOL finished) {
-				[self inquireAnswer:sender];
-			}];
-		}
-	}];
-}
-
-
-- (void)inquireAnswer:(id)sender
-{
 	NSString *correct = @"정답";
 	
 	//정답일 때
-	//POP Spin Animation
-	POPSpringAnimation *spinAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
-	spinAnimation.fromValue = @(M_PI / 4);
-	spinAnimation.toValue = @(0);
-	spinAnimation.springBounciness = 20;
-	spinAnimation.velocity = @(10);
-	
 	//POP Sprint Animation
 	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
 	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(4, 4)];
+	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(7, 7)];
 	sprintAnimation.springBounciness = 20.f;
 	
 	//오답일 때
 	//POP Shake Animation
 	POPSpringAnimation *shakeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
 	shakeAnimation.springBounciness = 20;
-	shakeAnimation.velocity = @(3000);
+	shakeAnimation.velocity = @(1000);
 	
-	CGFloat delay = 1.3f;
+	CGFloat delay = 1.5;
 	
 	if (sender == self.answerButton1) {
 		if ([_quiz1.correct isEqualToString:correct]) {
-			[self.answerLabel1.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
@@ -232,7 +208,6 @@
 		}
 	} else if (sender == self.answerButton2) {
 		if ([_quiz2.correct isEqualToString:correct]) {
-			[self.answerLabel2.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
@@ -242,7 +217,6 @@
 	}
 	else if (sender == self.answerButton3) {
 		if ([_quiz3.correct isEqualToString:correct]) {
-			[self.answerLabel3.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
@@ -251,7 +225,6 @@
 		}
 	}else if (sender == self.answerButton4) {
 		if ([_quiz4.correct isEqualToString:correct]) {
-			[self.answerLabel4.layer pop_addAnimation:spinAnimation forKey:@"spinAnimation"];
 			[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
