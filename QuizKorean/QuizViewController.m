@@ -19,8 +19,9 @@
 #define debug 1
 
 
-#define kODD_COLOR [UIColor colorWithRed:0.05 green:0.32 blue:0.41 alpha:1]
-#define kEVEN_COLOR [UIColor colorWithRed:0.000 green:0.277 blue:0.361 alpha:1.000]
+#define kODD_COLOR [UIColor colorWithRed:0.83 green:0.83 blue:0.83 alpha:1]
+#define kEVEN_COLOR [UIColor colorWithRed:0.96 green:0.89 blue:0.87 alpha:1]
+
 
 @interface QuizViewController ()
 
@@ -44,7 +45,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *answerButton4;
 
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *roundLabel;
 
 @end
 
@@ -57,6 +61,9 @@
 	Quiz *_quiz2;
 	Quiz *_quiz3;
 	Quiz *_quiz4;
+	
+	int _score;
+	int _round;
 	
 	NSString *_soundEffect;
 }
@@ -73,13 +80,36 @@
 }
 
 
+#pragma mark - Game Logic
+
+- (void)startNewRound
+{
+	_round += 1;
+}
+
+
+- (void)startNewGame
+{
+	_score = 0;
+	_round = 0;
+	[self startNewRound];
+}
+
+
+- (void)updateLabels
+{
+	self.scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
+	self.roundLabel.text = [NSString stringWithFormat:@"%d", _round];
+}
+
+
 #pragma mark - Fetch JSON Data
 
 - (void)fetchJSONData
 {
 	self.quiz = [[Quiz alloc] init];
 	
-	CGFloat duration = 0.2f;
+	CGFloat duration = 0.1f;
 	CGFloat alpha = 0.0f;
 	
 	[UIView animateWithDuration:duration animations:^{
@@ -111,48 +141,55 @@
 {
 	if ([[notification name] isEqualToString:@"ParseJSONDictionaryFinishedNotification"])
 	{
-		_quiz1 = self.quiz.quizArray[0];
-		_quiz2 = self.quiz.quizArray[1];
-		_quiz3 = self.quiz.quizArray[2];
-		_quiz4 = self.quiz.quizArray[3];
-		
-		POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
-		sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-		sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(4, 4)];
-		sprintAnimation.springBounciness = 20.f;
-		
-		CGFloat duration = 0.2f;
-		CGFloat alpha = 1.0f;
-		
-		[UIView animateWithDuration:duration animations:^{
-			self.questionLabel.alpha = alpha;
-			[self.questionLabel pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
-			self.questionLabel.text = _quiz1.question;
-		}completion:^(BOOL finished) {
+		if ([_quiz1 isKindOfClass:[NSNull class]] || [_quiz2 isKindOfClass:[NSNull class]] || [_quiz3 isKindOfClass:[NSNull class]] || [_quiz4 isKindOfClass:[NSNull class]]) {
+			
+			[self fetchJSONData];
+			
+		} else {
+			
+			_quiz1 = self.quiz.quizArray[0];
+			_quiz2 = self.quiz.quizArray[1];
+			_quiz3 = self.quiz.quizArray[2];
+			_quiz4 = self.quiz.quizArray[3];
+			
+			POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
+			sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+			sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(4, 4)];
+			sprintAnimation.springBounciness = 20.f;
+			
+			CGFloat duration = 0.2f;
+			CGFloat alpha = 1.0f;
+			
 			[UIView animateWithDuration:duration animations:^{
-				self.answerLabel1.alpha = alpha;
-				self.answerLabel1.text = _quiz1.answer;
-				NSLog (@"quiz1.correct: %@\n", _quiz1.correct);
+				self.questionLabel.alpha = alpha;
+				[self.questionLabel pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
+				self.questionLabel.text = _quiz1.question;
 			}completion:^(BOOL finished) {
 				[UIView animateWithDuration:duration animations:^{
-					self.answerLabel2.alpha = alpha;
-					self.answerLabel2.text = _quiz2.answer;
-					NSLog (@"quiz2.correct: %@\n", _quiz2.correct);
+					self.answerLabel1.alpha = alpha;
+					self.answerLabel1.text = _quiz1.answer;
+					NSLog (@"quiz1.correct: %@\n", _quiz1.correct);
 				}completion:^(BOOL finished) {
 					[UIView animateWithDuration:duration animations:^{
-						self.answerLabel3.alpha = alpha;
-						self.answerLabel3.text = _quiz3.answer;
-						NSLog (@"quiz3.correct: %@\n", _quiz3.correct);
+						self.answerLabel2.alpha = alpha;
+						self.answerLabel2.text = _quiz2.answer;
+						NSLog (@"quiz2.correct: %@\n", _quiz2.correct);
 					}completion:^(BOOL finished) {
 						[UIView animateWithDuration:duration animations:^{
-							self.answerLabel4.alpha = alpha;
-							self.answerLabel4.text = _quiz4.answer;
-							NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
-						}completion:^(BOOL finished) { }];
+							self.answerLabel3.alpha = alpha;
+							self.answerLabel3.text = _quiz3.answer;
+							NSLog (@"quiz3.correct: %@\n", _quiz3.correct);
+						}completion:^(BOOL finished) {
+							[UIView animateWithDuration:duration animations:^{
+								self.answerLabel4.alpha = alpha;
+								self.answerLabel4.text = _quiz4.answer;
+								NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
+							}completion:^(BOOL finished) { }];
+						}];
 					}];
 				}];
 			}];
-		}];
+		}
 	}
 }
 
@@ -183,15 +220,13 @@
 {
 	NSString *correct = @"정답";
 	
-	//정답일 때
-	//POP Sprint Animation
+	//정답일 때: POP Sprint Animation
 	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
 	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
 	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(7, 7)];
 	sprintAnimation.springBounciness = 20.f;
 	
-	//오답일 때
-	//POP Shake Animation
+	//오답일 때: POP Shake Animation
 	POPSpringAnimation *shakeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
 	shakeAnimation.springBounciness = 20;
 	shakeAnimation.velocity = @(1000);
@@ -274,10 +309,9 @@
 }
 
 
-- (IBAction)settingsButtonTapped:(id)sender
+- (IBAction)nextButtonTapped:(id)sender
 {
-	SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-	[self showViewController:controller sender:sender];
+	[self fetchJSONData];
 }
 
 
@@ -301,18 +335,23 @@
 	//Color
 	UIColor *whiteColor = [UIColor whiteColor];
 	UIColor *clearColor = [UIColor clearColor];
-	UIColor *deepBlue = [UIColor colorWithRed:0.044 green:0.132 blue:0.247 alpha:1.000];
+	UIColor *deepDarkGray = [UIColor colorWithWhite:0.090 alpha:1.000];
 	UIColor *lightRed = [UIColor colorWithRed:0.993 green:0.391 blue:0.279 alpha:1.000];
+	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
 	
 	//View
 	self.view.backgroundColor = whiteColor;
 	self.questionContainerView.backgroundColor = whiteColor;
 	self.answerContainerView.backgroundColor = whiteColor;
-	self.infoView.backgroundColor = whiteColor;
-	self.questionScrollView.backgroundColor = whiteColor;
+	self.infoView.backgroundColor = [UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
+	self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
 	
 	//Label
-	self.questionLabel.textColor = deepBlue;
+	self.questionLabel.textColor = deepDarkGray;
+	self.answerLabel1.textColor = deepDarkGray;
+	self.answerLabel2.textColor = deepDarkGray;
+	self.answerLabel3.textColor = deepDarkGray;
+	self.answerLabel4.textColor = deepDarkGray;
 	self.answerLabel1.backgroundColor = clearColor;
 	self.answerLabel2.backgroundColor = clearColor;
 	self.answerLabel3.backgroundColor = clearColor;
@@ -324,15 +363,16 @@
 	self.answerButton3.backgroundColor = kODD_COLOR;
 	self.answerButton4.backgroundColor = kEVEN_COLOR;
 	
-	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:deepBlue];
+	//Info View Buttons
+	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];
 	UIImage *menuImageHighlight = [UIImage imageForChangingColor:@"menu" color:lightRed];
 	[self.menuButton setImage:menuImageNormal forState:UIControlStateNormal];
 	[self.menuButton setImage:menuImageHighlight forState:UIControlStateHighlighted];
 	
-	UIImage *settingsImageNormal = [UIImage imageForChangingColor:@"settings" color:deepBlue];
-	UIImage *settingsImageHighlight = [UIImage imageForChangingColor:@"settings" color:lightRed];
-	[self.settingsButton setImage:settingsImageNormal forState:UIControlStateNormal];
-	[self.settingsButton setImage:settingsImageHighlight forState:UIControlStateHighlighted];
+	UIImage *settingsImageNormal = [UIImage imageForChangingColor:@"arrow-right" color:darkBrown];
+	UIImage *settingsImageHighlight = [UIImage imageForChangingColor:@"arrow-right" color:lightRed];
+	[self.nextButton setImage:settingsImageNormal forState:UIControlStateNormal];
+	[self.nextButton setImage:settingsImageHighlight forState:UIControlStateHighlighted];
 }
 
 

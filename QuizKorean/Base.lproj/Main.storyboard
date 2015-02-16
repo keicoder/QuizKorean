@@ -36,28 +36,34 @@
                                                     <action selector="homeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NBh-s7-Mt6"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WH-Na-3Va" userLabel="SettingsButton" customClass="PopAnimationClearButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WH-Na-3Va" userLabel="NextButton" customClass="PopAnimationClearButton">
                                                 <rect key="frame" x="536" y="16" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="hd7-gD-kvT"/>
                                                     <constraint firstAttribute="height" constant="44" id="uIA-LO-OuW"/>
                                                 </constraints>
-                                                <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
-                                                <state key="normal" image="settings">
+                                                <inset key="contentEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                                                <state key="normal" image="arrow-right">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="settingsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4yU-Eq-0iR"/>
+                                                    <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HR3-ft-2r3"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.84303140640258789" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="2Mv-n8-uWE"/>
+                                            <constraint firstAttribute="height" constant="60" id="2Mv-n8-uWE">
+                                                <variation key="heightClass=compact" constant="44"/>
+                                            </constraint>
                                             <constraint firstItem="nqj-wP-fyw" firstAttribute="leading" secondItem="14k-HL-lre" secondAttribute="leading" constant="20" id="6Az-vI-lJl"/>
-                                            <constraint firstItem="3WH-Na-3Va" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="75e-dM-mTR"/>
+                                            <constraint firstItem="3WH-Na-3Va" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="75e-dM-mTR">
+                                                <variation key="heightClass=compact" constant="0.0"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="20" id="Qdd-jV-hgT"/>
-                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="fLa-3J-eG6"/>
+                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="fLa-3J-eG6">
+                                                <variation key="heightClass=compact" constant="0.0"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="20" id="l1Q-vw-8hO"/>
                                         </constraints>
                                         <variation key="default">
@@ -149,12 +155,25 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDP-SU-zF2" userLabel="AnswerButton1">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="UkD-6x-SuE"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="UkD-6x-SuE">
+                                                <variation key="heightClass=compact" constant="100"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="hPV-jM-0ei"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="AnswerButton1">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="hPV-jM-0ei"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="hPV-jM-0ei"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0aU-SZ-89Y"/>
                                         </connections>
@@ -193,8 +212,12 @@
                                         <rect key="frame" x="20" y="0.0" width="560" height="75"/>
                                         <color key="backgroundColor" red="1" green="0.52167034149169922" blue="0.16747227311134338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="DbV-2F-hmS"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="aDl-im-bnp"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="DbV-2F-hmS">
+                                                <variation key="heightClass=compact" constant="100"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="aDl-im-bnp">
+                                                <variation key="heightClass=compact" constant="100"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -269,6 +292,7 @@
                             <constraint firstAttribute="trailing" secondItem="Vq7-0f-ZE0" secondAttribute="trailing" id="Cku-pC-D6X"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vq7-0f-ZE0" secondAttribute="bottom" id="DtH-J2-b5m"/>
                             <constraint firstItem="iWc-t1-F72" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="En4-NS-COM"/>
+                            <constraint firstItem="Vq7-0f-ZE0" firstAttribute="leading" secondItem="iWc-t1-F72" secondAttribute="trailing" id="EzJ-o9-Y2g"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="iWc-t1-F72" secondAttribute="bottom" id="Jf0-Om-vxd"/>
                             <constraint firstItem="iWc-t1-F72" firstAttribute="centerX" secondItem="Vq7-0f-ZE0" secondAttribute="centerX" id="Kla-XX-kb9"/>
                             <constraint firstItem="iWc-t1-F72" firstAttribute="centerY" secondItem="Vq7-0f-ZE0" secondAttribute="centerY" id="TwR-DS-83z"/>
@@ -284,6 +308,7 @@
                                 <exclude reference="TwR-DS-83z"/>
                                 <exclude reference="1a5-iK-0Fa"/>
                                 <exclude reference="Cku-pC-D6X"/>
+                                <exclude reference="EzJ-o9-Y2g"/>
                                 <exclude reference="dcz-nU-iVl"/>
                                 <exclude reference="Jf0-Om-vxd"/>
                             </mask>
@@ -293,9 +318,11 @@
                                 <exclude reference="2Pi-Hk-w3Y"/>
                                 <exclude reference="Kla-XX-kb9"/>
                                 <include reference="TwR-DS-83z"/>
+                                <exclude reference="aVX-RE-h4m"/>
                                 <include reference="1a5-iK-0Fa"/>
                                 <include reference="Cku-pC-D6X"/>
-                                <include reference="dcz-nU-iVl"/>
+                                <include reference="EzJ-o9-Y2g"/>
+                                <exclude reference="dcz-nU-iVl"/>
                                 <exclude reference="hzn-yT-ozz"/>
                                 <include reference="Jf0-Om-vxd"/>
                             </mask>
@@ -313,10 +340,10 @@
                         <outlet property="answerLabel4" destination="4JN-uH-SiH" id="LaK-cF-p0e"/>
                         <outlet property="infoView" destination="14k-HL-lre" id="t9W-o6-0Hc"/>
                         <outlet property="menuButton" destination="nqj-wP-fyw" id="g44-AS-nEx"/>
+                        <outlet property="nextButton" destination="3WH-Na-3Va" id="oqq-mW-h0G"/>
                         <outlet property="questionContainerView" destination="iWc-t1-F72" id="pVB-EN-M0j"/>
                         <outlet property="questionLabel" destination="b6f-WO-h0D" id="8Tb-iJ-HWv"/>
                         <outlet property="questionScrollView" destination="O9I-44-t4E" id="skS-jl-NMn"/>
-                        <outlet property="settingsButton" destination="3WH-Na-3Va" id="MhB-M5-1hr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -579,8 +606,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow-right" width="44" height="44"/>
         <image name="menu" width="43" height="35"/>
-        <image name="settings" width="46" height="47"/>
         <image name="smiley" width="49" height="50"/>
     </resources>
 </document>
