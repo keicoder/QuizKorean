@@ -64,6 +64,7 @@
 	
 	NSString *_soundEffect;
 	
+    NSInteger _currentAttempt;
 	NSInteger _score;
 	NSInteger _round;
 }
@@ -77,6 +78,7 @@
 	[self configureUI];
 	[self addObserverForParseJSONDictionaryNotification];
 	[self fetchJSONData];
+    _currentAttempt = 1; //첫시도에 바로 맞춰야 득점으로 인정
 	[self getScoreAndRoundDataFromNSUserDefaults];
 }
 
@@ -88,12 +90,21 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSInteger round = [defaults integerForKey:@"_round"];
 	NSLog (@"round: %ld\n", (long)round);
+    
+    NSInteger score = [defaults integerForKey:@"_score"];
+    NSLog (@"score: %ld\n", (long)score);
 	
 	if (round <= 0) {
 		_round = 0;
-	} else {
+	} else if (round > 0) {
 		_round = (int)round - 1;
 	}
+    
+    if (score <= 0) {
+        _score = 0;
+    } else if (score > 0) {
+        _score = (int)score;
+    }
 }
 
 
@@ -102,6 +113,7 @@
 - (void)startNewRound
 {
 	_round += 1;
+    _currentAttempt = 1; //시도 횟수 초기화
 }
 
 
@@ -110,6 +122,18 @@
 	_score = 0;
 	_round = 0;
 	[self startNewRound];
+}
+
+
+- (void)increaseCurrentAttempt
+{
+    _currentAttempt += 1; //오답이면 시도 횟수 증가시킴
+}
+
+
+- (void)increaseScore
+{
+    _score += 1; //스코어 1점 증가
 }
 
 
@@ -219,6 +243,7 @@
 								
 								NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 								[defaults setInteger:_round forKey:@"_round"];
+                                [defaults setInteger:_score forKey:@"_score"];
 								[defaults synchronize];
 							
 							}];
@@ -239,8 +264,8 @@
 		NSString *message = @"인터넷 연결을 확인해 주세요.";
 		
 		UIAlertController *sheet = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-		[sheet addAction:[UIAlertAction actionWithTitle:@"네" style:UIAlertActionStyleDefault handler:^void (UIAlertAction *action) {
-			NSLog(@"You tapped OK");
+		[sheet addAction:[UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^void (UIAlertAction *action) {
+			NSLog(@"Tapped OK");
 		}]];
 		
 		sheet.popoverPresentationController.sourceView = self.view;
@@ -275,16 +300,24 @@
 			[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+            }
 		} else {
 			[self.answerLabel1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+            [self increaseCurrentAttempt];
 		}
 	} else if (sender == self.answerButton2) {
 		if ([_quiz2.correct isEqualToString:correct]) {
 			[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+            }
 		} else {
 			[self.answerLabel2.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+            [self increaseCurrentAttempt];
 		}
 	}
 	else if (sender == self.answerButton3) {
@@ -292,16 +325,24 @@
 			[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+            }
 		} else {
 			[self.answerLabel3.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+            [self increaseCurrentAttempt];
 		}
 	}else if (sender == self.answerButton4) {
 		if ([_quiz4.correct isEqualToString:correct]) {
 			[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+            }
 		} else {
 			[self.answerLabel4.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+            [self increaseCurrentAttempt];
 		}
 	}
 }

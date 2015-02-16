@@ -88,6 +88,18 @@
 	[_defaults setInteger:_round forKey:@"_round"];
 	[_defaults synchronize];
 	
+    NSString *title = @"초기화 성공!";
+    NSString *message = @"데이터가 초기화 되었습니다.";
+    
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [sheet addAction:[UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^void (UIAlertAction *action) {
+        NSLog(@"Tapped OK");
+    }]];
+    
+    sheet.popoverPresentationController.sourceView = self.view;
+    sheet.popoverPresentationController.sourceRect = self.view.frame;
+    
+    [self presentViewController:sheet animated:YES completion:nil];
 }
 
 
