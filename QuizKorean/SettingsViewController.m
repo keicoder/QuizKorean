@@ -229,4 +229,12 @@
 }
 
 
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+	NSLog(@"dealloc %@", self);
+}
+
+
 @end

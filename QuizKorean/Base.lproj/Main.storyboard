@@ -586,6 +586,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리말 퀴즈" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-Xq-SAd">
+                                <rect key="frame" x="185" y="166" width="231" height="59"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="50"/>
+                                <color key="textColor" red="0.21766415238380432" green="0.40978914499282837" blue="0.61733728647232056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWt-n1-Bk6" userLabel="StartButton" customClass="PopAnimationButton">
                                 <rect key="frame" x="170" y="275" width="260" height="50"/>
                                 <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -626,22 +632,16 @@
                                     <action selector="aboutButtonTapped:" destination="Qhu-wo-ihA" eventType="touchUpInside" id="5F8-dO-FxB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리말 퀴즈" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-Xq-SAd">
-                                <rect key="frame" x="208" y="166" width="185" height="48"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="40"/>
-                                <color key="textColor" red="0.21766415238380432" green="0.40978914499282837" blue="0.61733728647232056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="uWt-n1-Bk6" secondAttribute="centerX" id="1Ko-Ul-wPp"/>
                             <constraint firstItem="uWt-n1-Bk6" firstAttribute="height" secondItem="XOr-YR-pc5" secondAttribute="height" id="76s-FR-BLh"/>
                             <constraint firstItem="WXc-yD-5gj" firstAttribute="height" secondItem="XOr-YR-pc5" secondAttribute="height" id="9Y1-dE-CRA"/>
-                            <constraint firstItem="3ci-Xq-SAd" firstAttribute="centerX" secondItem="uWt-n1-Bk6" secondAttribute="centerX" constant="0.5" id="A8o-bx-mgB"/>
+                            <constraint firstItem="3ci-Xq-SAd" firstAttribute="centerX" secondItem="uWt-n1-Bk6" secondAttribute="centerX" id="A8o-bx-mgB"/>
                             <constraint firstItem="WXc-yD-5gj" firstAttribute="width" secondItem="XOr-YR-pc5" secondAttribute="width" id="BVA-1D-v7H"/>
                             <constraint firstItem="uWt-n1-Bk6" firstAttribute="centerX" secondItem="XOr-YR-pc5" secondAttribute="centerX" id="PLC-Uc-pnr"/>
-                            <constraint firstItem="uWt-n1-Bk6" firstAttribute="top" secondItem="3ci-Xq-SAd" secondAttribute="bottom" constant="61" id="YPc-yQ-EZE"/>
+                            <constraint firstItem="uWt-n1-Bk6" firstAttribute="top" secondItem="3ci-Xq-SAd" secondAttribute="bottom" constant="50" id="YPc-yQ-EZE"/>
                             <constraint firstAttribute="centerY" secondItem="uWt-n1-Bk6" secondAttribute="centerY" id="YmG-s4-GwS"/>
                             <constraint firstItem="uWt-n1-Bk6" firstAttribute="width" secondItem="XOr-YR-pc5" secondAttribute="width" id="ihK-GV-xDd"/>
                             <constraint firstItem="XOr-YR-pc5" firstAttribute="top" secondItem="uWt-n1-Bk6" secondAttribute="bottom" constant="20" id="mjb-5d-qcc"/>
