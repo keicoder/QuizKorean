@@ -49,6 +49,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *roundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *slashLabel;
 
 @end
 
@@ -77,6 +78,23 @@
 	[self configureUI];
 	[self addObserverForParseJSONDictionaryNotification];
 	[self fetchJSONData];
+	[self getScoreAndRoundDataFromNSUserDefaults];
+}
+
+
+#pragma mark - Get the stored NSUserDefaults data
+
+- (void)getScoreAndRoundDataFromNSUserDefaults
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSInteger round = [defaults integerForKey:@"_round"];
+	NSLog (@"round: %ld\n", (long)round);
+	
+	if (round < 0) {
+		_round = 0;
+	} else {
+		_round = (int)round - 1;
+	}
 }
 
 
@@ -88,7 +106,7 @@
 }
 
 
-- (void)startNewGame
+- (void)startNewQuiz
 {
 	_score = 0;
 	_round = 0;
@@ -99,6 +117,7 @@
 - (void)updateLabels
 {
 	self.scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
+	self.slashLabel.text = @"/";
 	self.roundLabel.text = [NSString stringWithFormat:@"%d", _round];
 }
 
@@ -119,6 +138,10 @@
 		self.answerLabel2.alpha = alpha;
 		self.answerLabel3.alpha = alpha;
 		self.answerLabel4.alpha = alpha;
+		
+		self.scoreLabel.alpha = alpha;
+		self.slashLabel.alpha = alpha;
+		self.roundLabel.alpha = alpha;
 		
 	}completion:^(BOOL finished) {
 		
@@ -184,7 +207,22 @@
 								self.answerLabel4.alpha = alpha;
 								self.answerLabel4.text = _quiz4.answer;
 								NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
-							}completion:^(BOOL finished) { }];
+							}completion:^(BOOL finished) {
+								
+								[self startNewRound];
+								[self updateLabels];
+								
+								[UIView animateWithDuration:duration animations:^{
+									self.scoreLabel.alpha = alpha;
+									self.slashLabel.alpha = alpha;
+									self.roundLabel.alpha = alpha;
+								}completion:^(BOOL finished) { }];
+								
+								NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+								[defaults setInteger:_round forKey:@"_round"];
+								[defaults synchronize];
+							
+							}];
 						}];
 					}];
 				}];
@@ -198,7 +236,7 @@
 {
 	if ([[notification name] isEqualToString:@"ParseJSONDictionaryFailedNotification"])
 	{
-		NSString *title = @"에러";
+		NSString *title = @"접속 오류";
 		NSString *message = @"인터넷에 연결할 수 없습니다.";
 		
 		UIAlertController *sheet = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -311,6 +349,7 @@
 
 - (IBAction)nextButtonTapped:(id)sender
 {
+	_round -= 1;
 	[self fetchJSONData];
 }
 
@@ -331,6 +370,10 @@
 	self.answerLabel2.text = blank;
 	self.answerLabel3.text = blank;
 	self.answerLabel4.text = blank;
+	
+	self.scoreLabel.text = blank;
+	self.slashLabel.text = blank;
+	self.roundLabel.text = blank;
 	
 	//Color
 	UIColor *whiteColor = [UIColor whiteColor];

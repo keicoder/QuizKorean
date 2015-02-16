@@ -50,6 +50,36 @@
                                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HR3-ft-2r3"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56j-nG-sKf" userLabel="SlashLabel">
+                                                <rect key="frame" x="294" y="16" width="12" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="OhF-xB-D5Z"/>
+                                                    <constraint firstAttribute="width" constant="12" id="bhJ-tK-26v"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrf-zq-wX4" userLabel="RoundLabel">
+                                                <rect key="frame" x="308" y="16" width="52" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="HpY-0H-nal"/>
+                                                    <constraint firstAttribute="width" constant="52" id="g9h-cH-NMt"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KZ-iy-uuD" userLabel="ScoreLabel">
+                                                <rect key="frame" x="240" y="16" width="52" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c2b-cc-MmE"/>
+                                                    <constraint firstAttribute="width" constant="52" id="rvT-Ly-TVm"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.84303140640258789" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -60,11 +90,17 @@
                                             <constraint firstItem="3WH-Na-3Va" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="75e-dM-mTR">
                                                 <variation key="heightClass=compact" constant="0.0"/>
                                             </constraint>
+                                            <constraint firstItem="Jrf-zq-wX4" firstAttribute="leading" secondItem="56j-nG-sKf" secondAttribute="trailing" constant="2" id="DeM-Bf-jcg"/>
                                             <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="20" id="Qdd-jV-hgT"/>
+                                            <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="Jrf-zq-wX4" secondAttribute="centerY" id="TNG-mz-SqJ"/>
+                                            <constraint firstAttribute="centerX" secondItem="56j-nG-sKf" secondAttribute="centerX" id="YTQ-ns-Teo"/>
+                                            <constraint firstItem="9KZ-iy-uuD" firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" id="aeU-Mr-E1H"/>
                                             <constraint firstItem="nqj-wP-fyw" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="fLa-3J-eG6">
                                                 <variation key="heightClass=compact" constant="0.0"/>
                                             </constraint>
+                                            <constraint firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" constant="-8" id="ifF-xp-PMo"/>
                                             <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="20" id="l1Q-vw-8hO"/>
+                                            <constraint firstItem="56j-nG-sKf" firstAttribute="leading" secondItem="9KZ-iy-uuD" secondAttribute="trailing" constant="2" id="qCq-Yd-pvd"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -344,6 +380,9 @@
                         <outlet property="questionContainerView" destination="iWc-t1-F72" id="pVB-EN-M0j"/>
                         <outlet property="questionLabel" destination="b6f-WO-h0D" id="8Tb-iJ-HWv"/>
                         <outlet property="questionScrollView" destination="O9I-44-t4E" id="skS-jl-NMn"/>
+                        <outlet property="roundLabel" destination="Jrf-zq-wX4" id="IZ0-lX-EEl"/>
+                        <outlet property="scoreLabel" destination="9KZ-iy-uuD" id="1vs-gQ-UiC"/>
+                        <outlet property="slashLabel" destination="56j-nG-sKf" id="FPF-VG-nd9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
