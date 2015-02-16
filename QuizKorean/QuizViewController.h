@@ -10,6 +10,5 @@
 
 @interface QuizViewController : UIViewController
 
-
 @end
 

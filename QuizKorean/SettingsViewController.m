@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 @property (weak, nonatomic) IBOutlet UIButton *soundEffectButton;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendMailButton;
 @property (weak, nonatomic) IBOutlet UIButton *returnButton;
 
@@ -32,6 +33,10 @@
 {
     CGFloat _duration;
 	NSString *_soundEffect;
+	
+	NSUserDefaults *_defaults;
+	NSInteger _score;
+	NSInteger _round;
 }
 
 
@@ -39,8 +44,10 @@
 {
     [super viewDidLoad];
     _duration = 0.4;
+	_defaults = [NSUserDefaults standardUserDefaults];
 	[self configureUI];
-	[self getSoundEffectData];
+	[self getTheSoundEffectData];
+	[self getTheScoreAndRoundData];
 }
 
 
@@ -65,9 +72,22 @@
 	
 	[self.soundEffectButton setTitle:_soundEffect forState:UIControlStateNormal];
 	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:_soundEffect forKey:@"_soundEffect"];
-	[defaults synchronize];
+	[_defaults setObject:_soundEffect forKey:@"_soundEffect"];
+	[_defaults synchronize];
+}
+
+
+- (IBAction)resetButtonTapped:(id)sender
+{
+	_score = 0;
+	_round = 0;
+	NSLog (@"score value after reset: %ld\n", (long)_score);
+	NSLog (@"round value after reset: %ld\n", (long)_round);
+	
+	[_defaults setInteger:_score forKey:@"_score"];
+	[_defaults setInteger:_round forKey:@"_round"];
+	[_defaults synchronize];
+	
 }
 
 
@@ -85,11 +105,10 @@
 
 #pragma mark - Get the stored NSUserDefaults data
 
-- (void)getSoundEffectData
+- (void)getTheSoundEffectData
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	_soundEffect = [defaults objectForKey:@"_soundEffect"];
-	NSLog (@"_soundEffect: %@\n", _soundEffect);
+	_soundEffect = [_defaults objectForKey:@"_soundEffect"];
+	NSLog (@"_soundEffect before: %@\n", _soundEffect);
 	
 	if (_soundEffect == nil) {
 		_soundEffect = @"효과음 > 켜짐";
@@ -100,8 +119,18 @@
 		[self.soundEffectButton setBackgroundColor:kTURN_OFF];
 	}
 	
-	NSLog (@"_soundEffect: %@\n", _soundEffect);
+	NSLog (@"_soundEffect after: %@\n", _soundEffect);
 	[self.soundEffectButton setTitle:_soundEffect forState:UIControlStateNormal];
+}
+
+
+
+- (void)getTheScoreAndRoundData
+{
+	_score = [_defaults integerForKey:@"_score"];
+	_round = [_defaults integerForKey:@"_round"];
+	NSLog (@"score value before: %ld\n", (long)_score);
+	NSLog (@"round value before: %ld\n", (long)_round);
 }
 
 
@@ -193,6 +222,7 @@
 	float cornerRadius = self.aboutButton.bounds.size.height/2;
 	self.aboutButton.layer.cornerRadius = cornerRadius;
 	self.soundEffectButton.layer.cornerRadius = cornerRadius;
+	self.resetButton.layer.cornerRadius = cornerRadius;
 	self.sendMailButton.layer.cornerRadius = cornerRadius;
 	self.returnButton.layer.cornerRadius = cornerRadius;
 	[self.returnButton setBackgroundColor: [UIColor colorWithRed:1.000 green:0.541 blue:0.213 alpha:1.000]];

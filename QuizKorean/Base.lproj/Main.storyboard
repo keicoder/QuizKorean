@@ -477,7 +477,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dcm-1Z-3sq" userLabel="AboutButton" customClass="PopScaleButton">
-                                <rect key="frame" x="170" y="170" width="260" height="50"/>
+                                <rect key="frame" x="170" y="135" width="260" height="50"/>
                                 <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="앱 소개">
@@ -489,12 +489,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tjt-Wl-oWX" userLabel="SoundEffectButton" customClass="PopScaleButton">
-                                <rect key="frame" x="170" y="240" width="260" height="50"/>
+                                <rect key="frame" x="170" y="205" width="260" height="50"/>
                                 <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="260" id="Mx1-qP-q5M"/>
-                                    <constraint firstAttribute="height" constant="50" id="xag-bN-TNq"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="효과음 &gt; 켜짐">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -504,7 +500,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-N6-UrC" userLabel="SendMailButton" customClass="PopScaleButton">
-                                <rect key="frame" x="170" y="310" width="260" height="50"/>
+                                <rect key="frame" x="170" y="345" width="260" height="50"/>
                                 <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="의견보내기">
@@ -516,7 +512,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dA-Fb-MmG" userLabel="ReturnButton" customClass="PopScaleButton">
-                                <rect key="frame" x="170" y="380" width="260" height="50"/>
+                                <rect key="frame" x="170" y="415" width="260" height="50"/>
                                 <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="돌아가기">
@@ -527,27 +523,48 @@
                                     <action selector="dismissButtonTapped:" destination="mhd-ah-6Vd" eventType="touchUpInside" id="Seg-qm-7p4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ay2-x8-M1h" userLabel="ResetButton" customClass="PopScaleButton">
+                                <rect key="frame" x="170" y="275" width="260" height="50"/>
+                                <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3QK-Fc-G1E"/>
+                                    <constraint firstAttribute="width" constant="260" id="p3R-dx-3h1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="데이터 초기화">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButtonTapped:" destination="mhd-ah-6Vd" eventType="touchUpInside" id="Bay-Br-wVK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Tjt-Wl-oWX" firstAttribute="height" secondItem="Dcm-1Z-3sq" secondAttribute="height" id="1pw-tb-mgp"/>
-                            <constraint firstItem="ksS-N6-UrC" firstAttribute="top" secondItem="Tjt-Wl-oWX" secondAttribute="bottom" constant="20" id="7Me-Xv-PsO"/>
-                            <constraint firstItem="ksS-N6-UrC" firstAttribute="height" secondItem="Tjt-Wl-oWX" secondAttribute="height" id="D2m-yt-l84"/>
-                            <constraint firstAttribute="centerY" secondItem="Tjt-Wl-oWX" secondAttribute="centerY" constant="35" id="DTW-xR-MPT"/>
-                            <constraint firstItem="ksS-N6-UrC" firstAttribute="width" secondItem="Tjt-Wl-oWX" secondAttribute="width" id="Il8-EF-2Ju"/>
-                            <constraint firstAttribute="centerX" secondItem="Tjt-Wl-oWX" secondAttribute="centerX" id="PHn-Cp-PPM"/>
-                            <constraint firstItem="ksS-N6-UrC" firstAttribute="centerX" secondItem="2dA-Fb-MmG" secondAttribute="centerX" id="Q99-Jo-1yp"/>
-                            <constraint firstItem="Tjt-Wl-oWX" firstAttribute="top" secondItem="Dcm-1Z-3sq" secondAttribute="bottom" constant="20" id="ZEL-my-6Hl"/>
-                            <constraint firstItem="ksS-N6-UrC" firstAttribute="height" secondItem="2dA-Fb-MmG" secondAttribute="height" id="ZeL-fO-3eZ"/>
-                            <constraint firstItem="Tjt-Wl-oWX" firstAttribute="centerX" secondItem="Dcm-1Z-3sq" secondAttribute="centerX" id="eCi-iZ-JqO"/>
-                            <constraint firstItem="2dA-Fb-MmG" firstAttribute="top" secondItem="ksS-N6-UrC" secondAttribute="bottom" constant="20" id="hwG-eH-K4C"/>
-                            <constraint firstItem="ksS-N6-UrC" firstAttribute="centerX" secondItem="Tjt-Wl-oWX" secondAttribute="centerX" id="k0d-1s-aMg"/>
-                            <constraint firstItem="Tjt-Wl-oWX" firstAttribute="width" secondItem="Dcm-1Z-3sq" secondAttribute="width" id="sml-Rd-Ik4"/>
-                            <constraint firstItem="ksS-N6-UrC" firstAttribute="width" secondItem="2dA-Fb-MmG" secondAttribute="width" id="yhz-bc-v9p"/>
+                            <constraint firstAttribute="centerX" secondItem="ay2-x8-M1h" secondAttribute="centerX" id="1Dx-Dd-bP4"/>
+                            <constraint firstItem="ay2-x8-M1h" firstAttribute="top" secondItem="Tjt-Wl-oWX" secondAttribute="bottom" constant="20" id="3jW-nh-sSn"/>
+                            <constraint firstItem="ksS-N6-UrC" firstAttribute="width" secondItem="ay2-x8-M1h" secondAttribute="width" id="4lW-eq-Diy"/>
+                            <constraint firstItem="ksS-N6-UrC" firstAttribute="height" secondItem="ay2-x8-M1h" secondAttribute="height" id="DbW-hT-Jpp"/>
+                            <constraint firstItem="ksS-N6-UrC" firstAttribute="top" secondItem="ay2-x8-M1h" secondAttribute="bottom" constant="20" id="E5k-gb-ot1"/>
+                            <constraint firstItem="ay2-x8-M1h" firstAttribute="height" secondItem="Tjt-Wl-oWX" secondAttribute="height" id="FJT-Fu-Y37"/>
+                            <constraint firstItem="ksS-N6-UrC" firstAttribute="centerX" secondItem="2dA-Fb-MmG" secondAttribute="centerX" id="FM3-vE-6LB"/>
+                            <constraint firstItem="ksS-N6-UrC" firstAttribute="width" secondItem="2dA-Fb-MmG" secondAttribute="width" id="J0x-iO-AKP"/>
+                            <constraint firstItem="Dcm-1Z-3sq" firstAttribute="centerX" secondItem="Tjt-Wl-oWX" secondAttribute="centerX" id="QXI-h9-Jdv"/>
+                            <constraint firstItem="Tjt-Wl-oWX" firstAttribute="top" secondItem="Dcm-1Z-3sq" secondAttribute="bottom" constant="20" id="TVS-yA-A1N"/>
+                            <constraint firstItem="ay2-x8-M1h" firstAttribute="width" secondItem="Tjt-Wl-oWX" secondAttribute="width" id="WEl-qn-QAf"/>
+                            <constraint firstItem="2dA-Fb-MmG" firstAttribute="top" secondItem="ksS-N6-UrC" secondAttribute="bottom" constant="20" id="be8-MB-2EH"/>
+                            <constraint firstItem="Dcm-1Z-3sq" firstAttribute="height" secondItem="Tjt-Wl-oWX" secondAttribute="height" id="edf-J5-qDT"/>
+                            <constraint firstItem="ksS-N6-UrC" firstAttribute="height" secondItem="2dA-Fb-MmG" secondAttribute="height" id="fUB-B9-cp7"/>
+                            <constraint firstItem="Dcm-1Z-3sq" firstAttribute="width" secondItem="Tjt-Wl-oWX" secondAttribute="width" id="o18-JV-xsX"/>
+                            <constraint firstAttribute="centerY" secondItem="ay2-x8-M1h" secondAttribute="centerY" id="uLt-y2-EbL"/>
+                            <constraint firstItem="ay2-x8-M1h" firstAttribute="centerX" secondItem="Tjt-Wl-oWX" secondAttribute="centerX" id="utq-j5-i3d"/>
+                            <constraint firstItem="ksS-N6-UrC" firstAttribute="centerX" secondItem="ay2-x8-M1h" secondAttribute="centerX" id="yOq-fb-ZfI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="aboutButton" destination="Dcm-1Z-3sq" id="6dM-bT-DAg"/>
+                        <outlet property="resetButton" destination="ay2-x8-M1h" id="DmK-er-DKy"/>
                         <outlet property="returnButton" destination="2dA-Fb-MmG" id="OJ9-ML-V9s"/>
                         <outlet property="sendMailButton" destination="ksS-N6-UrC" id="BDR-Th-Ox6"/>
                         <outlet property="soundEffectButton" destination="Tjt-Wl-oWX" id="s6L-LP-tae"/>

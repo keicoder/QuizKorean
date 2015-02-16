@@ -13,7 +13,6 @@
 #import "POP.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImage+ChangeColor.h"
-#import "SettingsViewController.h"
 
 
 #define debug 1
@@ -63,10 +62,10 @@
 	Quiz *_quiz3;
 	Quiz *_quiz4;
 	
-	int _score;
-	int _round;
-	
 	NSString *_soundEffect;
+	
+	NSInteger _score;
+	NSInteger _round;
 }
 
 
@@ -90,7 +89,7 @@
 	NSInteger round = [defaults integerForKey:@"_round"];
 	NSLog (@"round: %ld\n", (long)round);
 	
-	if (round < 0) {
+	if (round <= 0) {
 		_round = 0;
 	} else {
 		_round = (int)round - 1;
@@ -116,9 +115,9 @@
 
 - (void)updateLabels
 {
-	self.scoreLabel.text = [NSString stringWithFormat:@"%d", _score];
+	self.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)_score];
 	self.slashLabel.text = @"/";
-	self.roundLabel.text = [NSString stringWithFormat:@"%d", _round];
+	self.roundLabel.text = [NSString stringWithFormat:@"%ld", (long)_round];
 }
 
 
@@ -237,10 +236,10 @@
 	if ([[notification name] isEqualToString:@"ParseJSONDictionaryFailedNotification"])
 	{
 		NSString *title = @"접속 오류";
-		NSString *message = @"인터넷에 연결할 수 없습니다.";
+		NSString *message = @"인터넷 연결을 확인해 주세요.";
 		
 		UIAlertController *sheet = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-		[sheet addAction:[UIAlertAction actionWithTitle:@"다시 시도" style:UIAlertActionStyleDefault handler:^void (UIAlertAction *action) {
+		[sheet addAction:[UIAlertAction actionWithTitle:@"네" style:UIAlertActionStyleDefault handler:^void (UIAlertAction *action) {
 			NSLog(@"You tapped OK");
 		}]];
 		
@@ -425,5 +424,22 @@
 {
 	NSLog(@"dealloc %@", self);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end
