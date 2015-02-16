@@ -260,7 +260,7 @@
 	//정답일 때: POP Sprint Animation
 	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
 	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(7, 7)];
+	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(10, 10)];
 	sprintAnimation.springBounciness = 20.f;
 	
 	//오답일 때: POP Shake Animation

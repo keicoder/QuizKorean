@@ -34,7 +34,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	_duration = 0.2;
+	_duration = 0.4;
 	[self configureUI];
 }
 
