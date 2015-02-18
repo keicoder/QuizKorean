@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0B97DC294D8C6E50512C47F4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4335BFEC03F1675186383896 /* libPods.a */; };
+		328948DE1A944D790024F74D /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 328948DD1A944D790024F74D /* PopView.m */; };
+		328948E11A9452290024F74D /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328948E01A9452290024F74D /* PopViewController.m */; };
 		C11EE55F1A8C241C00393FC1 /* PopScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */; };
 		C1400EC11A89DAEC00867496 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC01A89DAEC00867496 /* main.m */; };
 		C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC31A89DAEC00867496 /* AppDelegate.m */; };
@@ -51,6 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		328948DC1A944D790024F74D /* PopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopView.h; sourceTree = "<group>"; };
+		328948DD1A944D790024F74D /* PopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopView.m; sourceTree = "<group>"; };
+		328948DF1A9452290024F74D /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
+		328948E01A9452290024F74D /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
 		4335BFEC03F1675186383896 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C41846C9C4A9A3FF714D22 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A93D3854E72A579DC09E0303 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,8 +177,7 @@
 				C1705DD71A905800005129C6 /* iRate */,
 				C1B2A7E41A8AD21C00FC80C2 /* AFNetworking */,
 				C1B2A8011A8AE48C00FC80C2 /* Categories */,
-				C1400EF31A89E75900867496 /* PopButton */,
-				C1400EEC1A89DCAD00867496 /* Views */,
+				C1400EF31A89E75900867496 /* PopView */,
 				C1400EE41A89DB7E00867496 /* Controllers */,
 				C1B2A7E01A8AD16400FC80C2 /* Data */,
 				C1400EEB1A89DC8C00867496 /* UI */,
@@ -222,6 +227,8 @@
 				C1400EF11A89E3C800867496 /* SettingsViewController.m */,
 				C1400EE81A89DC5E00867496 /* AboutViewController.h */,
 				C1400EE91A89DC5E00867496 /* AboutViewController.m */,
+				328948DF1A9452290024F74D /* PopViewController.h */,
+				328948E01A9452290024F74D /* PopViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -236,16 +243,7 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		C1400EEC1A89DCAD00867496 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				C1400EED1A89DCD000867496 /* GradientView.h */,
-				C1400EEE1A89DCD000867496 /* GradientView.m */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		C1400EF31A89E75900867496 /* PopButton */ = {
+		C1400EF31A89E75900867496 /* PopView */ = {
 			isa = PBXGroup;
 			children = (
 				C1400EF41A89E77B00867496 /* PopAnimationButton.h */,
@@ -256,8 +254,12 @@
 				C1E4F52D1A8C7E0200A924F7 /* PopAnimationClearButton.m */,
 				C19D60FE1A9305DB00C03B08 /* PopCustomScaleButton.h */,
 				C19D60FF1A9305DB00C03B08 /* PopCustomScaleButton.m */,
+				328948DC1A944D790024F74D /* PopView.h */,
+				328948DD1A944D790024F74D /* PopView.m */,
+				C1400EED1A89DCD000867496 /* GradientView.h */,
+				C1400EEE1A89DCD000867496 /* GradientView.m */,
 			);
-			name = PopButton;
+			name = PopView;
 			sourceTree = "<group>";
 		};
 		C1705DD71A905800005129C6 /* iRate */ = {
@@ -475,6 +477,8 @@
 				C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */,
 				C1B2A7FB1A8AD21C00FC80C2 /* AFNetworkReachabilityManager.m in Sources */,
 				C1400EEA1A89DC5E00867496 /* AboutViewController.m in Sources */,
+				328948E11A9452290024F74D /* PopViewController.m in Sources */,
+				328948DE1A944D790024F74D /* PopView.m in Sources */,
 				C19D61001A9305DB00C03B08 /* PopCustomScaleButton.m in Sources */,
 				C1B2A7FD1A8AD21C00FC80C2 /* AFURLConnectionOperation.m in Sources */,
 				C1B2A7F81A8AD21C00FC80C2 /* AFHTTPRequestOperation.m in Sources */,

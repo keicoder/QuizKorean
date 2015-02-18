@@ -14,6 +14,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImage+ChangeColor.h"
 #import "PopCustomScaleButton.h"
+#import "PopView.h"
 
 
 #define debug 1
@@ -24,28 +25,36 @@
 @property (nonatomic, strong) Quiz *quiz;
 
 @property (weak, nonatomic) IBOutlet UIView *questionContainerView;
-@property (weak, nonatomic) IBOutlet UIView *answerContainerView;
 
 @property (weak, nonatomic) IBOutlet UIView *infoView;
-@property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *roundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *slashLabel;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+
+
+
+@property (weak, nonatomic) IBOutlet UIView *answerContainerView;
+
+@property (weak, nonatomic) IBOutlet PopView *answerView1;
+@property (weak, nonatomic) IBOutlet PopView *answerView2;
+@property (weak, nonatomic) IBOutlet PopView *answerView3;
+@property (weak, nonatomic) IBOutlet PopView *answerView4;
+
+@property (weak, nonatomic) IBOutlet UIButton *answerButton1;
+@property (weak, nonatomic) IBOutlet UIButton *answerButton2;
+@property (weak, nonatomic) IBOutlet UIButton *answerButton3;
+@property (weak, nonatomic) IBOutlet UIButton *answerButton4;
+
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel1;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel3;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel4;
 
-@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton1;
-@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton2;
-@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton3;
-@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton4;
-
-@property (weak, nonatomic) IBOutlet UIButton *menuButton;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
-
-@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *roundLabel;
-@property (weak, nonatomic) IBOutlet UILabel *slashLabel;
 
 @end
 
@@ -308,54 +317,54 @@
 	if (sender == self.answerButton1) {
 		if ([_quiz1.correct isEqualToString:correct]) {
 			//[self.answerLabel1 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
+			//[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
             }
 		} else {
-			[self.answerLabel1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			//[self.answerLabel1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
             [self increaseCurrentAttempt];
 		}
 	} else if (sender == self.answerButton2) {
 		if ([_quiz2.correct isEqualToString:correct]) {
 			//[self.answerLabel2 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
+			//[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
             }
 		} else {
-			[self.answerLabel2.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			//[self.answerLabel2.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
             [self increaseCurrentAttempt];
 		}
 	}
 	else if (sender == self.answerButton3) {
 		if ([_quiz3.correct isEqualToString:correct]) {
 			//[self.answerLabel3 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
+			//[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
             }
 		} else {
-			[self.answerLabel3.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			//[self.answerLabel3.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
             [self increaseCurrentAttempt];
 		}
 	}else if (sender == self.answerButton4) {
 		if ([_quiz4.correct isEqualToString:correct]) {
 			//[self.answerLabel4 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
+			//[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
             }
 		} else {
-			[self.answerLabel4.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+			//[self.answerLabel4.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
             [self increaseCurrentAttempt];
 		}
 	}
@@ -414,13 +423,16 @@
 {
 	NSString *blank = @"";
 	
-	//Text
+	//Button
 	[self.answerButton1 setTitle:blank forState:UIControlStateNormal];
 	[self.answerButton2 setTitle:blank forState:UIControlStateNormal];
 	[self.answerButton3 setTitle:blank forState:UIControlStateNormal];
 	[self.answerButton4 setTitle:blank forState:UIControlStateNormal];
-	self.questionLabel.text = blank;
-	self.answerLabel1.text = blank;
+	
+    //Label
+    self.questionLabel.text = blank;
+	
+    self.answerLabel1.text = blank;
 	self.answerLabel2.text = blank;
 	self.answerLabel3.text = blank;
 	self.answerLabel4.text = blank;
@@ -446,10 +458,10 @@
 	//Label
 	self.questionLabel.textColor = deepDarkGray;
 	
-	self.answerLabel1.textColor = darkBrown; //whiteColor; //deepDarkGray;
-	self.answerLabel2.textColor = darkBrown; //whiteColor; //deepDarkGray;
-	self.answerLabel3.textColor = darkBrown; //deepDarkGray;
-	self.answerLabel4.textColor = darkBrown; //deepDarkGray;
+	self.answerLabel1.textColor = deepDarkGray; //whiteColor; //deepDarkGray;
+	self.answerLabel2.textColor = deepDarkGray; //whiteColor; //deepDarkGray;
+	self.answerLabel3.textColor = deepDarkGray; //deepDarkGray;
+	self.answerLabel4.textColor = deepDarkGray; //deepDarkGray;
 	
 	self.answerLabel1.backgroundColor = clearColor;
 	self.answerLabel2.backgroundColor = clearColor;
@@ -463,20 +475,31 @@
 	UIColor *colorNormal4 = [UIColor colorWithRed:0.16 green:0.55 blue:0.69 alpha:1];
 	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1]; //[UIColor colorWithRed:1 green:0.73 blue:0.12 alpha:1];
 	
-	self.answerButton1.backgroundColor = colorNormal1;
-	self.answerButton2.backgroundColor = colorNormal2;
-	self.answerButton3.backgroundColor = colorNormal3;
-	self.answerButton4.backgroundColor = colorNormal4;
+	self.answerButton1.backgroundColor = clearColor;
+	self.answerButton2.backgroundColor = clearColor;
+	self.answerButton3.backgroundColor = clearColor;
+	self.answerButton4.backgroundColor = clearColor;
 	
-	self.answerButton1.backgroundColorNormal = colorNormal1;
-	self.answerButton1.backgroundColorHighlight = colorHighlight;
-	self.answerButton2.backgroundColorNormal = colorNormal2;
-	self.answerButton2.backgroundColorHighlight = colorHighlight;
-	self.answerButton3.backgroundColorNormal = colorNormal3;
-	self.answerButton3.backgroundColorHighlight = colorHighlight;
-	self.answerButton4.backgroundColorNormal = colorNormal4;
-	self.answerButton4.backgroundColorHighlight = colorHighlight;
-	
+//	self.answerButton1.backgroundColorNormal = colorNormal1;
+//	self.answerButton1.backgroundColorHighlight = colorHighlight;
+//	self.answerButton2.backgroundColorNormal = colorNormal2;
+//	self.answerButton2.backgroundColorHighlight = colorHighlight;
+//	self.answerButton3.backgroundColorNormal = colorNormal3;
+//	self.answerButton3.backgroundColorHighlight = colorHighlight;
+//	self.answerButton4.backgroundColorNormal = colorNormal4;
+//	self.answerButton4.backgroundColorHighlight = colorHighlight;
+
+    self.answerButton1.hidden = YES;
+    
+    self.answerView1.backgroundColorNormal = colorNormal1;
+    self.answerView1.backgroundColorHighlight = colorHighlight;
+    self.answerView2.backgroundColorNormal = colorNormal2;
+    self.answerView2.backgroundColorHighlight = colorHighlight;
+    self.answerView3.backgroundColorNormal = colorNormal3;
+    self.answerView3.backgroundColorHighlight = colorHighlight;
+    self.answerView4.backgroundColorNormal = colorNormal4;
+    self.answerView4.backgroundColorHighlight = colorHighlight;
+
 	
 	//Info View Buttons
 	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];
