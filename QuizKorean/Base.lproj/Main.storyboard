@@ -188,7 +188,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vq7-0f-ZE0" userLabel="AnswerContainerView">
                                 <rect key="frame" x="0.0" y="300" width="600" height="300"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDP-SU-zF2" userLabel="AnswerButton1">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDP-SU-zF2" userLabel="AnswerButton1" customClass="PopCustomScaleButton">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="UkD-6x-SuE">
@@ -214,7 +214,7 @@
                                             <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0aU-SZ-89Y"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nuc-Wh-px5" userLabel="AnswerButton2">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nuc-Wh-px5" userLabel="AnswerButton2" customClass="PopCustomScaleButton">
                                         <rect key="frame" x="0.0" y="75" width="600" height="75"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="AnswerButton2">
@@ -224,7 +224,7 @@
                                             <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="doo-H3-CoV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKh-wo-vs1" userLabel="AnswerButton3">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKh-wo-vs1" userLabel="AnswerButton3" customClass="PopCustomScaleButton">
                                         <rect key="frame" x="0.0" y="150" width="600" height="75"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="AnswerButton3">
@@ -234,7 +234,7 @@
                                             <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5VY-7d-Nsf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlv-jO-qi6" userLabel="AnswerButton4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlv-jO-qi6" userLabel="AnswerButton4" customClass="PopCustomScaleButton">
                                         <rect key="frame" x="0.0" y="225" width="600" height="75"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="AnswerButton4">
@@ -586,12 +586,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리말 퀴즈" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-Xq-SAd">
-                                <rect key="frame" x="185" y="166" width="231" height="59"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="50"/>
-                                <color key="textColor" red="0.21766415238380432" green="0.40978914499282837" blue="0.61733728647232056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWt-n1-Bk6" userLabel="StartButton" customClass="PopAnimationButton">
                                 <rect key="frame" x="170" y="275" width="260" height="50"/>
                                 <color key="backgroundColor" red="0.11817175890000001" green="0.14571416379999999" blue="0.30452650790000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -632,6 +626,42 @@
                                     <action selector="aboutButtonTapped:" destination="Qhu-wo-ihA" eventType="touchUpInside" id="5F8-dO-FxB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-Xq-SAd">
+                                <rect key="frame" x="168" y="157" width="265" height="96"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="ㅎ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.98700982332229614" green="0.67386668920516968" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="80" name="AppleSDGothicNeo-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="ㄱ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.93980550765991211" green="0.31710818409919739" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="80" name="AppleSDGothicNeo-Light"/>
+                                            <font key="NSOriginalFont" size="80" name="AppleSDGothicNeo-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.21766415238380432" green="0.40978914499282837" blue="0.61733728647232056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="50" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="퀴즈">
+                                        <attributes>
+                                            <color key="NSColor" red="0.21766415238380432" green="0.40978914499282837" blue="0.61733728647232056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="65" name="AppleSDGothicNeo-Light"/>
+                                            <font key="NSOriginalFont" size="70" name="AppleSDGothicNeo-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -641,7 +671,7 @@
                             <constraint firstItem="3ci-Xq-SAd" firstAttribute="centerX" secondItem="uWt-n1-Bk6" secondAttribute="centerX" id="A8o-bx-mgB"/>
                             <constraint firstItem="WXc-yD-5gj" firstAttribute="width" secondItem="XOr-YR-pc5" secondAttribute="width" id="BVA-1D-v7H"/>
                             <constraint firstItem="uWt-n1-Bk6" firstAttribute="centerX" secondItem="XOr-YR-pc5" secondAttribute="centerX" id="PLC-Uc-pnr"/>
-                            <constraint firstItem="uWt-n1-Bk6" firstAttribute="top" secondItem="3ci-Xq-SAd" secondAttribute="bottom" constant="50" id="YPc-yQ-EZE"/>
+                            <constraint firstItem="uWt-n1-Bk6" firstAttribute="top" secondItem="3ci-Xq-SAd" secondAttribute="bottom" constant="22" id="YPc-yQ-EZE"/>
                             <constraint firstAttribute="centerY" secondItem="uWt-n1-Bk6" secondAttribute="centerY" id="YmG-s4-GwS"/>
                             <constraint firstItem="uWt-n1-Bk6" firstAttribute="width" secondItem="XOr-YR-pc5" secondAttribute="width" id="ihK-GV-xDd"/>
                             <constraint firstItem="XOr-YR-pc5" firstAttribute="top" secondItem="uWt-n1-Bk6" secondAttribute="bottom" constant="20" id="mjb-5d-qcc"/>

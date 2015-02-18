@@ -13,13 +13,10 @@
 #import "POP.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImage+ChangeColor.h"
+#import "PopCustomScaleButton.h"
 
 
 #define debug 1
-
-
-#define kODD_COLOR [UIColor colorWithRed:0.83 green:0.83 blue:0.83 alpha:1]
-#define kEVEN_COLOR [UIColor colorWithRed:0.96 green:0.89 blue:0.87 alpha:1]
 
 
 @interface QuizViewController ()
@@ -38,10 +35,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel3;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel4;
 
-@property (weak, nonatomic) IBOutlet UIButton *answerButton1;
-@property (weak, nonatomic) IBOutlet UIButton *answerButton2;
-@property (weak, nonatomic) IBOutlet UIButton *answerButton3;
-@property (weak, nonatomic) IBOutlet UIButton *answerButton4;
+@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton1;
+@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton2;
+@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton3;
+@property (weak, nonatomic) IBOutlet PopCustomScaleButton *answerButton4;
 
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
@@ -202,33 +199,38 @@
 			sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
 			sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(4, 4)];
 			sprintAnimation.springBounciness = 20.f;
+			[self.questionLabel pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
+			
 			
 			CGFloat duration = 0.2f;
 			CGFloat alpha = 1.0f;
 			
 			[UIView animateWithDuration:duration animations:^{
 				self.questionLabel.alpha = alpha;
-				[self.questionLabel pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
 				self.questionLabel.text = _quiz1.question;
 			}completion:^(BOOL finished) {
 				[UIView animateWithDuration:duration animations:^{
 					self.answerLabel1.alpha = alpha;
 					self.answerLabel1.text = _quiz1.answer;
+//                    self.answerButton1.titleLabel.text = _quiz1.answer;
 					NSLog (@"quiz1.correct: %@\n", _quiz1.correct);
 				}completion:^(BOOL finished) {
 					[UIView animateWithDuration:duration animations:^{
 						self.answerLabel2.alpha = alpha;
 						self.answerLabel2.text = _quiz2.answer;
+//                        self.answerButton3.titleLabel.text = _quiz2.answer;
 						NSLog (@"quiz2.correct: %@\n", _quiz2.correct);
 					}completion:^(BOOL finished) {
 						[UIView animateWithDuration:duration animations:^{
 							self.answerLabel3.alpha = alpha;
 							self.answerLabel3.text = _quiz3.answer;
+//                            self.answerButton3.titleLabel.text = _quiz3.answer;
 							NSLog (@"quiz3.correct: %@\n", _quiz3.correct);
 						}completion:^(BOOL finished) {
 							[UIView animateWithDuration:duration animations:^{
 								self.answerLabel4.alpha = alpha;
 								self.answerLabel4.text = _quiz4.answer;
+//                                self.answerButton4.titleLabel.text = _quiz4.answer;
 								NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
 							}completion:^(BOOL finished) {
 								
@@ -284,9 +286,17 @@
 	
 	//정답일 때: POP Sprint Animation
 	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
-	sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
 	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(10, 10)];
 	sprintAnimation.springBounciness = 20.f;
+	
+	
+	//POP Rotate Animation
+	POPSpringAnimation *rotateAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
+	rotateAnimation.fromValue = @(0); //@(M_PI / 4);
+	rotateAnimation.toValue = @(M_PI / 4); //@(0);
+	rotateAnimation.springBounciness = 20;
+	rotateAnimation.velocity = @(10);
+	
 	
 	//오답일 때: POP Shake Animation
 	POPSpringAnimation *shakeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
@@ -297,6 +307,7 @@
 	
 	if (sender == self.answerButton1) {
 		if ([_quiz1.correct isEqualToString:correct]) {
+			//[self.answerLabel1 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
@@ -309,6 +320,7 @@
 		}
 	} else if (sender == self.answerButton2) {
 		if ([_quiz2.correct isEqualToString:correct]) {
+			//[self.answerLabel2 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
@@ -322,6 +334,7 @@
 	}
 	else if (sender == self.answerButton3) {
 		if ([_quiz3.correct isEqualToString:correct]) {
+			//[self.answerLabel3 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
@@ -334,6 +347,7 @@
 		}
 	}else if (sender == self.answerButton4) {
 		if ([_quiz4.correct isEqualToString:correct]) {
+			//[self.answerLabel4 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
 			[self checkToPlaySoundEffect:sender];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
@@ -426,25 +440,43 @@
 	self.view.backgroundColor = whiteColor;
 	self.questionContainerView.backgroundColor = whiteColor;
 	self.answerContainerView.backgroundColor = whiteColor;
-	self.infoView.backgroundColor = [UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
-	self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
+	self.infoView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
+	self.questionScrollView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
 	
 	//Label
 	self.questionLabel.textColor = deepDarkGray;
-	self.answerLabel1.textColor = deepDarkGray;
-	self.answerLabel2.textColor = deepDarkGray;
-	self.answerLabel3.textColor = deepDarkGray;
-	self.answerLabel4.textColor = deepDarkGray;
+	
+	self.answerLabel1.textColor = darkBrown; //whiteColor; //deepDarkGray;
+	self.answerLabel2.textColor = darkBrown; //whiteColor; //deepDarkGray;
+	self.answerLabel3.textColor = darkBrown; //deepDarkGray;
+	self.answerLabel4.textColor = darkBrown; //deepDarkGray;
+	
 	self.answerLabel1.backgroundColor = clearColor;
 	self.answerLabel2.backgroundColor = clearColor;
 	self.answerLabel3.backgroundColor = clearColor;
 	self.answerLabel4.backgroundColor = clearColor;
 	
 	//Button
-	self.answerButton1.backgroundColor = kODD_COLOR;
-	self.answerButton2.backgroundColor = kEVEN_COLOR;
-	self.answerButton3.backgroundColor = kODD_COLOR;
-	self.answerButton4.backgroundColor = kEVEN_COLOR;
+	UIColor *colorNormal1 = [UIColor colorWithRed:0.72 green:0.93 blue:1 alpha:1];
+	UIColor *colorNormal2 = [UIColor colorWithRed:0.52 green:0.85 blue:0.98 alpha:1];
+	UIColor *colorNormal3 = [UIColor colorWithRed:0.2 green:0.69 blue:0.86 alpha:1];
+	UIColor *colorNormal4 = [UIColor colorWithRed:0.16 green:0.55 blue:0.69 alpha:1];
+	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1]; //[UIColor colorWithRed:1 green:0.73 blue:0.12 alpha:1];
+	
+	self.answerButton1.backgroundColor = colorNormal1;
+	self.answerButton2.backgroundColor = colorNormal2;
+	self.answerButton3.backgroundColor = colorNormal3;
+	self.answerButton4.backgroundColor = colorNormal4;
+	
+	self.answerButton1.backgroundColorNormal = colorNormal1;
+	self.answerButton1.backgroundColorHighlight = colorHighlight;
+	self.answerButton2.backgroundColorNormal = colorNormal2;
+	self.answerButton2.backgroundColorHighlight = colorHighlight;
+	self.answerButton3.backgroundColorNormal = colorNormal3;
+	self.answerButton3.backgroundColorHighlight = colorHighlight;
+	self.answerButton4.backgroundColorNormal = colorNormal4;
+	self.answerButton4.backgroundColorHighlight = colorHighlight;
+	
 	
 	//Info View Buttons
 	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];

@@ -24,6 +24,7 @@
 		C1705DDB1A905800005129C6 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C1705DD81A905800005129C6 /* iRate.bundle */; };
 		C1705DDC1A905800005129C6 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1705DDA1A905800005129C6 /* iRate.m */; };
 		C1705DDE1A905824005129C6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1705DDD1A905824005129C6 /* StoreKit.framework */; };
+		C19D61001A9305DB00C03B08 /* PopCustomScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C19D60FF1A9305DB00C03B08 /* PopCustomScaleButton.m */; };
 		C1B2A7DF1A8AD12C00FC80C2 /* correct.caf in Resources */ = {isa = PBXBuildFile; fileRef = C1B2A7DE1A8AD12C00FC80C2 /* correct.caf */; };
 		C1B2A7E31A8AD18000FC80C2 /* Quiz.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7E21A8AD18000FC80C2 /* Quiz.m */; };
 		C1B2A7F81A8AD21C00FC80C2 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7E61A8AD21C00FC80C2 /* AFHTTPRequestOperation.m */; };
@@ -84,6 +85,8 @@
 		C1705DD91A905800005129C6 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		C1705DDA1A905800005129C6 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		C1705DDD1A905824005129C6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		C19D60FE1A9305DB00C03B08 /* PopCustomScaleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopCustomScaleButton.h; sourceTree = "<group>"; };
+		C19D60FF1A9305DB00C03B08 /* PopCustomScaleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopCustomScaleButton.m; sourceTree = "<group>"; };
 		C1B2A7DE1A8AD12C00FC80C2 /* correct.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = correct.caf; sourceTree = "<group>"; };
 		C1B2A7E11A8AD18000FC80C2 /* Quiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quiz.h; sourceTree = "<group>"; };
 		C1B2A7E21A8AD18000FC80C2 /* Quiz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quiz.m; sourceTree = "<group>"; };
@@ -251,6 +254,8 @@
 				C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */,
 				C1E4F52C1A8C7E0200A924F7 /* PopAnimationClearButton.h */,
 				C1E4F52D1A8C7E0200A924F7 /* PopAnimationClearButton.m */,
+				C19D60FE1A9305DB00C03B08 /* PopCustomScaleButton.h */,
+				C19D60FF1A9305DB00C03B08 /* PopCustomScaleButton.m */,
 			);
 			name = PopButton;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				TargetAttributes = {
 					C1400EBA1A89DAEC00867496 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 9DHQ6GLLC9;
 					};
 					C1400ED31A89DAEC00867496 = {
 						CreatedOnToolsVersion = 6.3;
@@ -469,6 +475,7 @@
 				C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */,
 				C1B2A7FB1A8AD21C00FC80C2 /* AFNetworkReachabilityManager.m in Sources */,
 				C1400EEA1A89DC5E00867496 /* AboutViewController.m in Sources */,
+				C19D61001A9305DB00C03B08 /* PopCustomScaleButton.m in Sources */,
 				C1B2A7FD1A8AD21C00FC80C2 /* AFURLConnectionOperation.m in Sources */,
 				C1B2A7F81A8AD21C00FC80C2 /* AFHTTPRequestOperation.m in Sources */,
 				C1B2A7FA1A8AD21C00FC80C2 /* AFHTTPSessionManager.m in Sources */,
@@ -611,6 +618,7 @@
 			baseConfigurationReference = 55C41846C9C4A9A3FF714D22 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = QuizKorean/PrefixHeader.pch;
 				INFOPLIST_FILE = QuizKorean/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -624,6 +632,7 @@
 			baseConfigurationReference = A93D3854E72A579DC09E0303 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = QuizKorean/PrefixHeader.pch;
 				INFOPLIST_FILE = QuizKorean/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
