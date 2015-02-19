@@ -13,7 +13,6 @@
 #import "POP.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImage+ChangeColor.h"
-#import "PopCustomScaleButton.h"
 #import "PopView.h"
 
 
@@ -36,19 +35,12 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 
-
-
 @property (weak, nonatomic) IBOutlet UIView *answerContainerView;
 
 @property (weak, nonatomic) IBOutlet PopView *answerView1;
 @property (weak, nonatomic) IBOutlet PopView *answerView2;
 @property (weak, nonatomic) IBOutlet PopView *answerView3;
 @property (weak, nonatomic) IBOutlet PopView *answerView4;
-
-@property (weak, nonatomic) IBOutlet UIButton *answerButton1;
-@property (weak, nonatomic) IBOutlet UIButton *answerButton2;
-@property (weak, nonatomic) IBOutlet UIButton *answerButton3;
-@property (weak, nonatomic) IBOutlet UIButton *answerButton4;
 
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel1;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel2;
@@ -81,10 +73,12 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
+    _currentAttempt = 1; //첫시도에 바로 맞춰야 득점으로 인정
+    
 	[self configureUI];
 	[self addObserverForParseJSONDictionaryNotification];
 	[self fetchJSONData];
-    _currentAttempt = 1; //첫시도에 바로 맞춰야 득점으로 인정
 	[self getScoreAndRoundDataFromNSUserDefaults];
     [self addTapGestureOnTheView:self.answerView1];
     [self addTapGestureOnTheView:self.answerView2];
@@ -225,25 +219,21 @@
 				[UIView animateWithDuration:duration animations:^{
 					self.answerLabel1.alpha = alpha;
 					self.answerLabel1.text = _quiz1.answer;
-//                    self.answerButton1.titleLabel.text = _quiz1.answer;
 					NSLog (@"quiz1.correct: %@\n", _quiz1.correct);
 				}completion:^(BOOL finished) {
 					[UIView animateWithDuration:duration animations:^{
 						self.answerLabel2.alpha = alpha;
 						self.answerLabel2.text = _quiz2.answer;
-//                        self.answerButton3.titleLabel.text = _quiz2.answer;
 						NSLog (@"quiz2.correct: %@\n", _quiz2.correct);
 					}completion:^(BOOL finished) {
 						[UIView animateWithDuration:duration animations:^{
 							self.answerLabel3.alpha = alpha;
 							self.answerLabel3.text = _quiz3.answer;
-//                            self.answerButton3.titleLabel.text = _quiz3.answer;
 							NSLog (@"quiz3.correct: %@\n", _quiz3.correct);
 						}completion:^(BOOL finished) {
 							[UIView animateWithDuration:duration animations:^{
 								self.answerLabel4.alpha = alpha;
 								self.answerLabel4.text = _quiz4.answer;
-//                                self.answerButton4.titleLabel.text = _quiz4.answer;
 								NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
 							}completion:^(BOOL finished) {
 								
@@ -290,91 +280,6 @@
 	}
 }
 
-
-#pragma mark - Button Action
-
-- (IBAction)answerButtonPressed:(id)sender
-{
-	NSString *correct = @"정답";
-	
-	//정답일 때: POP Sprint Animation
-	POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
-	sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(10, 10)];
-	sprintAnimation.springBounciness = 20.f;
-	
-	
-	//POP Rotate Animation
-	POPSpringAnimation *rotateAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerRotation];
-	rotateAnimation.fromValue = @(0); //@(M_PI / 4);
-	rotateAnimation.toValue = @(M_PI / 4); //@(0);
-	rotateAnimation.springBounciness = 20;
-	rotateAnimation.velocity = @(10);
-	
-	
-	//오답일 때: POP Shake Animation
-	POPSpringAnimation *shakeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
-	shakeAnimation.springBounciness = 20;
-	shakeAnimation.velocity = @(1000);
-	
-	CGFloat delay = 1.5;
-	
-	if (sender == self.answerButton1) {
-		if ([_quiz1.correct isEqualToString:correct]) {
-			//[self.answerLabel1 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			//[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-            [self.answerView1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimaion"];
-			[self checkToPlaySoundEffect];
-			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-            }
-		} else {
-            [self.answerView1 pop_addAnimation:shakeAnimation forKey:@"sprintAnimaion"];
-			//[self.answerLabel1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
-            [self increaseCurrentAttempt];
-		}
-	} else if (sender == self.answerButton2) {
-		if ([_quiz2.correct isEqualToString:correct]) {
-			//[self.answerLabel2 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			//[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self checkToPlaySoundEffect];
-			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-            }
-		} else {
-			//[self.answerLabel2.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
-            [self increaseCurrentAttempt];
-		}
-	}
-	else if (sender == self.answerButton3) {
-		if ([_quiz3.correct isEqualToString:correct]) {
-			//[self.answerLabel3 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			//[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self checkToPlaySoundEffect];
-			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-            }
-		} else {
-			//[self.answerLabel3.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
-            [self increaseCurrentAttempt];
-		}
-	}else if (sender == self.answerButton4) {
-		if ([_quiz4.correct isEqualToString:correct]) {
-			//[self.answerLabel4 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
-			//[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self checkToPlaySoundEffect];
-			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-            }
-		} else {
-			//[self.answerLabel4.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
-            [self increaseCurrentAttempt];
-		}
-	}
-}
 
 
 #pragma mark - Get the stored NSUserDefaults data and check to play SoundEffect
@@ -538,12 +443,6 @@
 {
 	NSString *blank = @"";
 	
-	//Button
-	[self.answerButton1 setTitle:blank forState:UIControlStateNormal];
-	[self.answerButton2 setTitle:blank forState:UIControlStateNormal];
-	[self.answerButton3 setTitle:blank forState:UIControlStateNormal];
-	[self.answerButton4 setTitle:blank forState:UIControlStateNormal];
-	
     //Label
     self.questionLabel.text = blank;
 	
@@ -583,33 +482,14 @@
 	self.answerLabel3.backgroundColor = clearColor;
 	self.answerLabel4.backgroundColor = clearColor;
 	
-	//Button
+	//Color
 	UIColor *colorNormal1 = [UIColor colorWithRed:0.72 green:0.93 blue:1 alpha:1];
 	UIColor *colorNormal2 = [UIColor colorWithRed:0.52 green:0.85 blue:0.98 alpha:1];
 	UIColor *colorNormal3 = [UIColor colorWithRed:0.2 green:0.69 blue:0.86 alpha:1];
 	UIColor *colorNormal4 = [UIColor colorWithRed:0.16 green:0.55 blue:0.69 alpha:1];
-	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1]; //[UIColor colorWithRed:1 green:0.73 blue:0.12 alpha:1];
+	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
 	
-	self.answerButton1.backgroundColor = clearColor;
-	self.answerButton2.backgroundColor = clearColor;
-	self.answerButton3.backgroundColor = clearColor;
-	self.answerButton4.backgroundColor = clearColor;
-	
-//	self.answerButton1.backgroundColorNormal = colorNormal1;
-//	self.answerButton1.backgroundColorHighlight = colorHighlight;
-//	self.answerButton2.backgroundColorNormal = colorNormal2;
-//	self.answerButton2.backgroundColorHighlight = colorHighlight;
-//	self.answerButton3.backgroundColorNormal = colorNormal3;
-//	self.answerButton3.backgroundColorHighlight = colorHighlight;
-//	self.answerButton4.backgroundColorNormal = colorNormal4;
-//	self.answerButton4.backgroundColorHighlight = colorHighlight;
-
-    self.answerButton1.hidden = YES;
-    self.answerButton2.hidden = YES;
-    self.answerButton3.hidden = YES;
-    self.answerButton4.hidden = YES;
-    
-    self.answerView1.backgroundColor = colorNormal1;
+	self.answerView1.backgroundColor = colorNormal1;
     self.answerView2.backgroundColor = colorNormal2;
     self.answerView3.backgroundColor = colorNormal3;
     self.answerView4.backgroundColor = colorNormal4;
@@ -643,22 +523,6 @@
 {
 	NSLog(@"dealloc %@", self);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @end

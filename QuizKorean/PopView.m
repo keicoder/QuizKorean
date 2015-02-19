@@ -66,7 +66,12 @@
     [UIView animateWithDuration:_duration animations:^{
         
         float cornerRadius = 7;
-        self.layer.cornerRadius = cornerRadius;
+        
+        if (!self.cornerRadius) {
+            [self.layer setCornerRadius:cornerRadius];
+        } else {
+            [self.layer setCornerRadius:self.cornerRadius];
+        }
         
         if (!self.backgroundColorHighlight) {
             [self setBackgroundColor:kBackgroundColorHighlight];
@@ -78,10 +83,9 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
-    
     POPSpringAnimation *scale = [self pop_animationForKey:@"scale"];
     
     CGFloat size = 1.0;
@@ -99,7 +103,12 @@
     [UIView animateWithDuration:_duration animations:^{
         
         float cornerRadius = 0;
-        self.layer.cornerRadius = cornerRadius;
+        
+        if (!self.cornerRadius) {
+            [self.layer setCornerRadius:cornerRadius];
+        } else {
+            [self.layer setCornerRadius:self.cornerRadius];
+        }
         
         if (!self.backgroundColorNormal) {
             [self setBackgroundColor:kBackgroundColorNormal];

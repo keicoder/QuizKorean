@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) UIColor *backgroundColorNormal;
 @property (nonatomic, strong) UIColor *backgroundColorHighlight;
+@property (nonatomic, assign) CGFloat cornerRadius;
 
 @end

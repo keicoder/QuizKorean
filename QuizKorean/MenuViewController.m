@@ -13,36 +13,45 @@
 #import "QuizViewController.h"
 #import "SettingsViewController.h"
 #import "AboutViewController.h"
+#import "UIImage+ChangeColor.h"
+#import "PopView.h"
 
 
-@interface MenuViewController ()
+@interface MenuViewController () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *startButton;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
-@property (weak, nonatomic) IBOutlet UIButton *aboutButton;
+@property (weak, nonatomic) IBOutlet PopView *startView;
+@property (weak, nonatomic) IBOutlet PopView *settingsView;
+@property (weak, nonatomic) IBOutlet PopView *aboutView;
+@property (weak, nonatomic) IBOutlet UIImageView *startImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *settingsImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *aboutImageView;
 
 @end
 
 
 @implementation MenuViewController
 {
-	CGFloat _duration;
+	
 }
 
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	_duration = 0.4;
+    
 	[self configureUI];
+    [self addTapGestureOnTheView:self.startView];
+    [self addTapGestureOnTheView:self.settingsView];
+    [self addTapGestureOnTheView:self.aboutView];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[self changeButtonsAlphaToZero];
+    
+	[self changeViewsAlphaToZero];
 	[self changeTitleLabelsAlphaToOpaque];
 }
 
@@ -50,33 +59,33 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[self moveButtonsOutOfTheView];
+	[self moveViewsOutOfTheView];
 }
 
 
 #pragma mark - Animation
 
-- (void)moveButtonsOutOfTheView
+- (void)moveViewsOutOfTheView
 {
-	CGFloat originX = 2;
-	
-	CGRect startButtonFrame = self.startButton.frame;
-	startButtonFrame.origin.x -= self.view.bounds.size.width/originX;
-	self.startButton.frame = startButtonFrame;
-	
-	CGRect settingsButtonFrame = self.settingsButton.frame;
-	settingsButtonFrame.origin.x -= self.view.bounds.size.width/originX;
-	self.settingsButton.frame = settingsButtonFrame;
-	
-	CGRect aboutButtonFrame = self.aboutButton.frame;
-	aboutButtonFrame.origin.x -= self.view.bounds.size.width/originX;
-	self.aboutButton.frame = aboutButtonFrame;
-	
-	[self performSelector:@selector(moveButtonsInTheViewWithAnimation) withObject:nil afterDelay:0.1];
+    CGFloat originX = 2;
+    
+    CGRect startViewFrame = self.startView.frame;
+    startViewFrame.origin.x -= self.view.bounds.size.width/originX;
+    self.startView.frame = startViewFrame;
+    
+    CGRect settingsViewFrame = self.settingsView.frame;
+    settingsViewFrame.origin.x -= self.view.bounds.size.width/originX;
+    self.settingsView.frame = settingsViewFrame;
+    
+    CGRect aboutViewFrame = self.aboutView.frame;
+    aboutViewFrame.origin.x -= self.view.bounds.size.width/originX;
+    self.aboutView.frame = aboutViewFrame;
+    
+    [self performSelector:@selector(moveViewsInTheViewWithAnimation) withObject:nil afterDelay:0.1];
 }
 
 
-- (void)moveButtonsInTheViewWithAnimation
+- (void)moveViewsInTheViewWithAnimation
 {
 	CGFloat alpha = 1.0;
 	
@@ -87,22 +96,22 @@
 	
 	[UIView animateWithDuration:duration delay:initialDelay options: options animations:^{
 		
-		self.startButton.alpha = alpha;
-		self.startButton.frame = CGRectMake(self.view.bounds.size.width/2 - self.startButton.bounds.size.width/2, self.startButton.frame.origin.y, self.startButton.bounds.size.width, self.startButton.bounds.size.height);
+		self.startView.alpha = alpha;
+		self.startView.frame = CGRectMake(self.view.bounds.size.width/2 - self.startView.bounds.size.width/2, self.startView.frame.origin.y, self.startView.bounds.size.width, self.startView.bounds.size.height);
 		
 	} completion:^(BOOL finished) {
 		
 		[UIView animateWithDuration:duration delay:additionalDelay options: options animations:^{
 			
-			self.settingsButton.alpha = alpha;
-			self.settingsButton.frame = CGRectMake(self.view.bounds.size.width/2 - self.settingsButton.bounds.size.width/2, self.settingsButton.frame.origin.y, self.settingsButton.bounds.size.width, self.settingsButton.bounds.size.height);
+			self.settingsView.alpha = alpha;
+			self.settingsView.frame = CGRectMake(self.view.bounds.size.width/2 - self.settingsView.bounds.size.width/2, self.settingsView.frame.origin.y, self.settingsView.bounds.size.width, self.settingsView.bounds.size.height);
 			
 		} completion:^(BOOL finished) {
 			
 			[UIView animateWithDuration:duration delay:additionalDelay options: options animations:^{
 				
-				self.aboutButton.alpha = alpha;
-				self.aboutButton.frame = CGRectMake(self.view.bounds.size.width/2 - self.aboutButton.bounds.size.width/2, self.aboutButton.frame.origin.y, self.aboutButton.bounds.size.width, self.aboutButton.bounds.size.height);
+				self.aboutView.alpha = alpha;
+				self.aboutView.frame = CGRectMake(self.view.bounds.size.width/2 - self.aboutView.bounds.size.width/2, self.aboutView.frame.origin.y, self.aboutView.bounds.size.width, self.aboutView.bounds.size.height);
 				
 			} completion:^(BOOL finished) {
 				
@@ -112,46 +121,52 @@
 }
 
 
-#pragma mark - Button Action
+#pragma mark - Tap gesture on the View
 
-- (IBAction)startButtonTapped:(id)sender
+- (void)addTapGestureOnTheView:(UIView *)aView
 {
-	[self performSelector:@selector(showViewController:) withObject:sender afterDelay:_duration];
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureViewTapped:)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    gestureRecognizer.delegate = self;
+    
+    [aView addGestureRecognizer:gestureRecognizer];
 }
 
 
-- (IBAction)settingsButtonTapped:(id)sender
+- (void)gestureViewTapped:(UITouch *)touch
 {
-	[self performSelector:@selector(showViewController:) withObject:sender afterDelay:_duration];
+    if ([touch.view isEqual:(UIView *)self.startView]) {
+        
+        NSLog(@"self.startView Tapped");
+        QuizViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"QuizViewController"];
+        [self presentViewController:controller animated:YES completion:^{ }];
+    
+    } else if ([touch.view isEqual:(UIView *)self.settingsView]) {
+        
+        NSLog(@"self.settingsView Tapped");
+        SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+        [self presentViewController:controller animated:YES completion:^{ }];
+        
+    } else if ([touch.view isEqual:(UIView *)self.aboutView]) {
+        
+        NSLog(@"self.aboutView Tapped");
+        AboutViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
+        controller.view.frame = self.view.bounds;
+        [controller presentInParentViewController:self];
+    }
 }
 
 
-- (IBAction)aboutButtonTapped:(id)sender
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-	[self performSelector:@selector(showViewController:) withObject:sender afterDelay:_duration];
-}
-
-
-#pragma mark - Show ViewController
-
-- (void)showViewController:(id)sender
-{
-	if (sender == self.startButton)
-	{
-		QuizViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"QuizViewController"];
-		[self showViewController:controller sender:sender];
-	}
-	else if (sender == self.settingsButton)
-	{
-		SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-		[self presentViewController:controller animated:YES completion:^{ }];
-	}
-	else if (sender == self.aboutButton)
-	{
-		AboutViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
-		controller.view.frame = self.view.bounds;
-		[controller presentInParentViewController:self];
-	}
+    if (touch.view == self.startView || touch.view == self.settingsView || touch.view == self.aboutView) {
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 
@@ -159,28 +174,55 @@
 
 - (void)configureUI
 {
-	float cornerRadius = self.startButton.bounds.size.height/2;
-	self.startButton.layer.cornerRadius = cornerRadius;
-	self.settingsButton.layer.cornerRadius = cornerRadius;
-	self.aboutButton.layer.cornerRadius = cornerRadius;
+    self.view.tintColor = [UIColor colorWithRed:20/255.0f green:160/255.0f blue:160/255.0f alpha:1.0f];
+    
+    UIImage *about = [UIImage imageForChangingColor:@"info" color:[UIColor whiteColor]];
+    self.aboutImageView.image = about;
+    
+    //Corner Radius
+    float cornerRadius = self.startView.bounds.size.height/2;
+    
+    self.startView.layer.cornerRadius = cornerRadius;
+    self.settingsView.layer.cornerRadius = cornerRadius;
+    self.aboutView.layer.cornerRadius = cornerRadius;
+    
+    self.startView.cornerRadius = cornerRadius;
+    self.settingsView.cornerRadius = cornerRadius;
+    self.aboutView.cornerRadius = cornerRadius;
+    
+    //Color
+    UIColor *colorNormal1 = [UIColor colorWithRed:0.72 green:0.93 blue:1 alpha:1];
+    UIColor *colorNormal2 = [UIColor colorWithRed:0.52 green:0.85 blue:0.98 alpha:1];
+    UIColor *colorNormal3 = [UIColor colorWithRed:0.2 green:0.69 blue:0.86 alpha:1];
+    UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
+    
+    [self.startView setBackgroundColor: colorNormal1];
+    [self.settingsView setBackgroundColor:colorNormal2];
+    [self.aboutView setBackgroundColor:colorNormal3];
+    
+    self.startView.backgroundColorNormal = colorNormal1;
+    self.startView.backgroundColorHighlight = colorHighlight;
+    self.settingsView.backgroundColorNormal = colorNormal2;
+    self.settingsView.backgroundColorHighlight = colorHighlight;
+    self.aboutView.backgroundColorNormal = colorNormal3;
+    self.aboutView.backgroundColorHighlight = colorHighlight;
 }
 
 
-- (void)changeButtonsAlphaToZero
+- (void)changeViewsAlphaToZero
 {
 	CGFloat alpha = 0.0;
 	self.titleLabel.alpha = alpha;
-	self.startButton.alpha = alpha;
-	self.settingsButton.alpha = alpha;
-	self.aboutButton.alpha = alpha;
-	
-	[self.startButton setBackgroundColor: [UIColor colorWithRed:1.000 green:0.541 blue:0.213 alpha:1.000]];
+	self.startView.alpha = alpha;
+	self.settingsView.alpha = alpha;
+	self.aboutView.alpha = alpha;
 }
 
 
 - (void)changeTitleLabelsAlphaToOpaque
 {
 	CGFloat labelAnimationDuration = 0.7;
+    
 	[UIView animateWithDuration:labelAnimationDuration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
 		
 		CGFloat alpha = 1.0;
