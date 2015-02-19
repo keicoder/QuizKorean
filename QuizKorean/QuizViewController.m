@@ -20,7 +20,7 @@
 #define debug 1
 
 
-@interface QuizViewController ()
+@interface QuizViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) Quiz *quiz;
 
@@ -86,6 +86,10 @@
 	[self fetchJSONData];
     _currentAttempt = 1; //첫시도에 바로 맞춰야 득점으로 인정
 	[self getScoreAndRoundDataFromNSUserDefaults];
+    [self addTapGestureOnTheView:self.answerView1];
+    [self addTapGestureOnTheView:self.answerView2];
+    [self addTapGestureOnTheView:self.answerView3];
+    [self addTapGestureOnTheView:self.answerView4];
 }
 
 
@@ -318,12 +322,14 @@
 		if ([_quiz1.correct isEqualToString:correct]) {
 			//[self.answerLabel1 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			//[self.answerLabel1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self checkToPlaySoundEffect:sender];
+            [self.answerView1 pop_addAnimation:sprintAnimation forKey:@"sprintAnimaion"];
+			[self checkToPlaySoundEffect];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
             }
 		} else {
+            [self.answerView1 pop_addAnimation:shakeAnimation forKey:@"sprintAnimaion"];
 			//[self.answerLabel1.layer pop_addAnimation:shakeAnimation forKey:@"shakeAnimation"];
             [self increaseCurrentAttempt];
 		}
@@ -331,7 +337,7 @@
 		if ([_quiz2.correct isEqualToString:correct]) {
 			//[self.answerLabel2 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			//[self.answerLabel2 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self checkToPlaySoundEffect:sender];
+			[self checkToPlaySoundEffect];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
@@ -345,7 +351,7 @@
 		if ([_quiz3.correct isEqualToString:correct]) {
 			//[self.answerLabel3 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			//[self.answerLabel3 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self checkToPlaySoundEffect:sender];
+			[self checkToPlaySoundEffect];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
@@ -358,7 +364,7 @@
 		if ([_quiz4.correct isEqualToString:correct]) {
 			//[self.answerLabel4 pop_addAnimation:rotateAnimation forKey:@"rotateAnimation"];
 			//[self.answerLabel4 pop_addAnimation:sprintAnimation forKey:@"sprintAnimation"];
-			[self checkToPlaySoundEffect:sender];
+			[self checkToPlaySoundEffect];
 			[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
             if (_currentAttempt == 1) {
                 [self increaseScore];
@@ -373,7 +379,7 @@
 
 #pragma mark - Get the stored NSUserDefaults data and check to play SoundEffect
 
-- (void)checkToPlaySoundEffect:(id)sender
+- (void)checkToPlaySoundEffect
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	_soundEffect = [defaults objectForKey:@"_soundEffect"];
@@ -381,9 +387,9 @@
 	
 	if (_soundEffect == nil) {
 		_soundEffect = @"효과음 > 켜짐";
-		[self playCorrectSound:sender];
+		[self playCorrectSound];
 	} else if ([_soundEffect isEqualToString: @"효과음 > 켜짐"]) {
-		[self playCorrectSound:sender];
+		[self playCorrectSound];
 	} else if ([_soundEffect isEqualToString: @"효과음 > 꺼짐"]) {
 		NSLog(@"No SoundEffect");
 	}
@@ -392,7 +398,7 @@
 }
 
 
-- (void)playCorrectSound:(id)sender
+- (void)playCorrectSound
 {
 	NSString *correctPath = [[NSBundle mainBundle] pathForResource:@"correct" ofType:@"caf"];
 	NSURL *correctURL = [NSURL fileURLWithPath:correctPath];
@@ -414,6 +420,115 @@
 {
 	_round -= 1;
 	[self fetchJSONData];
+}
+
+
+#pragma mark - Tap gesture on the View
+
+- (void)addTapGestureOnTheView:(UIView *)aView
+{
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureViewTapped:)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    gestureRecognizer.delegate = self;
+    
+    [aView addGestureRecognizer:gestureRecognizer];
+}
+
+
+- (void)gestureViewTapped:(UITouch *)touch
+{
+    NSString *correct = @"정답";
+    //CGFloat delay = 1.5;
+    
+    if ([touch.view isEqual:(UIView *)self.answerView1]) {
+        NSLog(@"self.answerView1 Tapped");
+        
+        if ([_quiz1.correct isEqualToString:correct]) {
+            
+            [self checkToPlaySoundEffect];
+            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+                NSLog(@"Correct : You earned score");
+            } else {
+                NSLog(@"correct : But no score. cheer up");
+            }
+        } else {
+            
+            [self increaseCurrentAttempt];
+            NSLog(@"No, try again");
+        }
+        
+    } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
+        
+        NSLog(@"self.answerView2 Tapped");
+        
+        if ([_quiz2.correct isEqualToString:correct]) {
+            
+            [self checkToPlaySoundEffect];
+            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+                NSLog(@"Correct : You earned score");
+            } else {
+                NSLog(@"correct : But no score. cheer up");
+            }
+        } else {
+            
+            [self increaseCurrentAttempt];
+            NSLog(@"No, try again");
+        }
+        
+    } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
+        NSLog(@"self.answerView3 Tapped");
+        
+        if ([_quiz3.correct isEqualToString:correct]) {
+            
+            [self checkToPlaySoundEffect];
+            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+                NSLog(@"Correct : You earned score");
+            } else {
+                NSLog(@"correct : But no score. cheer up");
+            }
+        } else {
+            
+            [self increaseCurrentAttempt];
+            NSLog(@"No, try again");
+        }
+        
+    } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
+        NSLog(@"self.answerView4 Tapped");
+        
+        if ([_quiz4.correct isEqualToString:correct]) {
+            
+            [self checkToPlaySoundEffect];
+            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            if (_currentAttempt == 1) {
+                [self increaseScore];
+                NSLog(@"Correct : You earned score");
+            } else {
+                NSLog(@"correct : But no score. cheer up");
+            }
+        } else {
+            
+            [self increaseCurrentAttempt];
+            NSLog(@"No, try again");
+        }
+    }
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if (touch.view == self.answerView1 || touch.view == self.answerView2 || touch.view == self.answerView3 || touch.view == self.answerView4) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 
@@ -490,6 +605,14 @@
 //	self.answerButton4.backgroundColorHighlight = colorHighlight;
 
     self.answerButton1.hidden = YES;
+    self.answerButton2.hidden = YES;
+    self.answerButton3.hidden = YES;
+    self.answerButton4.hidden = YES;
+    
+    self.answerView1.backgroundColor = colorNormal1;
+    self.answerView2.backgroundColor = colorNormal2;
+    self.answerView3.backgroundColor = colorNormal3;
+    self.answerView4.backgroundColor = colorNormal4;
     
     self.answerView1.backgroundColorNormal = colorNormal1;
     self.answerView1.backgroundColorHighlight = colorHighlight;
