@@ -7,9 +7,8 @@
 //
 
 
-
-#define kBackgroundColorNormal [UIColor colorWithRed:0.860 green:0.560 blue:0.406 alpha:1.000] //[UIColor colorWithRed:0.506 green:0.678 blue:0.860 alpha:1.000]
-#define kBackgroundColorHighlight [UIColor colorWithRed:0.227 green:0.414 blue:0.610 alpha:1.000] //[UIColor colorWithRed:0.044 green:0.132 blue:0.247 alpha:1.000]
+#define kBackgroundColorNormal [UIColor colorWithRed:0.506 green:0.678 blue:0.860 alpha:1.000]
+#define kBackgroundColorHighlight [UIColor colorWithRed:0.044 green:0.132 blue:0.247 alpha:1.000]
 
 
 #import "PopView.h"

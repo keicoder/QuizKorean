@@ -23,7 +23,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqj-wP-fyw" userLabel="MenuButton" customClass="PopAnimationClearButton">
-                                                <rect key="frame" x="20" y="16" width="44" height="44"/>
+                                                <rect key="frame" x="10" y="16" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="bIX-Mu-IQd"/>
                                                     <constraint firstAttribute="height" constant="44" id="qhx-aX-Buw"/>
@@ -67,7 +67,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WH-Na-3Va" userLabel="NextButton" customClass="PopAnimationClearButton">
-                                                <rect key="frame" x="536" y="16" width="44" height="44"/>
+                                                <rect key="frame" x="546" y="16" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="o8H-px-Rsu"/>
                                                     <constraint firstAttribute="width" constant="44" id="uLB-ny-tA8"/>
@@ -83,19 +83,27 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.84303140640258789" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="Frz-bv-XhI"/>
+                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="Frz-bv-XhI">
+                                                <variation key="heightClass=compact" constant="0.0"/>
+                                            </constraint>
                                             <constraint firstItem="Jrf-zq-wX4" firstAttribute="leading" secondItem="56j-nG-sKf" secondAttribute="trailing" constant="2" id="IPK-Ic-9fM"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="leading" secondItem="9KZ-iy-uuD" secondAttribute="trailing" constant="2" id="LNl-uj-43w"/>
                                             <constraint firstAttribute="centerX" secondItem="56j-nG-sKf" secondAttribute="centerX" id="O1X-KC-8qE">
                                                 <variation key="heightClass=compact" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="Jrf-zq-wX4" secondAttribute="centerY" id="Of2-MK-YZM"/>
-                                            <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="20" id="dU2-ua-XyD"/>
+                                            <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="10" id="dU2-ua-XyD"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="9KZ-iy-uuD" secondAttribute="centerY" id="grV-BZ-ccU"/>
-                                            <constraint firstItem="3WH-Na-3Va" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="jtA-7J-hIc"/>
-                                            <constraint firstAttribute="height" constant="60" id="oAM-yP-gFI"/>
-                                            <constraint firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" constant="-8" id="p7r-Te-2hY"/>
-                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="leading" secondItem="14k-HL-lre" secondAttribute="leading" constant="20" id="q3m-1K-dAc"/>
+                                            <constraint firstItem="3WH-Na-3Va" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="jtA-7J-hIc">
+                                                <variation key="heightClass=compact" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="60" id="oAM-yP-gFI">
+                                                <variation key="heightClass=compact" constant="44"/>
+                                            </constraint>
+                                            <constraint firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" constant="-8" id="p7r-Te-2hY">
+                                                <variation key="heightClass=compact" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="leading" secondItem="14k-HL-lre" secondAttribute="leading" constant="10" id="q3m-1K-dAc"/>
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O9I-44-t4E" userLabel="QuestionScrollView">
@@ -139,16 +147,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XhV-gf-qte" userLabel="AnswerView1" customClass="PopView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDP-SU-zF2" userLabel="AnswerButton1">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="AnswerButton1">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0aU-SZ-89Y"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="Dll-tu-ddo" userLabel="AnswerLabel1">
                                                 <rect key="frame" x="20" y="0.0" width="560" height="75"/>
                                                 <color key="backgroundColor" red="1" green="0.52167034149169922" blue="0.16747227311134338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -159,29 +157,15 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="DDP-SU-zF2" firstAttribute="height" secondItem="XhV-gf-qte" secondAttribute="height" id="0AN-pD-Dmo"/>
                                             <constraint firstAttribute="centerX" secondItem="Dll-tu-ddo" secondAttribute="centerX" id="INw-Pn-kcA"/>
-                                            <constraint firstAttribute="centerX" secondItem="DDP-SU-zF2" secondAttribute="centerX" id="JRR-nX-eS1"/>
                                             <constraint firstItem="Dll-tu-ddo" firstAttribute="width" secondItem="XhV-gf-qte" secondAttribute="width" constant="-40" id="KZs-gO-Orc"/>
                                             <constraint firstAttribute="centerY" secondItem="Dll-tu-ddo" secondAttribute="centerY" id="RoM-Cf-08N"/>
-                                            <constraint firstItem="DDP-SU-zF2" firstAttribute="width" secondItem="XhV-gf-qte" secondAttribute="width" id="Zdn-rk-bPK"/>
-                                            <constraint firstAttribute="centerY" secondItem="DDP-SU-zF2" secondAttribute="centerY" id="guE-u4-Mut"/>
                                             <constraint firstItem="Dll-tu-ddo" firstAttribute="height" secondItem="XhV-gf-qte" secondAttribute="height" id="qxA-4h-wGs"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tA8-sw-Fha" userLabel="AnswerView2" customClass="PopView">
                                         <rect key="frame" x="0.0" y="75" width="600" height="75"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nuc-Wh-px5" userLabel="AnswerButton2">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="AnswerButton2">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="doo-H3-CoV"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="dg6-n8-PEo" userLabel="AnswerLabel2">
                                                 <rect key="frame" x="20" y="0.0" width="560" height="75"/>
                                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -193,11 +177,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="dg6-n8-PEo" firstAttribute="width" secondItem="tA8-sw-Fha" secondAttribute="width" constant="-40" id="IJS-W3-aZ1"/>
-                                            <constraint firstItem="Nuc-Wh-px5" firstAttribute="width" secondItem="tA8-sw-Fha" secondAttribute="width" id="MhN-4O-69e"/>
-                                            <constraint firstAttribute="centerX" secondItem="Nuc-Wh-px5" secondAttribute="centerX" id="Tkv-Ml-gKb"/>
                                             <constraint firstItem="dg6-n8-PEo" firstAttribute="height" secondItem="tA8-sw-Fha" secondAttribute="height" id="X60-Bq-S9h"/>
-                                            <constraint firstItem="Nuc-Wh-px5" firstAttribute="height" secondItem="tA8-sw-Fha" secondAttribute="height" id="bTV-re-Jwd"/>
-                                            <constraint firstAttribute="centerY" secondItem="Nuc-Wh-px5" secondAttribute="centerY" id="boy-wf-CPs"/>
                                             <constraint firstAttribute="centerX" secondItem="dg6-n8-PEo" secondAttribute="centerX" id="bqc-9z-1Mv"/>
                                             <constraint firstAttribute="centerY" secondItem="dg6-n8-PEo" secondAttribute="centerY" id="mEM-ie-7jQ"/>
                                         </constraints>
@@ -205,16 +185,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blk-jy-YwN" userLabel="AnswerView3" customClass="PopView">
                                         <rect key="frame" x="0.0" y="150" width="600" height="75"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKh-wo-vs1" userLabel="AnswerButton3">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="AnswerButton3">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5VY-7d-Nsf"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="RGa-0d-UGf" userLabel="AnswerLabel3">
                                                 <rect key="frame" x="20" y="0.0" width="560" height="75"/>
                                                 <color key="backgroundColor" red="1" green="0.52167034149169922" blue="0.16747227311134338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -225,12 +195,8 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="qKh-wo-vs1" secondAttribute="centerX" id="5TC-bp-0u7"/>
-                                            <constraint firstAttribute="width" secondItem="qKh-wo-vs1" secondAttribute="width" id="Hsr-eY-WID"/>
                                             <constraint firstItem="RGa-0d-UGf" firstAttribute="width" secondItem="blk-jy-YwN" secondAttribute="width" constant="-40" id="Nfj-Bc-KEm"/>
-                                            <constraint firstAttribute="centerY" secondItem="qKh-wo-vs1" secondAttribute="centerY" id="RO8-fv-bD1"/>
                                             <constraint firstAttribute="centerY" secondItem="RGa-0d-UGf" secondAttribute="centerY" id="ZUA-AH-tRf"/>
-                                            <constraint firstAttribute="height" secondItem="qKh-wo-vs1" secondAttribute="height" id="eBo-nF-bpd"/>
                                             <constraint firstAttribute="centerX" secondItem="RGa-0d-UGf" secondAttribute="centerX" id="gva-zn-qHM"/>
                                             <constraint firstAttribute="height" secondItem="RGa-0d-UGf" secondAttribute="height" id="olL-ZM-30Y"/>
                                         </constraints>
@@ -238,16 +204,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfw-2p-hxB" userLabel="AnswerView4" customClass="PopView">
                                         <rect key="frame" x="0.0" y="225" width="600" height="75"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlv-jO-qi6" userLabel="AnswerButton4">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="AnswerButton4">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="answerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WUO-NI-z5u"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="4JN-uH-SiH" userLabel="AnswerLabel4">
                                                 <rect key="frame" x="20" y="0.0" width="560" height="75"/>
                                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -258,12 +214,8 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="Rlv-jO-qi6" secondAttribute="centerX" id="3Fh-6l-E7m"/>
-                                            <constraint firstAttribute="height" secondItem="Rlv-jO-qi6" secondAttribute="height" id="Kdw-x6-8wg"/>
                                             <constraint firstItem="4JN-uH-SiH" firstAttribute="width" secondItem="qfw-2p-hxB" secondAttribute="width" constant="-40" id="PJK-Oh-Xl6"/>
                                             <constraint firstAttribute="centerX" secondItem="4JN-uH-SiH" secondAttribute="centerX" id="aKB-F0-0e1"/>
-                                            <constraint firstAttribute="width" secondItem="Rlv-jO-qi6" secondAttribute="width" id="gWT-HI-PM2"/>
-                                            <constraint firstAttribute="centerY" secondItem="Rlv-jO-qi6" secondAttribute="centerY" id="hQ6-NA-2OR"/>
                                             <constraint firstAttribute="height" secondItem="4JN-uH-SiH" secondAttribute="height" id="mAv-BL-UCm"/>
                                             <constraint firstAttribute="centerY" secondItem="4JN-uH-SiH" secondAttribute="centerY" id="tXb-B7-Eaz"/>
                                         </constraints>
@@ -342,10 +294,6 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="answerButton1" destination="DDP-SU-zF2" id="H18-4T-qTf"/>
-                        <outlet property="answerButton2" destination="Nuc-Wh-px5" id="QTL-uQ-Col"/>
-                        <outlet property="answerButton3" destination="qKh-wo-vs1" id="gCT-gc-OY1"/>
-                        <outlet property="answerButton4" destination="Rlv-jO-qi6" id="CMw-yC-PQK"/>
                         <outlet property="answerContainerView" destination="Vq7-0f-ZE0" id="u48-TL-Tyg"/>
                         <outlet property="answerLabel1" destination="Dll-tu-ddo" id="G0R-O3-lB9"/>
                         <outlet property="answerLabel2" destination="dg6-n8-PEo" id="crm-av-psJ"/>
@@ -717,7 +665,7 @@
                         <outlet property="settingsImageView" destination="oGr-Dt-Z4O" id="909-J0-DqB"/>
                         <outlet property="settingsView" destination="zs0-Jj-nQf" id="j2F-uH-5lg"/>
                         <outlet property="startImageView" destination="e4L-dE-apP" id="8e8-dO-MeF"/>
-                        <outlet property="startView" destination="fbx-wa-ktW" id="pFv-Uh-q6h"/>
+                        <outlet property="startView" destination="fbx-wa-ktW" id="u1e-wU-LvI"/>
                         <outlet property="titleLabel" destination="3ci-Xq-SAd" id="R78-VX-9RU"/>
                     </connections>
                 </viewController>

@@ -196,9 +196,9 @@
     UIColor *colorNormal3 = [UIColor colorWithRed:0.2 green:0.69 blue:0.86 alpha:1];
     UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
     
-    [self.startView setBackgroundColor: colorNormal1];
-    [self.settingsView setBackgroundColor:colorNormal2];
-    [self.aboutView setBackgroundColor:colorNormal3];
+    self.startView.backgroundColor = colorNormal1;
+    self.settingsView.backgroundColor = colorNormal2;
+    self.aboutView.backgroundColor = colorNormal3;
     
     self.startView.backgroundColorNormal = colorNormal1;
     self.startView.backgroundColorHighlight = colorHighlight;
