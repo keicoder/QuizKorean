@@ -14,26 +14,20 @@
 #import "SettingsViewController.h"
 #import "AboutViewController.h"
 #import "PopView.h"
+#import "UIImage+ChangeColor.h"
 
 
 @interface MenuViewController () <UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet PopView *startView;
 @property (weak, nonatomic) IBOutlet PopView *settingsView;
 @property (weak, nonatomic) IBOutlet PopView *aboutView;
-@property (weak, nonatomic) IBOutlet UIImageView *startImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *settingsImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *aboutImageView;
 
 @end
 
 
 @implementation MenuViewController
-{
-	
-}
-
 
 - (void)viewDidLoad
 {
@@ -51,7 +45,7 @@
 	[super viewWillAppear:animated];
     
 	[self changeViewsAlphaToZero];
-	[self changeTitleLabelsAlphaToOpaque];
+	[self changelogoImageViewsAlphaToOpaque];
 }
 
 
@@ -169,6 +163,31 @@
 }
 
 
+#pragma mark - View's Alpha
+
+- (void)changeViewsAlphaToZero
+{
+    CGFloat alpha = 0.0;
+    self.logoImageView.alpha = alpha;
+    self.startView.alpha = alpha;
+    self.settingsView.alpha = alpha;
+    self.aboutView.alpha = alpha;
+}
+
+
+- (void)changelogoImageViewsAlphaToOpaque
+{
+    CGFloat labelAnimationDuration = 2.0;
+    
+    [UIView animateWithDuration:labelAnimationDuration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        CGFloat alpha = 1.0;
+        self.logoImageView.alpha = alpha;
+        
+    } completion:^(BOOL finished) { }];
+}
+
+
 #pragma mark - Configure UI
 
 - (void)configureUI
@@ -189,6 +208,7 @@
     self.settingsView.cornerRadius = cornerRadius;
     self.aboutView.cornerRadius = cornerRadius;
     
+    
     //Color
     UIColor *colorNormal1 = [UIColor colorWithRed:0.72 green:0.93 blue:1 alpha:1];
     UIColor *colorNormal2 = [UIColor colorWithRed:0.52 green:0.85 blue:0.98 alpha:1];
@@ -205,29 +225,13 @@
     self.settingsView.backgroundColorHighlight = colorHighlight;
     self.aboutView.backgroundColorNormal = colorNormal3;
     self.aboutView.backgroundColorHighlight = colorHighlight;
-}
-
-
-- (void)changeViewsAlphaToZero
-{
-	CGFloat alpha = 0.0;
-	self.titleLabel.alpha = alpha;
-	self.startView.alpha = alpha;
-	self.settingsView.alpha = alpha;
-	self.aboutView.alpha = alpha;
-}
-
-
-- (void)changeTitleLabelsAlphaToOpaque
-{
-	CGFloat labelAnimationDuration = 0.7;
     
-	[UIView animateWithDuration:labelAnimationDuration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-		
-		CGFloat alpha = 1.0;
-		self.titleLabel.alpha = alpha;
-		
-	} completion:^(BOOL finished) { }];
+    
+    //Image View
+    UIColor *color = [UIColor colorWithRed:0 green:0.83 blue:0.95 alpha:1];
+    UIImage *image = [UIImage imageForChangingColor:@"handHeart" color:color];
+    self.logoImageView.backgroundColor = [UIColor clearColor];
+    self.logoImageView.image = image;
 }
 
 

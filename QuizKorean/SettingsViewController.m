@@ -12,6 +12,7 @@
 #import <MessageUI/MessageUI.h>
 #import "iRate.h"
 #import "PopView.h"
+#import "UIImage+ChangeColor.h"
 
 
 #define kTURN_ON  [UIColor colorWithRed:1 green:0.73 blue:0.2 alpha:1]
@@ -21,6 +22,7 @@
 
 @interface SettingsViewController () <UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet PopView *aboutView;
 @property (weak, nonatomic) IBOutlet PopView *soundEffectView;
 @property (weak, nonatomic) IBOutlet PopView *resetView;
@@ -263,7 +265,7 @@
     float cornerRadius;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        cornerRadius = self.aboutView.bounds.size.height/2;
+        cornerRadius = 35;
     } else {
         cornerRadius = self.aboutView.bounds.size.height/2;
     }
@@ -299,6 +301,13 @@
     self.resetView.backgroundColorHighlight = colorHighlight;
     self.sendMailView.backgroundColorHighlight = colorHighlight;
     self.returnView.backgroundColorHighlight = colorHighlight;
+    
+    
+    //Image View
+    UIColor *color = [UIColor colorWithRed:0 green:0.83 blue:0.95 alpha:1];
+    UIImage *image = [UIImage imageForChangingColor:@"gear" color:color];
+    self.imageView.backgroundColor = [UIColor clearColor];
+    self.imageView.image = image;
 }
 
 
