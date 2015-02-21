@@ -13,6 +13,7 @@
 #import "iRate.h"
 #import "PopView.h"
 #import "UIImage+ChangeColor.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 
 #define kTURN_ON  [UIColor colorWithRed:1 green:0.73 blue:0.2 alpha:1]
@@ -130,6 +131,7 @@
             _soundEffect = @"효과음 > 켜짐";
             self.soundEffectView.backgroundColor = kTURN_ON;
             self.soundEffectView.backgroundColorNormal = kTURN_ON;
+            [self playSound];
         }
         
         self.soundEffectLabel.text = _soundEffect;
@@ -186,6 +188,17 @@
     }
     
     return NO;
+}
+
+
+
+- (void)playSound
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"correct" ofType:@"caf"];
+    NSURL *URL = [NSURL fileURLWithPath:path];
+    SystemSoundID correctSoundID;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)URL, &correctSoundID);
+    AudioServicesPlaySystemSound(correctSoundID);
 }
 
 
