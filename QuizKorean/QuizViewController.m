@@ -99,7 +99,7 @@
     NSLog (@"score: %ld\n", (long)score);
 	
 	if (round <= 0) {
-		_round = 0;
+		_round = -1;
 	} else if (round > 0) {
 		_round = (int)round - 1;
 	}

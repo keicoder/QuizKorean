@@ -13,7 +13,6 @@
 #import "QuizViewController.h"
 #import "SettingsViewController.h"
 #import "AboutViewController.h"
-#import "UIImage+ChangeColor.h"
 #import "PopView.h"
 
 
@@ -174,13 +173,13 @@
 
 - (void)configureUI
 {
-    self.view.tintColor = [UIColor colorWithRed:20/255.0f green:160/255.0f blue:160/255.0f alpha:1.0f];
+    float cornerRadius;
     
-    UIImage *about = [UIImage imageForChangingColor:@"info" color:[UIColor whiteColor]];
-    self.aboutImageView.image = about;
-    
-    //Corner Radius
-    float cornerRadius = self.startView.bounds.size.height/2;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        cornerRadius = 35;
+    } else {
+        cornerRadius = self.startView.bounds.size.height/2;
+    }
     
     self.startView.layer.cornerRadius = cornerRadius;
     self.settingsView.layer.cornerRadius = cornerRadius;
