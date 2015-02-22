@@ -401,6 +401,14 @@
                         <outlet property="answerView2" destination="tA8-sw-Fha" id="5yW-pH-Wc7"/>
                         <outlet property="answerView3" destination="blk-jy-YwN" id="ccb-xh-Qxp"/>
                         <outlet property="answerView4" destination="qfw-2p-hxB" id="ifs-us-P0f"/>
+                        <outlet property="iconImageView1" destination="wBa-Z5-sqb" id="kiz-Gl-X78"/>
+                        <outlet property="iconImageView2" destination="F8o-mH-BtO" id="JYp-5S-SBC"/>
+                        <outlet property="iconImageView3" destination="ZoN-tU-B03" id="qIF-om-Jms"/>
+                        <outlet property="iconImageView4" destination="DLB-pu-UuW" id="5Je-KN-qar"/>
+                        <outlet property="iconView1" destination="Q6Y-RT-1dv" id="rfI-zr-rEQ"/>
+                        <outlet property="iconView2" destination="O9P-vw-9Nx" id="jwp-J1-Oed"/>
+                        <outlet property="iconView3" destination="hZD-kN-aHB" id="lvw-0j-j5C"/>
+                        <outlet property="iconView4" destination="eAj-1W-Kmh" id="RkM-Od-2Ez"/>
                         <outlet property="infoView" destination="14k-HL-lre" id="t9W-o6-0Hc"/>
                         <outlet property="menuButton" destination="nqj-wP-fyw" id="g44-AS-nEx"/>
                         <outlet property="nextButton" destination="3WH-Na-3Va" id="oqq-mW-h0G"/>

@@ -47,6 +47,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel3;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel4;
 
+@property (weak, nonatomic) IBOutlet UIView *iconView1;
+@property (weak, nonatomic) IBOutlet UIView *iconView2;
+@property (weak, nonatomic) IBOutlet UIView *iconView3;
+@property (weak, nonatomic) IBOutlet UIView *iconView4;
+
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView2;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView3;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView4;
 
 @end
 
@@ -77,6 +86,7 @@
     _currentAttempt = 1; //첫시도에 바로 맞춰야 득점으로 인정
     
 	[self configureUI];
+    [self clearImageIconView];
 	[self addObserverForParseJSONDictionaryNotification];
 	[self fetchJSONData];
 	[self getScoreAndRoundDataFromNSUserDefaults];
@@ -153,6 +163,8 @@
 
 - (void)fetchJSONData
 {
+    [self clearImageIconView];
+    
 	self.quiz = [[Quiz alloc] init];
 	
 	CGFloat duration = 0.1f;
@@ -340,6 +352,8 @@
 }
 
 
+#pragma mark 정답/오답 버튼 액션
+
 - (void)gestureViewTapped:(UITouch *)touch
 {
     NSString *correct = @"정답";
@@ -358,10 +372,14 @@
             } else {
                 NSLog(@"correct : But no score. cheer up");
             }
+            
+            [self showCorrectIcon:touch];
+            
         } else {
             
-            [self increaseCurrentAttempt];
             NSLog(@"No, try again");
+            [self increaseCurrentAttempt];
+            [self showFalseIcon:touch];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
@@ -378,10 +396,14 @@
             } else {
                 NSLog(@"correct : But no score. cheer up");
             }
+            
+            [self showCorrectIcon:touch];
+            
         } else {
             
-            [self increaseCurrentAttempt];
             NSLog(@"No, try again");
+            [self increaseCurrentAttempt];
+            [self showFalseIcon:touch];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
@@ -397,10 +419,14 @@
             } else {
                 NSLog(@"correct : But no score. cheer up");
             }
+            
+            [self showCorrectIcon:touch];
+            
         } else {
             
-            [self increaseCurrentAttempt];
             NSLog(@"No, try again");
+            [self increaseCurrentAttempt];
+            [self showFalseIcon:touch];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
@@ -416,10 +442,14 @@
             } else {
                 NSLog(@"correct : But no score. cheer up");
             }
+            
+            [self showCorrectIcon:touch];
+            
         } else {
             
-            [self increaseCurrentAttempt];
             NSLog(@"No, try again");
+            [self increaseCurrentAttempt];
+            [self showFalseIcon:touch];
         }
     }
 }
@@ -434,6 +464,58 @@
     }
     
     return NO;
+}
+
+
+#pragma mark - Show icon when user touches answer
+
+- (void)showCorrectIcon:(UITouch *)touch
+{
+    UIImage *image = [UIImage imageNamed:@"correct"];
+    
+    if ([touch.view isEqual:(UIView *)self.answerView1]) {
+        
+        self.iconImageView1.image = image;
+    } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
+        
+        self.iconImageView2.image = image;
+    } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
+        
+        self.iconImageView3.image = image;
+    } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
+        
+        self.iconImageView4.image = image;
+    }
+}
+
+
+- (void)showFalseIcon:(UITouch *)touch
+{
+    UIImage *image = [UIImage imageNamed:@"false"];
+    
+    if ([touch.view isEqual:(UIView *)self.answerView1]) {
+        
+        self.iconImageView1.image = image;
+    } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
+        
+        self.iconImageView2.image = image;
+    } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
+        
+        self.iconImageView3.image = image;
+    } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
+        
+        self.iconImageView4.image = image;
+    }
+}
+
+
+- (void)clearImageIconView
+{
+    //Image View
+    self.iconImageView1.image = nil;
+    self.iconImageView2.image = nil;
+    self.iconImageView3.image = nil;
+    self.iconImageView4.image = nil;
 }
 
 
