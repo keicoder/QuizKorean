@@ -485,8 +485,8 @@
 	//Color
 	UIColor *colorNormal1 = [UIColor colorWithRed:0.72 green:0.93 blue:1 alpha:1];
 	UIColor *colorNormal2 = [UIColor colorWithRed:0.52 green:0.85 blue:0.98 alpha:1];
-	UIColor *colorNormal3 = [UIColor colorWithRed:0.2 green:0.69 blue:0.86 alpha:1];
-	UIColor *colorNormal4 = [UIColor colorWithRed:0.16 green:0.55 blue:0.69 alpha:1];
+	UIColor *colorNormal3 = [UIColor colorWithRed:0.209 green:0.744 blue:0.927 alpha:1.000];
+	UIColor *colorNormal4 = [UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1.000];
 	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
 	
 	self.answerView1.backgroundColor = colorNormal1;

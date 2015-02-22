@@ -64,7 +64,7 @@
     
     [UIView animateWithDuration:_duration animations:^{
         
-        float cornerRadius = 7;
+        float cornerRadius = 3;
         
         if (!self.cornerRadius) {
             [self.layer setCornerRadius:cornerRadius];
