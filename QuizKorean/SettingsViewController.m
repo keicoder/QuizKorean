@@ -142,27 +142,7 @@
     } else if ([touch.view isEqual:(UIView *)self.resetView]) {
         
         NSLog(@"self.resetView Tapped");
-        _score = 0;
-        _round = 0;
-        NSLog (@"score value after reset: %ld\n", (long)_score);
-        NSLog (@"round value after reset: %ld\n", (long)_round);
-        
-        [_defaults setInteger:_score forKey:@"_score"];
-        [_defaults setInteger:_round forKey:@"_round"];
-        [_defaults synchronize];
-        
-        NSString *title = @"초기화 성공!";
-        NSString *message = @"데이터가 초기화 되었습니다.";
-        
-        UIAlertController *sheet = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        [sheet addAction:[UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^void (UIAlertAction *action) {
-            NSLog(@"Tapped OK");
-        }]];
-        
-        sheet.popoverPresentationController.sourceView = self.view;
-        sheet.popoverPresentationController.sourceRect = self.view.frame;
-        
-        [self presentViewController:sheet animated:YES completion:nil];
+        [self showAlertController];
         
     } else if ([touch.view isEqual:(UIView *)self.sendMailView]) {
         
@@ -202,8 +182,63 @@
 }
 
 
-#pragma mark 이메일 공유
-#pragma mark 메일 컴포즈 컨트롤러
+#pragma mark - Action
+#pragma mark 데이터 초기화 (Show Alert Cotroller)
+
+- (void)showAlertController
+{
+    NSString *title = @"데이터 초기화";
+    NSString *message = @"학습한 기록을 초기화 하겠습니까?";
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"예" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        _score = 0;
+        _round = 0;
+        NSLog (@"score value after reset: %ld\n", (long)_score);
+        NSLog (@"round value after reset: %ld\n", (long)_round);
+        
+        [_defaults setInteger:_score forKey:@"_score"];
+        [_defaults setInteger:_round forKey:@"_round"];
+        [_defaults synchronize];
+        
+        NSLog(@"OK Button Tapped");
+        
+        NSString *title = @"알림";
+        NSString *message = @"학습한 기록을 초기화 했습니다.";
+        
+        UIAlertController * alert= [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* done = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            
+            NSLog(@"초기화 Done");
+        }];
+        
+        [alert addAction:done];
+        
+        alert.popoverPresentationController.sourceView = self.view;
+        alert.popoverPresentationController.sourceRect = self.view.frame;
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"취소" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        NSLog(@"초기화 취소");
+    }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    alert.popoverPresentationController.sourceView = self.view;
+    alert.popoverPresentationController.sourceRect = self.view.frame;
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+#pragma mark 이메일 공유 (MFMailComposeViewController)
 
 - (void)sendFeedbackEmail
 {
