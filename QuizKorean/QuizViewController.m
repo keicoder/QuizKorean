@@ -18,10 +18,14 @@
 
 #define debug 1
 
+#define kIconImageForCorrectAnswer [UIImage imageNamed:@"correct"]
+#define kIconImageForFalseAnswer   [UIImage imageNamed:@"false"]
+
 
 @interface QuizViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) Quiz *quiz;
+@property (nonatomic, assign) NSUInteger indexOfCorrectAnswer;
 
 @property (weak, nonatomic) IBOutlet UIView *questionContainerView;
 
@@ -70,7 +74,7 @@
 	Quiz *_quiz4;
 	
 	NSString *_soundEffect;
-	
+    
     NSInteger _currentAttempt;
 	NSInteger _score;
 	NSInteger _round;
@@ -85,6 +89,7 @@
     
     _currentAttempt = 1; //첫시도에 바로 맞춰야 득점으로 인정
     
+    [self allowUserInteraction:YES];
 	[self configureUI];
     [self clearImageIconView];
 	[self addObserverForParseJSONDictionaryNotification];
@@ -164,6 +169,7 @@
 - (void)fetchJSONData
 {
     [self clearImageIconView];
+    [self allowUserInteraction:YES];
     
 	self.quiz = [[Quiz alloc] init];
 	
@@ -359,7 +365,20 @@
 - (void)gestureViewTapped:(UITouch *)touch
 {
     NSString *correct = @"정답";
-    //CGFloat delay = 1.5;
+    
+    self.indexOfCorrectAnswer = 0;
+    
+    if (_quiz1.correct.length > 0) {
+        self.indexOfCorrectAnswer = 1;
+    } else if (_quiz2.correct.length > 0) {
+        self.indexOfCorrectAnswer = 2;
+    } else if (_quiz3.correct.length > 0) {
+        self.indexOfCorrectAnswer = 3;
+    } else if (_quiz4.correct.length > 0) {
+        self.indexOfCorrectAnswer = 4;
+    }
+    
+    NSLog (@"self.indexOfCorrectAnswer: %ld\n", self.indexOfCorrectAnswer);
     
     if ([touch.view isEqual:(UIView *)self.answerView1]) {
         NSLog(@"self.answerView1 Tapped");
@@ -367,7 +386,7 @@
         if ([_quiz1.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            
             if (_currentAttempt == 1) {
                 [self increaseScore];
                 NSLog(@"Correct : You earned score");
@@ -375,13 +394,13 @@
                 NSLog(@"correct : But no score. cheer up");
             }
             
-            [self showCorrectIcon:touch];
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
             
         } else {
             
             NSLog(@"No, try again");
             [self increaseCurrentAttempt];
-            [self showFalseIcon:touch];
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
@@ -391,7 +410,7 @@
         if ([_quiz2.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            
             if (_currentAttempt == 1) {
                 [self increaseScore];
                 NSLog(@"Correct : You earned score");
@@ -399,14 +418,14 @@
                 NSLog(@"correct : But no score. cheer up");
             }
             
-            [self showCorrectIcon:touch];
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
             
         } else {
             
             NSLog(@"No, try again");
             [self increaseCurrentAttempt];
-            [self showFalseIcon:touch];
-        }
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
         NSLog(@"self.answerView3 Tapped");
@@ -414,7 +433,7 @@
         if ([_quiz3.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            
             if (_currentAttempt == 1) {
                 [self increaseScore];
                 NSLog(@"Correct : You earned score");
@@ -422,13 +441,13 @@
                 NSLog(@"correct : But no score. cheer up");
             }
             
-            [self showCorrectIcon:touch];
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
             
         } else {
             
             NSLog(@"No, try again");
             [self increaseCurrentAttempt];
-            [self showFalseIcon:touch];
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
@@ -437,7 +456,7 @@
         if ([_quiz4.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            //[self performSelector:@selector(fetchJSONData) withObject:nil afterDelay:delay];
+            
             if (_currentAttempt == 1) {
                 [self increaseScore];
                 NSLog(@"Correct : You earned score");
@@ -445,13 +464,13 @@
                 NSLog(@"correct : But no score. cheer up");
             }
             
-            [self showCorrectIcon:touch];
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
             
         } else {
             
             NSLog(@"No, try again");
             [self increaseCurrentAttempt];
-            [self showFalseIcon:touch];
+            [self showIconAtIndex:self.indexOfCorrectAnswer];
         }
     }
 }
@@ -471,49 +490,58 @@
 
 #pragma mark - Show icon when user touches answer
 
-- (void)showCorrectIcon:(UITouch *)touch
+- (void)showIconAtIndex:(NSUInteger)index
 {
-    UIImage *image = [UIImage imageNamed:@"correct"];
+    [self allowUserInteraction:NO];
     
-    if ([touch.view isEqual:(UIView *)self.answerView1]) {
-        
-        self.iconImageView1.image = image;
-    } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
-        
-        self.iconImageView2.image = image;
-    } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
-        
-        self.iconImageView3.image = image;
-    } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
-        
-        self.iconImageView4.image = image;
+    index = self.indexOfCorrectAnswer;
+    
+    switch (index) {
+        case 1:
+            self.iconImageView1.image = kIconImageForCorrectAnswer;
+            self.iconImageView2.image = kIconImageForFalseAnswer;
+            self.iconImageView3.image = kIconImageForFalseAnswer;
+            self.iconImageView4.image = kIconImageForFalseAnswer;
+            break;
+            
+        case 2:
+            self.iconImageView1.image = kIconImageForFalseAnswer;
+            self.iconImageView2.image = kIconImageForCorrectAnswer;
+            self.iconImageView3.image = kIconImageForFalseAnswer;
+            self.iconImageView4.image = kIconImageForFalseAnswer;
+            break;
+            
+        case 3:
+            self.iconImageView1.image = kIconImageForFalseAnswer;
+            self.iconImageView2.image = kIconImageForFalseAnswer;
+            self.iconImageView3.image = kIconImageForCorrectAnswer;
+            self.iconImageView4.image = kIconImageForFalseAnswer;
+            break;
+            
+        case 4:
+            self.iconImageView1.image = kIconImageForFalseAnswer;
+            self.iconImageView2.image = kIconImageForFalseAnswer;
+            self.iconImageView3.image = kIconImageForFalseAnswer;
+            self.iconImageView4.image = kIconImageForCorrectAnswer;
+            break;
+            
+        default:
+            break;
     }
 }
 
 
-- (void)showFalseIcon:(UITouch *)touch
+- (void)allowUserInteraction:(BOOL)userInteraction
 {
-    UIImage *image = [UIImage imageNamed:@"false"];
-    
-    if ([touch.view isEqual:(UIView *)self.answerView1]) {
-        
-        self.iconImageView1.image = image;
-    } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
-        
-        self.iconImageView2.image = image;
-    } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
-        
-        self.iconImageView3.image = image;
-    } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
-        
-        self.iconImageView4.image = image;
-    }
+    self.answerView1.userInteractionEnabled = userInteraction;
+    self.answerView2.userInteractionEnabled = userInteraction;
+    self.answerView3.userInteractionEnabled = userInteraction;
+    self.answerView4.userInteractionEnabled = userInteraction;
 }
 
 
 - (void)clearImageIconView
 {
-    //Image View
     self.iconImageView1.image = nil;
     self.iconImageView2.image = nil;
     self.iconImageView3.image = nil;
