@@ -362,7 +362,7 @@
         self.indexOfCorrectAnswer = 4;
     }
     
-    NSLog (@"self.indexOfCorrectAnswer: %ld\n", self.indexOfCorrectAnswer);
+    NSLog (@"self.indexOfCorrectAnswer: %ld\n", (unsigned long)self.indexOfCorrectAnswer);
     
     CGFloat delay = 1.0;
     CGFloat duration = 1.0;
@@ -531,10 +531,10 @@
 
 - (void)setDefaultIcon:(BOOL)deFaultIcon
 {
-    UIColor *colorNormal1 = [UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
+    UIColor *colorNormal1 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
     UIColor *colorNormal2 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
-    UIColor *colorNormal3 = [UIColor colorWithRed:0.160 green:0.310 blue:0.402 alpha:1.000];
-    UIColor *colorNormal4 = [UIColor colorWithRed:0.200 green:0.273 blue:0.326 alpha:1.000];
+    UIColor *colorNormal3 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.160 green:0.310 blue:0.402 alpha:1.000];
+    UIColor *colorNormal4 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.200 green:0.273 blue:0.326 alpha:1.000];
     
     if (deFaultIcon == YES) {
         //Image View
@@ -580,11 +580,14 @@
 	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
 	
 	//View
+    
+    CGFloat cornerRadius = 3.0;
+    
 	self.view.backgroundColor = whiteColor;
 	self.questionContainerView.backgroundColor = whiteColor;
     
     self.questionView.backgroundColor = [UIColor colorWithRed:0.984 green:0.4 blue:0.302 alpha:1]; //[UIColor colorWithRed:0.166 green:0.226 blue:0.270 alpha:1.000]; //[UIColor colorWithRed:0.44 green:0.76 blue:0.25 alpha:1];
-    self.questionView.layer.cornerRadius = 7.0;
+    self.questionView.layer.cornerRadius = cornerRadius;
     
 	self.answerContainerView.backgroundColor = whiteColor;
 	self.infoView.backgroundColor = whiteColor;
@@ -604,10 +607,10 @@
 	self.answerLabel4.backgroundColor = clearColor;
 	
     //Icon View Color
-    UIColor *iconViewColorNormal1 = [UIColor colorWithRed:0.166 green:0.226 blue:0.270 alpha:1.000];
-    UIColor *iconViewColorNormal2 = [UIColor colorWithRed:0.274 green:0.334 blue:0.381 alpha:1.000];
+    UIColor *iconViewColorNormal1 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000]; //[UIColor colorWithRed:0.166 green:0.226 blue:0.270 alpha:1.000];
+    UIColor *iconViewColorNormal2 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000]; //[UIColor colorWithRed:0.274 green:0.334 blue:0.381 alpha:1.000];
     UIColor *iconViewColorNormal3 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000];
-    UIColor *iconViewColorNormal4 = [UIColor colorWithRed:0.173 green:0.591 blue:0.745 alpha:1.000];
+    UIColor *iconViewColorNormal4 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000]; //[UIColor colorWithRed:0.173 green:0.591 blue:0.745 alpha:1.000];
     
     self.iconView1.backgroundColor = iconViewColorNormal1;
     self.iconView2.backgroundColor = iconViewColorNormal2;
@@ -615,10 +618,10 @@
     self.iconView4.backgroundColor = iconViewColorNormal4;
     
 	//Answer View Color
-    UIColor *colorNormal1 = [UIColor colorWithRed:0.22 green:0.3 blue:0.36 alpha:1];
-    UIColor *colorNormal2 = [UIColor colorWithRed:0.36 green:0.44 blue:0.5 alpha:1];
+    UIColor *colorNormal1 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.22 green:0.3 blue:0.36 alpha:1];
+    UIColor *colorNormal2 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.36 green:0.44 blue:0.5 alpha:1];
     UIColor *colorNormal3 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
-    UIColor *colorNormal4 = [UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
+    UIColor *colorNormal4 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
 	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
 	
 	self.answerView1.backgroundColor = colorNormal1;
@@ -635,6 +638,11 @@
     self.answerView4.backgroundColorNormal = colorNormal4;
     self.answerView4.backgroundColorHighlight = colorHighlight;
 	
+    self.answerView1.layer.cornerRadius = cornerRadius;
+    self.answerView2.layer.cornerRadius = cornerRadius;
+    self.answerView3.layer.cornerRadius = cornerRadius;
+    self.answerView4.layer.cornerRadius = cornerRadius;
+    
 	//Info View Buttons
 	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];
 	UIImage *menuImageHighlight = [UIImage imageForChangingColor:@"menu" color:lightRed];
