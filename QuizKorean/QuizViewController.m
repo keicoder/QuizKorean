@@ -204,10 +204,12 @@
 	if ([[notification name] isEqualToString:@"ParseJSONDictionaryFinishedNotification"])
 	{
 		if ([_quiz1 isKindOfClass:[NSNull class]] || [_quiz2 isKindOfClass:[NSNull class]] || [_quiz3 isKindOfClass:[NSNull class]] || [_quiz4 isKindOfClass:[NSNull class]]) {
-			
 			[self fetchJSONData];
 			
-		} else {
+        } else if (!(self.quiz.quizArray[0] || self.quiz.quizArray[1] || self.quiz.quizArray[2] || self.quiz.quizArray[3])) {
+            [self fetchJSONData];
+        
+        } else {
 			
 			_quiz1 = self.quiz.quizArray[0];
 			_quiz2 = self.quiz.quizArray[1];
