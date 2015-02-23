@@ -18,8 +18,8 @@
 
 #define debug 1
 
-#define kIconImageForCorrectAnswer [UIImage imageNamed:@"correct"]
-#define kIconImageForFalseAnswer   [UIImage imageNamed:@"false"]
+#define kIconImageForCorrectAnswer [UIImage imageNamed:@"correctSimple"]
+#define kIconImageForFalseAnswer   [UIImage imageNamed:@"falseSimple"]
 
 
 @interface QuizViewController () <UIGestureRecognizerDelegate>
@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *slashLabel;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
+@property (weak, nonatomic) IBOutlet UIView *questionView;
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *answerContainerView;
@@ -75,7 +76,6 @@
 	
 	NSString *_soundEffect;
     
-    NSInteger _currentAttempt;
 	NSInteger _score;
 	NSInteger _round;
 }
@@ -86,12 +86,8 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    
-    _currentAttempt = 1; //첫시도에 바로 맞춰야 득점으로 인정
-    
     [self allowUserInteraction:YES];
-	[self configureUI];
-    [self clearImageIconView];
+    [self configureUI];
 	[self addObserverForParseJSONDictionaryNotification];
 	[self fetchJSONData];
 	[self getScoreAndRoundDataFromNSUserDefaults];
@@ -132,21 +128,6 @@
 - (void)startNewRound
 {
 	_round += 1;
-    _currentAttempt = 1; //시도 횟수 초기화
-}
-
-
-- (void)startNewQuiz
-{
-	_score = 0;
-	_round = 0;
-	[self startNewRound];
-}
-
-
-- (void)increaseCurrentAttempt
-{
-    _currentAttempt += 1; //오답이면 시도 횟수 증가시킴
 }
 
 
@@ -168,7 +149,8 @@
 
 - (void)fetchJSONData
 {
-    [self clearImageIconView];
+    [self setDefaultIcon:NO];
+    
     [self allowUserInteraction:YES];
     
 	self.quiz = [[Quiz alloc] init];
@@ -270,6 +252,8 @@
 								[defaults setInteger:_round forKey:@"_round"];
                                 [defaults setInteger:_score forKey:@"_score"];
 								[defaults synchronize];
+                                
+                                [self setDefaultIcon:YES];
 							
 							}];
 						}];
@@ -368,17 +352,20 @@
     
     self.indexOfCorrectAnswer = 0;
     
-    if (_quiz1.correct.length > 0) {
+    if ([_quiz1.correct isEqualToString:correct]) {
         self.indexOfCorrectAnswer = 1;
-    } else if (_quiz2.correct.length > 0) {
+    } else if ([_quiz2.correct isEqualToString:correct]) {
         self.indexOfCorrectAnswer = 2;
-    } else if (_quiz3.correct.length > 0) {
+    } else if ([_quiz3.correct isEqualToString:correct]) {
         self.indexOfCorrectAnswer = 3;
-    } else if (_quiz4.correct.length > 0) {
+    } else if ([_quiz4.correct isEqualToString:correct]) {
         self.indexOfCorrectAnswer = 4;
     }
     
     NSLog (@"self.indexOfCorrectAnswer: %ld\n", self.indexOfCorrectAnswer);
+    
+    CGFloat delay = 1.0;
+    CGFloat duration = 1.0;
     
     if ([touch.view isEqual:(UIView *)self.answerView1]) {
         NSLog(@"self.answerView1 Tapped");
@@ -386,21 +373,15 @@
         if ([_quiz1.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-                NSLog(@"Correct : You earned score");
-            } else {
-                NSLog(@"correct : But no score. cheer up");
-            }
-            
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            [self increaseScore];
+            NSLog(@"Correct : You earned score");
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
+            [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self increaseCurrentAttempt];
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
@@ -410,22 +391,16 @@
         if ([_quiz2.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-                NSLog(@"Correct : You earned score");
-            } else {
-                NSLog(@"correct : But no score. cheer up");
-            }
-            
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            [self increaseScore];
+            NSLog(@"Correct : You earned score");
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
+            [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self increaseCurrentAttempt];
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
-            }
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
+        }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
         NSLog(@"self.answerView3 Tapped");
@@ -433,21 +408,15 @@
         if ([_quiz3.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-                NSLog(@"Correct : You earned score");
-            } else {
-                NSLog(@"correct : But no score. cheer up");
-            }
-            
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            [self increaseScore];
+            NSLog(@"Correct : You earned score");
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
+            [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self increaseCurrentAttempt];
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
@@ -456,21 +425,15 @@
         if ([_quiz4.correct isEqualToString:correct]) {
             
             [self checkToPlaySoundEffect];
-            
-            if (_currentAttempt == 1) {
-                [self increaseScore];
-                NSLog(@"Correct : You earned score");
-            } else {
-                NSLog(@"correct : But no score. cheer up");
-            }
-            
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            [self increaseScore];
+            NSLog(@"Correct : You earned score");
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
+            [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self increaseCurrentAttempt];
-            [self showIconAtIndex:self.indexOfCorrectAnswer];
+            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
         }
     }
 }
@@ -490,39 +453,65 @@
 
 #pragma mark - Show icon when user touches answer
 
-- (void)showIconAtIndex:(NSUInteger)index
+- (void)showIconAtIndex:(NSUInteger)index delay:(CGFloat)delay duration:(CGFloat)duration
 {
     [self allowUserInteraction:NO];
     
     index = self.indexOfCorrectAnswer;
     
     switch (index) {
-        case 1:
-            self.iconImageView1.image = kIconImageForCorrectAnswer;
-            self.iconImageView2.image = kIconImageForFalseAnswer;
-            self.iconImageView3.image = kIconImageForFalseAnswer;
-            self.iconImageView4.image = kIconImageForFalseAnswer;
+        case 1: {
+            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.iconImageView1.image = kIconImageForCorrectAnswer;
+                self.iconImageView2.image = kIconImageForFalseAnswer;
+                self.iconImageView3.image = kIconImageForFalseAnswer;
+                self.iconImageView4.image = kIconImageForFalseAnswer;
+            }completion:^(BOOL finished) { }]; }
             break;
             
-        case 2:
-            self.iconImageView1.image = kIconImageForFalseAnswer;
-            self.iconImageView2.image = kIconImageForCorrectAnswer;
-            self.iconImageView3.image = kIconImageForFalseAnswer;
-            self.iconImageView4.image = kIconImageForFalseAnswer;
+        case 2: {
+            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.iconImageView1.image = kIconImageForFalseAnswer;
+                self.iconImageView2.image = kIconImageForCorrectAnswer;
+                self.iconImageView3.image = kIconImageForFalseAnswer;
+                self.iconImageView4.image = kIconImageForFalseAnswer;
+            }completion:^(BOOL finished) {
+                
+                [UIView animateWithDuration:duration animations:^{
+                    
+                }completion:^(BOOL finished) { }];
+                
+            }]; }
             break;
             
-        case 3:
-            self.iconImageView1.image = kIconImageForFalseAnswer;
-            self.iconImageView2.image = kIconImageForFalseAnswer;
-            self.iconImageView3.image = kIconImageForCorrectAnswer;
-            self.iconImageView4.image = kIconImageForFalseAnswer;
+        case 3: {
+            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.iconImageView1.image = kIconImageForFalseAnswer;
+                self.iconImageView2.image = kIconImageForFalseAnswer;
+                self.iconImageView3.image = kIconImageForCorrectAnswer;
+                self.iconImageView4.image = kIconImageForFalseAnswer;
+            }completion:^(BOOL finished) {
+                
+                [UIView animateWithDuration:duration animations:^{
+                    
+                }completion:^(BOOL finished) { }];
+                
+            }]; }
             break;
             
-        case 4:
-            self.iconImageView1.image = kIconImageForFalseAnswer;
-            self.iconImageView2.image = kIconImageForFalseAnswer;
-            self.iconImageView3.image = kIconImageForFalseAnswer;
-            self.iconImageView4.image = kIconImageForCorrectAnswer;
+        case 4: {
+            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.iconImageView1.image = kIconImageForFalseAnswer;
+                self.iconImageView2.image = kIconImageForFalseAnswer;
+                self.iconImageView3.image = kIconImageForFalseAnswer;
+                self.iconImageView4.image = kIconImageForCorrectAnswer;
+            }completion:^(BOOL finished) {
+                
+                [UIView animateWithDuration:duration animations:^{
+                    
+                }completion:^(BOOL finished) { }];
+                
+            }]; }
             break;
             
         default:
@@ -540,12 +529,29 @@
 }
 
 
-- (void)clearImageIconView
+- (void)setDefaultIcon:(BOOL)deFaultIcon
 {
-    self.iconImageView1.image = nil;
-    self.iconImageView2.image = nil;
-    self.iconImageView3.image = nil;
-    self.iconImageView4.image = nil;
+    UIColor *colorNormal1 = [UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
+    UIColor *colorNormal2 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
+    UIColor *colorNormal3 = [UIColor colorWithRed:0.160 green:0.310 blue:0.402 alpha:1.000];
+    UIColor *colorNormal4 = [UIColor colorWithRed:0.200 green:0.273 blue:0.326 alpha:1.000];
+    
+    if (deFaultIcon == YES) {
+        //Image View
+        UIImage *image1 = [UIImage imageForChangingColor:@"polygon" color:colorNormal1];
+        self.iconImageView1.image = image1;
+        UIImage *image2 = [UIImage imageForChangingColor:@"polygon" color:colorNormal2];
+        self.iconImageView2.image = image2;
+        UIImage *image3 = [UIImage imageForChangingColor:@"polygon" color:colorNormal3];
+        self.iconImageView3.image = image3;
+        UIImage *image4 = [UIImage imageForChangingColor:@"polygon" color:colorNormal4];
+        self.iconImageView4.image = image4;
+    } else {
+        self.iconImageView1.image = nil;
+        self.iconImageView2.image = nil;
+        self.iconImageView3.image = nil;
+        self.iconImageView4.image = nil;
+    }
 }
 
 
@@ -570,35 +576,49 @@
 	//Color
 	UIColor *whiteColor = [UIColor whiteColor];
 	UIColor *clearColor = [UIColor clearColor];
-	UIColor *deepDarkGray = [UIColor colorWithWhite:0.090 alpha:1.000];
 	UIColor *lightRed = [UIColor colorWithRed:0.993 green:0.391 blue:0.279 alpha:1.000];
 	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
 	
 	//View
 	self.view.backgroundColor = whiteColor;
 	self.questionContainerView.backgroundColor = whiteColor;
+    
+    self.questionView.backgroundColor = [UIColor colorWithRed:0.984 green:0.4 blue:0.302 alpha:1]; //[UIColor colorWithRed:0.166 green:0.226 blue:0.270 alpha:1.000]; //[UIColor colorWithRed:0.44 green:0.76 blue:0.25 alpha:1];
+    self.questionView.layer.cornerRadius = 7.0;
+    
 	self.answerContainerView.backgroundColor = whiteColor;
-	self.infoView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
-	self.questionScrollView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.98 green:0.97 blue:0.95 alpha:1];
+	self.infoView.backgroundColor = whiteColor;
+	self.questionScrollView.backgroundColor = whiteColor;
 	
 	//Label
-	self.questionLabel.textColor = deepDarkGray;
+	self.questionLabel.textColor = whiteColor;
+	self.answerLabel1.textColor = whiteColor;
+	self.answerLabel2.textColor = whiteColor;
+	self.answerLabel3.textColor = whiteColor;
+	self.answerLabel4.textColor = whiteColor;
 	
-	self.answerLabel1.textColor = deepDarkGray; //whiteColor; //deepDarkGray;
-	self.answerLabel2.textColor = deepDarkGray; //whiteColor; //deepDarkGray;
-	self.answerLabel3.textColor = deepDarkGray; //deepDarkGray;
-	self.answerLabel4.textColor = deepDarkGray; //deepDarkGray;
-	
+    self.questionLabel.backgroundColor = clearColor;
 	self.answerLabel1.backgroundColor = clearColor;
 	self.answerLabel2.backgroundColor = clearColor;
 	self.answerLabel3.backgroundColor = clearColor;
 	self.answerLabel4.backgroundColor = clearColor;
 	
-	//Color
-	UIColor *colorNormal1 = [UIColor colorWithRed:0.72 green:0.93 blue:1 alpha:1];
-	UIColor *colorNormal2 = [UIColor colorWithRed:0.52 green:0.85 blue:0.98 alpha:1];
-	UIColor *colorNormal3 = [UIColor colorWithRed:0.209 green:0.744 blue:0.927 alpha:1.000];
-	UIColor *colorNormal4 = [UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1.000];
+    //Icon View Color
+    UIColor *iconViewColorNormal1 = [UIColor colorWithRed:0.166 green:0.226 blue:0.270 alpha:1.000];
+    UIColor *iconViewColorNormal2 = [UIColor colorWithRed:0.274 green:0.334 blue:0.381 alpha:1.000];
+    UIColor *iconViewColorNormal3 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000];
+    UIColor *iconViewColorNormal4 = [UIColor colorWithRed:0.173 green:0.591 blue:0.745 alpha:1.000];
+    
+    self.iconView1.backgroundColor = iconViewColorNormal1;
+    self.iconView2.backgroundColor = iconViewColorNormal2;
+    self.iconView3.backgroundColor = iconViewColorNormal3;
+    self.iconView4.backgroundColor = iconViewColorNormal4;
+    
+	//Answer View Color
+    UIColor *colorNormal1 = [UIColor colorWithRed:0.22 green:0.3 blue:0.36 alpha:1];
+    UIColor *colorNormal2 = [UIColor colorWithRed:0.36 green:0.44 blue:0.5 alpha:1];
+    UIColor *colorNormal3 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
+    UIColor *colorNormal4 = [UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
 	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
 	
 	self.answerView1.backgroundColor = colorNormal1;
@@ -614,7 +634,6 @@
     self.answerView3.backgroundColorHighlight = colorHighlight;
     self.answerView4.backgroundColorNormal = colorNormal4;
     self.answerView4.backgroundColorHighlight = colorHighlight;
-
 	
 	//Info View Buttons
 	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];

@@ -228,8 +228,8 @@
     
     
     //Image View
-    UIColor *color = [UIColor colorWithRed:0 green:0.83 blue:0.95 alpha:1];
-    UIImage *image = [UIImage imageForChangingColor:@"handHeart" color:color];
+    UIColor *color = [UIColor colorWithRed:0.286 green:0.58 blue:0.753 alpha:1];
+    UIImage *image = [UIImage imageForChangingColor:@"clock" color:color];
     self.logoImageView.backgroundColor = [UIColor clearColor];
     self.logoImageView.image = image;
 }

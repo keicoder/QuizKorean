@@ -352,7 +352,7 @@
     
     
     //Image View
-    UIColor *color = [UIColor colorWithRed:0 green:0.83 blue:0.95 alpha:1];
+    UIColor *color = [UIColor colorWithRed:0.286 green:0.58 blue:0.753 alpha:1];
     UIImage *image = [UIImage imageForChangingColor:@"gear" color:color];
     self.imageView.backgroundColor = [UIColor clearColor];
     self.imageView.image = image;
