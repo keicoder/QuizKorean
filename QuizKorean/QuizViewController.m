@@ -531,21 +531,14 @@
 
 - (void)setDefaultIcon:(BOOL)deFaultIcon
 {
-    UIColor *colorNormal1 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
-    UIColor *colorNormal2 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
-    UIColor *colorNormal3 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.160 green:0.310 blue:0.402 alpha:1.000];
-    UIColor *colorNormal4 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.200 green:0.273 blue:0.326 alpha:1.000];
+    UIColor *color = [UIColor whiteColor]; //[UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
+    UIImage *image = [UIImage imageForChangingColor:@"polygon" color:color];
     
     if (deFaultIcon == YES) {
-        //Image View
-        UIImage *image1 = [UIImage imageForChangingColor:@"polygon" color:colorNormal1];
-        self.iconImageView1.image = image1;
-        UIImage *image2 = [UIImage imageForChangingColor:@"polygon" color:colorNormal2];
-        self.iconImageView2.image = image2;
-        UIImage *image3 = [UIImage imageForChangingColor:@"polygon" color:colorNormal3];
-        self.iconImageView3.image = image3;
-        UIImage *image4 = [UIImage imageForChangingColor:@"polygon" color:colorNormal4];
-        self.iconImageView4.image = image4;
+        self.iconImageView1.image = image;
+        self.iconImageView2.image = image;
+        self.iconImageView3.image = image;
+        self.iconImageView4.image = image;
     } else {
         self.iconImageView1.image = nil;
         self.iconImageView2.image = nil;
@@ -581,20 +574,20 @@
 	
 	//View
     
-    CGFloat cornerRadius = 3.0;
+    CGFloat cornerRadius = 12.0;
     
 	self.view.backgroundColor = whiteColor;
-	self.questionContainerView.backgroundColor = whiteColor;
+    self.questionContainerView.backgroundColor = whiteColor;
     
-    self.questionView.backgroundColor = [UIColor colorWithRed:0.984 green:0.4 blue:0.302 alpha:1]; //[UIColor colorWithRed:0.166 green:0.226 blue:0.270 alpha:1.000]; //[UIColor colorWithRed:0.44 green:0.76 blue:0.25 alpha:1];
+    self.questionView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.44 green:0.76 blue:0.25 alpha:1];
     self.questionView.layer.cornerRadius = cornerRadius;
     
-	self.answerContainerView.backgroundColor = whiteColor;
-	self.infoView.backgroundColor = whiteColor;
-	self.questionScrollView.backgroundColor = whiteColor;
+    self.answerContainerView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1]; //whiteColor;
+    self.infoView.backgroundColor = self.answerContainerView.backgroundColor; //whiteColor;
+    self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.655 green:0.824 blue:0.863 alpha:1];; //whiteColor;
 	
 	//Label
-	self.questionLabel.textColor = whiteColor;
+    self.questionLabel.textColor = darkBrown; //whiteColor;
 	self.answerLabel1.textColor = whiteColor;
 	self.answerLabel2.textColor = whiteColor;
 	self.answerLabel3.textColor = whiteColor;
@@ -606,42 +599,37 @@
 	self.answerLabel3.backgroundColor = clearColor;
 	self.answerLabel4.backgroundColor = clearColor;
 	
-    //Icon View Color
-    UIColor *iconViewColorNormal1 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000]; //[UIColor colorWithRed:0.166 green:0.226 blue:0.270 alpha:1.000];
-    UIColor *iconViewColorNormal2 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000]; //[UIColor colorWithRed:0.274 green:0.334 blue:0.381 alpha:1.000];
-    UIColor *iconViewColorNormal3 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000];
-    UIColor *iconViewColorNormal4 = [UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000]; //[UIColor colorWithRed:0.173 green:0.591 blue:0.745 alpha:1.000];
-    
-    self.iconView1.backgroundColor = iconViewColorNormal1;
-    self.iconView2.backgroundColor = iconViewColorNormal2;
-    self.iconView3.backgroundColor = iconViewColorNormal3;
-    self.iconView4.backgroundColor = iconViewColorNormal4;
-    
 	//Answer View Color
-    UIColor *colorNormal1 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.22 green:0.3 blue:0.36 alpha:1];
-    UIColor *colorNormal2 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.36 green:0.44 blue:0.5 alpha:1];
-    UIColor *colorNormal3 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
-    UIColor *colorNormal4 = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]; //[UIColor colorWithRed:0.204 green:0.699 blue:0.881 alpha:1];
+    UIColor *colorNormal = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
 	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
 	
-	self.answerView1.backgroundColor = colorNormal1;
-    self.answerView2.backgroundColor = colorNormal2;
-    self.answerView3.backgroundColor = colorNormal3;
-    self.answerView4.backgroundColor = colorNormal4;
+	self.answerView1.backgroundColor = colorNormal;
+    self.answerView2.backgroundColor = colorNormal;
+    self.answerView3.backgroundColor = colorNormal;
+    self.answerView4.backgroundColor = colorNormal;
     
-    self.answerView1.backgroundColorNormal = colorNormal1;
+    self.answerView1.backgroundColorNormal = colorNormal;
     self.answerView1.backgroundColorHighlight = colorHighlight;
-    self.answerView2.backgroundColorNormal = colorNormal2;
+    self.answerView2.backgroundColorNormal = colorNormal;
     self.answerView2.backgroundColorHighlight = colorHighlight;
-    self.answerView3.backgroundColorNormal = colorNormal3;
+    self.answerView3.backgroundColorNormal = colorNormal;
     self.answerView3.backgroundColorHighlight = colorHighlight;
-    self.answerView4.backgroundColorNormal = colorNormal4;
+    self.answerView4.backgroundColorNormal = colorNormal;
     self.answerView4.backgroundColorHighlight = colorHighlight;
 	
-    self.answerView1.layer.cornerRadius = cornerRadius;
-    self.answerView2.layer.cornerRadius = cornerRadius;
-    self.answerView3.layer.cornerRadius = cornerRadius;
-    self.answerView4.layer.cornerRadius = cornerRadius;
+    CGFloat answerViewCornerRadius = 3.0;
+    self.answerView1.layer.cornerRadius = answerViewCornerRadius;
+    self.answerView2.layer.cornerRadius = answerViewCornerRadius;
+    self.answerView3.layer.cornerRadius = answerViewCornerRadius;
+    self.answerView4.layer.cornerRadius = answerViewCornerRadius;
+    
+    //Icon View Color
+    //UIColor *iconViewColorNormal = self.questionScrollView.backgroundColor; //[UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000];
+    
+    self.iconView1.backgroundColor = colorNormal;
+    self.iconView2.backgroundColor = colorNormal;
+    self.iconView3.backgroundColor = colorNormal;
+    self.iconView4.backgroundColor = colorNormal;
     
 	//Info View Buttons
 	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];
