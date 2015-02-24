@@ -531,7 +531,7 @@
 
 - (void)setDefaultIcon:(BOOL)deFaultIcon
 {
-    UIColor *color = [UIColor whiteColor]; //[UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
+    UIColor *color = [UIColor whiteColor];
     UIImage *image = [UIImage imageForChangingColor:@"polygon" color:color];
     
     if (deFaultIcon == YES) {
@@ -554,7 +554,7 @@
 {
 	NSString *blank = @"";
 	
-    //Label
+    //Label Text
     self.questionLabel.text = blank;
 	
     self.answerLabel1.text = blank;
@@ -573,21 +573,20 @@
 	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
 	
 	//View
-    
     CGFloat cornerRadius = 12.0;
     
 	self.view.backgroundColor = whiteColor;
     self.questionContainerView.backgroundColor = whiteColor;
     
-    self.questionView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.44 green:0.76 blue:0.25 alpha:1];
+    self.questionView.backgroundColor = whiteColor;
     self.questionView.layer.cornerRadius = cornerRadius;
     
-    self.answerContainerView.backgroundColor = whiteColor; //[UIColor colorWithRed:0.204 green:0.596 blue:0.859 alpha:1]; //whiteColor;
+    self.answerContainerView.backgroundColor = whiteColor;
     self.infoView.backgroundColor = self.answerContainerView.backgroundColor; //whiteColor;
-    self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.655 green:0.824 blue:0.863 alpha:1];; //whiteColor;
+    self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.655 green:0.824 blue:0.863 alpha:1];
 	
 	//Label
-    self.questionLabel.textColor = darkBrown; //whiteColor;
+    self.questionLabel.textColor = darkBrown;
 	self.answerLabel1.textColor = whiteColor;
 	self.answerLabel2.textColor = whiteColor;
 	self.answerLabel3.textColor = whiteColor;
@@ -624,8 +623,6 @@
     self.answerView4.layer.cornerRadius = answerViewCornerRadius;
     
     //Icon View Color
-    //UIColor *iconViewColorNormal = self.questionScrollView.backgroundColor; //[UIColor colorWithRed:0.245 green:0.473 blue:0.614 alpha:1.000];
-    
     self.iconView1.backgroundColor = colorNormal;
     self.iconView2.backgroundColor = colorNormal;
     self.iconView3.backgroundColor = colorNormal;
