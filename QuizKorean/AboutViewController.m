@@ -133,7 +133,7 @@
 	self.containerView.backgroundColor = [UIColor colorWithRed:0.05 green:0.32 blue:0.41 alpha:1];
 	self.containerView.layer.cornerRadius = 10.0f;
 	
-	UIImage *smiley = [UIImage imageForChangingColor:@"smiley" color:[UIColor whiteColor]];
+	UIImage *smiley = [UIImage imageForChangingColor:@"paperclip" color:[UIColor whiteColor]];
 	self.smileyImageView.image = smiley;
 }
 

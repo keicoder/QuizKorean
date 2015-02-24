@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B97DC294D8C6E50512C47F4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4335BFEC03F1675186383896 /* libPods.a */; };
+		321E17D31A9C1A57006E3FDA /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E17D21A9C1A57006E3FDA /* ProgressViewController.m */; };
 		328948DE1A944D790024F74D /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 328948DD1A944D790024F74D /* PopView.m */; };
 		328948E11A9452290024F74D /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328948E01A9452290024F74D /* PopViewController.m */; };
 		329D53EB1A9889030053CF0A /* PopAnimationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329D53EA1A9889030053CF0A /* PopAnimationImageView.m */; };
@@ -54,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		321E17D11A9C1A57006E3FDA /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
+		321E17D21A9C1A57006E3FDA /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
 		328948DC1A944D790024F74D /* PopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopView.h; sourceTree = "<group>"; };
 		328948DD1A944D790024F74D /* PopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopView.m; sourceTree = "<group>"; };
 		328948DF1A9452290024F74D /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				C1400EE61A89DBB400867496 /* MenuViewController.m */,
 				C1400EC51A89DAEC00867496 /* QuizViewController.h */,
 				C1400EC61A89DAEC00867496 /* QuizViewController.m */,
+				321E17D11A9C1A57006E3FDA /* ProgressViewController.h */,
+				321E17D21A9C1A57006E3FDA /* ProgressViewController.m */,
 				C1400EF01A89E3C800867496 /* SettingsViewController.h */,
 				C1400EF11A89E3C800867496 /* SettingsViewController.m */,
 				C1400EE81A89DC5E00867496 /* AboutViewController.h */,
@@ -477,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1B2A8041A8AE48C00FC80C2 /* UIImage+ChangeColor.m in Sources */,
+				321E17D31A9C1A57006E3FDA /* ProgressViewController.m in Sources */,
 				C1E4F52E1A8C7E0200A924F7 /* PopAnimationClearButton.m in Sources */,
 				C1B2A7FC1A8AD21C00FC80C2 /* AFSecurityPolicy.m in Sources */,
 				329D53EB1A9889030053CF0A /* PopAnimationImageView.m in Sources */,
