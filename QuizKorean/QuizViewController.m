@@ -323,7 +323,6 @@
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	_soundEffect = [defaults objectForKey:@"_soundEffect"];
-	NSLog (@"_soundEffect: %@\n", _soundEffect);
 	
 	if (_soundEffect == nil) {
 		
@@ -338,9 +337,6 @@
 		
 		_canPlaySoundEffect = NO;
 	}
-	
-	NSLog (@"_soundEffect: %@\n", _soundEffect);
-	NSLog (@"_canPlaySoundEffect: %hhd\n", _canPlaySoundEffect);
 	
 	return _canPlaySoundEffect;
 }
