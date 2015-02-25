@@ -204,11 +204,6 @@
     self.settingsView.layer.cornerRadius = cornerRadius;
     self.aboutView.layer.cornerRadius = cornerRadius;
     
-    self.startView.cornerRadius = cornerRadius;
-    self.settingsView.cornerRadius = cornerRadius;
-    self.aboutView.cornerRadius = cornerRadius;
-    
-    
     //Color
     UIColor *colorNormal1 = [UIColor colorWithRed:0.98 green:0.33 blue:0.28 alpha:1];
     UIColor *colorNormal2 = [UIColor colorWithRed:1 green:0.74 blue:0.29 alpha:1];

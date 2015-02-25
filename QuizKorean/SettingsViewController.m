@@ -324,13 +324,6 @@
     self.sendMailView.layer.cornerRadius = cornerRadius;
     self.returnView.layer.cornerRadius = cornerRadius;
     
-    self.aboutView.cornerRadius = cornerRadius;
-    self.soundEffectView.cornerRadius = cornerRadius;
-    self.resetView.cornerRadius = cornerRadius;
-    self.sendMailView.cornerRadius = cornerRadius;
-    self.returnView.cornerRadius = cornerRadius;
-    
-    
     //Color
     UIColor *colorNormal1 = [UIColor colorWithRed:0.52 green:0.85 blue:0.98 alpha:1];
     UIColor *colorNormal2 = [UIColor colorWithRed:1.000 green:0.541 blue:0.213 alpha:1.000];

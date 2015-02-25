@@ -573,17 +573,17 @@
 	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
 	
 	//View
-    CGFloat cornerRadius = 12.0;
+    CGFloat questionViewCornerRadius = 12.0;
     
 	self.view.backgroundColor = whiteColor;
     self.questionContainerView.backgroundColor = whiteColor;
-    
-    self.questionView.backgroundColor = whiteColor;
-    self.questionView.layer.cornerRadius = cornerRadius;
-    
-    self.answerContainerView.backgroundColor = whiteColor;
-    self.infoView.backgroundColor = self.answerContainerView.backgroundColor; //whiteColor;
-    self.questionScrollView.backgroundColor = [UIColor colorWithRed:0.655 green:0.824 blue:0.863 alpha:1];
+	self.answerContainerView.backgroundColor = whiteColor;
+	
+	self.infoView.backgroundColor = self.answerContainerView.backgroundColor;
+	
+	self.questionScrollView.backgroundColor = whiteColor;
+	self.questionView.backgroundColor = [UIColor colorWithRed:0.69 green:0.95 blue:0.95 alpha:1];
+    self.questionView.layer.cornerRadius = questionViewCornerRadius;
 	
 	//Label
     self.questionLabel.textColor = darkBrown;
@@ -616,12 +616,12 @@
     self.answerView4.backgroundColorNormal = colorNormal;
     self.answerView4.backgroundColorHighlight = colorHighlight;
 	
-    CGFloat answerViewCornerRadius = 3.0;
+    CGFloat answerViewCornerRadius = 7.0;
     self.answerView1.layer.cornerRadius = answerViewCornerRadius;
     self.answerView2.layer.cornerRadius = answerViewCornerRadius;
     self.answerView3.layer.cornerRadius = answerViewCornerRadius;
     self.answerView4.layer.cornerRadius = answerViewCornerRadius;
-    
+	
     //Icon View Color
     self.iconView1.backgroundColor = colorNormal;
     self.iconView2.backgroundColor = colorNormal;

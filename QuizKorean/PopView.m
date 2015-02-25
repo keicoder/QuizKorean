@@ -63,15 +63,7 @@
     }
     
     [UIView animateWithDuration:_duration animations:^{
-        
-        float cornerRadius = 3;
-        
-        if (!self.cornerRadius) {
-            [self.layer setCornerRadius:cornerRadius];
-        } else {
-            [self.layer setCornerRadius:self.cornerRadius];
-        }
-        
+		
         if (!self.backgroundColorHighlight) {
             [self setBackgroundColor:kBackgroundColorHighlight];
         } else {
@@ -100,15 +92,7 @@
     }
     
     [UIView animateWithDuration:_duration animations:^{
-        
-        float cornerRadius = 0;
-        
-        if (!self.cornerRadius) {
-            [self.layer setCornerRadius:cornerRadius];
-        } else {
-            [self.layer setCornerRadius:self.cornerRadius];
-        }
-        
+		
         if (!self.backgroundColorNormal) {
             [self setBackgroundColor:kBackgroundColorNormal];
         } else {
