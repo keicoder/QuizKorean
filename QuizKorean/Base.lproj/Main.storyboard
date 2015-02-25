@@ -162,7 +162,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XhV-gf-qte" userLabel="AnswerView1" customClass="PopView">
                                         <rect key="frame" x="20" y="10" width="560" height="63"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-RT-1dv" userLabel="IconView1">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-RT-1dv" userLabel="IconView1" customClass="PopView">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="63"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="false" translatesAutoresizingMaskIntoConstraints="NO" id="wBa-Z5-sqb" userLabel="IconImageView1">
@@ -207,7 +207,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tA8-sw-Fha" userLabel="AnswerView2" customClass="PopView">
                                         <rect key="frame" x="20" y="83" width="560" height="62"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9P-vw-9Nx" userLabel="IconView2">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9P-vw-9Nx" userLabel="IconView2" customClass="PopView">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="62"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correct" translatesAutoresizingMaskIntoConstraints="NO" id="F8o-mH-BtO" userLabel="IconImageView2">
@@ -242,7 +242,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blk-jy-YwN" userLabel="AnswerView3" customClass="PopView">
                                         <rect key="frame" x="20" y="155" width="560" height="63"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZD-kN-aHB" userLabel="IconView3">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZD-kN-aHB" userLabel="IconView3" customClass="PopView">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="63"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="false" translatesAutoresizingMaskIntoConstraints="NO" id="ZoN-tU-B03" userLabel="IconImageView3">
@@ -277,7 +277,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfw-2p-hxB" userLabel="AnswerView4" customClass="PopView">
                                         <rect key="frame" x="20" y="228" width="560" height="62"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAj-1W-Kmh" userLabel="IconView4">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAj-1W-Kmh" userLabel="IconView4" customClass="PopView">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="62"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="false" translatesAutoresizingMaskIntoConstraints="NO" id="DLB-pu-UuW" userLabel="IconImageView4">

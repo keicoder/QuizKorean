@@ -18,8 +18,15 @@
 
 #define debug 1
 
-#define kIconImageForCorrectAnswer [UIImage imageNamed:@"correctSimple"]
-#define kIconImageForFalseAnswer   [UIImage imageNamed:@"falseSimple"]
+#define kIconImageForCorrectAnswer		[UIImage imageNamed:@"correctSimple"]
+#define kIconImageForFalseAnswer		[UIImage imageNamed:@"falseSimple"]
+
+#define kColorForViewNormal				[UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]
+#define kColorforViewHighlight			[UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1]
+#define kColorForIconViewNormal			[UIColor colorWithRed:0.192 green:0.372 blue:0.481 alpha:1.000]
+#define kColorForIconViewHighlight		[UIColor colorWithRed:0.465 green:0.641 blue:0.653 alpha:1.000]
+#define kColorForImageViewWhenCorrect	[UIColor colorWithRed:1 green:0.53 blue:0.25 alpha:1]
+#define kColorForViewWhenCorrect		[UIColor colorWithRed:0.99 green:0.64 blue:0.4 alpha:1]
 
 
 @interface QuizViewController () <UIGestureRecognizerDelegate>
@@ -54,10 +61,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel3;
 @property (weak, nonatomic) IBOutlet UILabel *answerLabel4;
 
-@property (weak, nonatomic) IBOutlet UIView *iconView1;
-@property (weak, nonatomic) IBOutlet UIView *iconView2;
-@property (weak, nonatomic) IBOutlet UIView *iconView3;
-@property (weak, nonatomic) IBOutlet UIView *iconView4;
+@property (weak, nonatomic) IBOutlet PopView *iconView1;
+@property (weak, nonatomic) IBOutlet PopView *iconView2;
+@property (weak, nonatomic) IBOutlet PopView *iconView3;
+@property (weak, nonatomic) IBOutlet PopView *iconView4;
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView1;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView2;
@@ -216,9 +223,9 @@
 			
 			POPSpringAnimation *sprintAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
 			sprintAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-			sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(4, 4)];
-			sprintAnimation.springBounciness = 20.f;
-			[self.questionLabel pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
+			sprintAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(7, 7)];
+			sprintAnimation.springBounciness = 20.0f;
+			[self.questionScrollView pop_addAnimation:sprintAnimation forKey:@"springAnimation"];
 			
 			
 			CGFloat duration = 0.2f;
@@ -337,6 +344,7 @@
 	_round -= 1;
 	[self setIconViewImageToNil];
 	[self fetchJSONData];
+	[self changeColorOfViewToNormal];
 }
 
 
@@ -356,6 +364,9 @@
 
 - (void)gestureViewTapped:(UITouch *)touch
 {
+	[self allowUserInteraction:NO];
+	[self adjustIconViewWidth:50];
+	
     NSString *correct = @"정답";
     
     self.indexOfCorrectAnswer = 0;
@@ -407,11 +418,8 @@
 			
 			[self checkToPlaySoundEffect];
 			[self increaseScore];
-			
 		}
 	}
-	
-	[self adjustIconViewWidth:50];
 	
 	CGFloat duration = 0.25f;
 	CGFloat delay = 0.25f;
@@ -467,14 +475,14 @@
 		
 		[UIView animateWithDuration:duration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
 			
-			[self showIconImageAtIndex:self.indexOfCorrectAnswer];
+			[self showIconImageAtIndexAndChangeColorOfView:self.indexOfCorrectAnswer];
 			
 		} completion:^(BOOL finished) { }];
 	}
 }
 
 
-- (void)showIconImageAtIndex:(NSUInteger)index
+- (void)showIconImageAtIndexAndChangeColorOfView:(NSUInteger)index
 {
     switch (index) {
         case 1:
@@ -482,6 +490,8 @@
 			self.iconImageView2.image = kIconImageForFalseAnswer;
 			self.iconImageView3.image = kIconImageForFalseAnswer;
 			self.iconImageView4.image = kIconImageForFalseAnswer;
+			[self changeColorOfViewWhenCorrect:self.iconView1 withColor:kColorForImageViewWhenCorrect];
+			[self changeColorOfViewWhenCorrect:self.answerView1 withColor:kColorForViewWhenCorrect];
             break;
 			
         case 2:
@@ -489,6 +499,8 @@
 			self.iconImageView2.image = kIconImageForCorrectAnswer;
 			self.iconImageView3.image = kIconImageForFalseAnswer;
 			self.iconImageView4.image = kIconImageForFalseAnswer;
+			[self changeColorOfViewWhenCorrect:self.iconView2 withColor:kColorForImageViewWhenCorrect];
+			[self changeColorOfViewWhenCorrect:self.answerView2 withColor:kColorForViewWhenCorrect];
             break;
             
         case 3:
@@ -496,6 +508,8 @@
 			self.iconImageView2.image = kIconImageForFalseAnswer;
 			self.iconImageView3.image = kIconImageForCorrectAnswer;
 			self.iconImageView4.image = kIconImageForFalseAnswer;
+			[self changeColorOfViewWhenCorrect:self.iconView3 withColor:kColorForImageViewWhenCorrect];
+			[self changeColorOfViewWhenCorrect:self.answerView3 withColor:kColorForViewWhenCorrect];
             break;
 			
         case 4:
@@ -503,6 +517,8 @@
 			self.iconImageView2.image = kIconImageForFalseAnswer;
 			self.iconImageView3.image = kIconImageForFalseAnswer;
 			self.iconImageView4.image = kIconImageForCorrectAnswer;
+			[self changeColorOfViewWhenCorrect:self.iconView4 withColor:kColorForImageViewWhenCorrect];
+			[self changeColorOfViewWhenCorrect:self.answerView4 withColor:kColorForViewWhenCorrect];
             break;
 			
         default:
@@ -529,6 +545,28 @@
 }
 
 
+#pragma mark - Change color of view when correct or start new round
+
+- (void)changeColorOfViewWhenCorrect:(PopView *)view withColor:(UIColor *)color
+{
+	view.backgroundColor = color;
+	view.backgroundColorNormal = color;
+}
+
+
+- (void)changeColorOfViewToNormal
+{
+	[self changeColorOfViewWhenCorrect:self.iconView1 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.answerView1 withColor:kColorForViewNormal];
+	[self changeColorOfViewWhenCorrect:self.iconView2 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.answerView2 withColor:kColorForViewNormal];
+	[self changeColorOfViewWhenCorrect:self.iconView3 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.answerView3 withColor:kColorForViewNormal];
+	[self changeColorOfViewWhenCorrect:self.iconView4 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.answerView4 withColor:kColorForViewNormal];
+}
+
+
 #pragma mark - ConfigureUI
 
 - (void)configureUI
@@ -552,6 +590,7 @@
 	UIColor *clearColor = [UIColor clearColor];
 	UIColor *lightRed = [UIColor colorWithRed:0.993 green:0.391 blue:0.279 alpha:1.000];
 	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
+	UIColor *questionViewColor = [UIColor colorWithRed:0.504 green:0.655 blue:0.388 alpha:1.000];
 	
 	//View
     CGFloat questionViewCornerRadius = 12.0;
@@ -563,11 +602,11 @@
 	self.infoView.backgroundColor = self.answerContainerView.backgroundColor;
 	
 	self.questionScrollView.backgroundColor = whiteColor;
-	self.questionView.backgroundColor = [UIColor colorWithRed:0.69 green:0.95 blue:0.95 alpha:1];
+	self.questionView.backgroundColor = questionViewColor;
     self.questionView.layer.cornerRadius = questionViewCornerRadius;
 	
 	//Label
-    self.questionLabel.textColor = darkBrown;
+	self.questionLabel.textColor = whiteColor; //darkBrown;
 	self.answerLabel1.textColor = whiteColor;
 	self.answerLabel2.textColor = whiteColor;
 	self.answerLabel3.textColor = whiteColor;
@@ -580,22 +619,19 @@
 	self.answerLabel4.backgroundColor = clearColor;
 	
 	//Answer View Color
-    UIColor *colorNormal = [UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1];
-	UIColor *colorHighlight = [UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1];
-	
-	self.answerView1.backgroundColor = colorNormal;
-    self.answerView2.backgroundColor = colorNormal;
-    self.answerView3.backgroundColor = colorNormal;
-    self.answerView4.backgroundColor = colorNormal;
+	self.answerView1.backgroundColor = kColorForViewNormal;
+    self.answerView2.backgroundColor = kColorForViewNormal;
+    self.answerView3.backgroundColor = kColorForViewNormal;
+    self.answerView4.backgroundColor = kColorForViewNormal;
     
-    self.answerView1.backgroundColorNormal = colorNormal;
-    self.answerView1.backgroundColorHighlight = colorHighlight;
-    self.answerView2.backgroundColorNormal = colorNormal;
-    self.answerView2.backgroundColorHighlight = colorHighlight;
-    self.answerView3.backgroundColorNormal = colorNormal;
-    self.answerView3.backgroundColorHighlight = colorHighlight;
-    self.answerView4.backgroundColorNormal = colorNormal;
-    self.answerView4.backgroundColorHighlight = colorHighlight;
+    self.answerView1.backgroundColorNormal = kColorForViewNormal;
+    self.answerView1.backgroundColorHighlight = kColorforViewHighlight;
+    self.answerView2.backgroundColorNormal = kColorForViewNormal;
+    self.answerView2.backgroundColorHighlight = kColorforViewHighlight;
+    self.answerView3.backgroundColorNormal = kColorForViewNormal;
+    self.answerView3.backgroundColorHighlight = kColorforViewHighlight;
+    self.answerView4.backgroundColorNormal = kColorForViewNormal;
+    self.answerView4.backgroundColorHighlight = kColorforViewHighlight;
 	
     CGFloat answerViewCornerRadius = 7.0;
     self.answerView1.layer.cornerRadius = answerViewCornerRadius;
@@ -604,12 +640,20 @@
     self.answerView4.layer.cornerRadius = answerViewCornerRadius;
 	
     //Icon View Color
-	UIColor *iconViewColorNormal = [UIColor colorWithRed:0.192 green:0.372 blue:0.481 alpha:1.000];
-    self.iconView1.backgroundColor = iconViewColorNormal;
-    self.iconView2.backgroundColor = iconViewColorNormal;
-    self.iconView3.backgroundColor = iconViewColorNormal;
-    self.iconView4.backgroundColor = iconViewColorNormal;
-    
+	self.iconView1.backgroundColor = kColorForIconViewNormal;
+    self.iconView2.backgroundColor = kColorForIconViewNormal;
+    self.iconView3.backgroundColor = kColorForIconViewNormal;
+    self.iconView4.backgroundColor = kColorForIconViewNormal;
+	
+	self.iconView1.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView1.backgroundColorHighlight = kColorForIconViewHighlight;
+	self.iconView2.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView2.backgroundColorHighlight = kColorForIconViewHighlight;
+	self.iconView3.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView3.backgroundColorHighlight = kColorForIconViewHighlight;
+	self.iconView4.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView4.backgroundColorHighlight = kColorForIconViewHighlight;
+	
 	//Info View Buttons
 	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];
 	UIImage *menuImageHighlight = [UIImage imageForChangingColor:@"menu" color:lightRed];
