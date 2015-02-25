@@ -14,6 +14,8 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImage+ChangeColor.h"
 #import "PopView.h"
+#import "CustomDraggableModalTransitionAnimator.h"
+#import "ProgressViewController.h"
 
 
 #define debug 1
@@ -76,6 +78,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView3;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView4;
 
+@property (nonatomic, strong) CustomDraggableModalTransitionAnimator *animator;
+
 @end
 
 
@@ -124,6 +128,26 @@
 	} else {
 		[self adjustIconViewWidth:kIconViewWidthIphoneNormal];
 	}
+}
+
+
+- (IBAction)tmpButtonTapped:(id)sender
+{
+	ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
+	
+	controller.modalPresentationStyle = UIModalPresentationCustom;
+	
+	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+	self.animator.dragable = YES;
+	self.animator.bounces = YES;
+	self.animator.behindViewAlpha = 0.8f;
+	self.animator.behindViewScale = 1.0f;
+	self.animator.transitionDuration = 0.4f;
+	self.animator.direction = ModalTransitonDirectionLeft;
+	
+	controller.transitioningDelegate = self.animator;
+	
+	[self presentViewController:controller animated:YES completion:nil];
 }
 
 

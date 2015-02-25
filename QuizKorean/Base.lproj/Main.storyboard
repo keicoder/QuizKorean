@@ -22,6 +22,15 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14k-HL-lre" userLabel="InfoView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldl-cp-NFk">
+                                                <rect key="frame" x="62" y="23" width="46" height="30"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tmpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KTi-U5-gjb"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqj-wP-fyw" userLabel="MenuButton" customClass="PopAnimationClearButton">
                                                 <rect key="frame" x="10" y="16" width="44" height="44"/>
                                                 <constraints>
@@ -84,12 +93,14 @@
                                         <color key="backgroundColor" red="1" green="0.84303140640258789" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="nqj-wP-fyw" firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" id="5LH-pQ-f8t"/>
+                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="centerY" secondItem="Ldl-cp-NFk" secondAttribute="centerY" id="FfT-1O-ueH"/>
                                             <constraint firstItem="Jrf-zq-wX4" firstAttribute="leading" secondItem="56j-nG-sKf" secondAttribute="trailing" constant="2" id="IPK-Ic-9fM"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="leading" secondItem="9KZ-iy-uuD" secondAttribute="trailing" constant="2" id="LNl-uj-43w"/>
                                             <constraint firstAttribute="centerX" secondItem="56j-nG-sKf" secondAttribute="centerX" id="O1X-KC-8qE">
                                                 <variation key="heightClass=compact" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="Jrf-zq-wX4" secondAttribute="centerY" id="Of2-MK-YZM"/>
+                                            <constraint firstItem="Ldl-cp-NFk" firstAttribute="leading" secondItem="nqj-wP-fyw" secondAttribute="trailing" constant="8" id="ZQ7-ex-He6"/>
                                             <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="10" id="dU2-ua-XyD"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="9KZ-iy-uuD" secondAttribute="centerY" id="grV-BZ-ccU"/>
                                             <constraint firstAttribute="height" constant="60" id="oAM-yP-gFI">
@@ -432,10 +443,10 @@
             </objects>
             <point key="canvasLocation" x="1337" y="395"/>
         </scene>
-        <!--Pop View Controller-->
+        <!--Progress View Controller-->
         <scene sceneID="5nz-t6-NZ3">
             <objects>
-                <viewController storyboardIdentifier="PopViewController" id="plI-t5-dSX" customClass="PopViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgressViewController" id="plI-t5-dSX" customClass="ProgressViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bMR-0Q-2Dy"/>
                         <viewControllerLayoutGuide type="bottom" id="ohd-VZ-T8F"/>
@@ -445,26 +456,55 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cl-Kh-Gfn" userLabel="ContainerView">
-                                <rect key="frame" x="200" y="200" width="200" height="200"/>
+                                <rect key="frame" x="40" y="60" width="520" height="480"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XR0-9u-HIX" userLabel="PopView" customClass="PopView">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XR0-9u-HIX" userLabel="PopView" customClass="PopView">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="480"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K23-Ql-q8X">
+                                                <rect key="frame" x="233" y="225" width="54" height="30"/>
+                                                <state key="normal" title="Dismiss">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="dismissButtonTapped:" destination="plI-t5-dSX" eventType="touchUpInside" id="Zzu-eZ-3Bz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.32644865743873996" green="0.83118764848255178" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="K23-Ql-q8X" secondAttribute="centerX" id="9XG-gH-q4p"/>
+                                            <constraint firstAttribute="centerY" secondItem="K23-Ql-q8X" secondAttribute="centerY" id="SpT-EY-dcW"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="C3p-kj-BBr"/>
-                                    <constraint firstAttribute="width" constant="200" id="ml0-my-Kc5"/>
+                                    <constraint firstAttribute="bottom" secondItem="XR0-9u-HIX" secondAttribute="bottom" id="3uU-s0-GV0"/>
+                                    <constraint firstItem="XR0-9u-HIX" firstAttribute="top" secondItem="9cl-Kh-Gfn" secondAttribute="top" id="58E-KJ-089"/>
+                                    <constraint firstAttribute="centerY" secondItem="XR0-9u-HIX" secondAttribute="centerY" id="HIL-4s-oR4"/>
+                                    <constraint firstItem="XR0-9u-HIX" firstAttribute="leading" secondItem="9cl-Kh-Gfn" secondAttribute="leading" id="NDC-CL-SOP"/>
+                                    <constraint firstAttribute="centerX" secondItem="XR0-9u-HIX" secondAttribute="centerX" id="XAR-cp-5NR"/>
+                                    <constraint firstAttribute="trailing" secondItem="XR0-9u-HIX" secondAttribute="trailing" id="cur-jv-y8e"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="9cl-Kh-Gfn" secondAttribute="centerX" id="OS7-bK-5Ot"/>
+                            <constraint firstItem="ohd-VZ-T8F" firstAttribute="top" secondItem="9cl-Kh-Gfn" secondAttribute="bottom" constant="40" id="ZX2-m4-hRM"/>
                             <constraint firstAttribute="centerY" secondItem="9cl-Kh-Gfn" secondAttribute="centerY" id="rKo-we-Hiw"/>
+                            <constraint firstAttribute="trailing" secondItem="9cl-Kh-Gfn" secondAttribute="trailing" constant="40" id="ygb-nM-GjE"/>
+                            <constraint firstItem="9cl-Kh-Gfn" firstAttribute="top" secondItem="bMR-0Q-2Dy" secondAttribute="bottom" constant="40" id="yst-H7-zGT"/>
+                            <constraint firstItem="9cl-Kh-Gfn" firstAttribute="leading" secondItem="EPa-qG-ofV" secondAttribute="leading" constant="40" id="zuR-uD-NQS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZX2-m4-hRM"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="popView" destination="XR0-9u-HIX" id="TRh-sH-bOL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44k-m3-B8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

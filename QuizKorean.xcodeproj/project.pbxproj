@@ -16,6 +16,7 @@
 		C10F0AA11A9DB3DA00350ACD /* fail.caf in Resources */ = {isa = PBXBuildFile; fileRef = C10F0AA01A9DB3DA00350ACD /* fail.caf */; };
 		C10F0AA31A9DB42000350ACD /* take.caf in Resources */ = {isa = PBXBuildFile; fileRef = C10F0AA21A9DB42000350ACD /* take.caf */; };
 		C11EE55F1A8C241C00393FC1 /* PopScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */; };
+		C13B50E71A9DEA730086B840 /* CustomDraggableModalTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = C13B50E61A9DEA730086B840 /* CustomDraggableModalTransitionAnimator.m */; };
 		C1400EC11A89DAEC00867496 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC01A89DAEC00867496 /* main.m */; };
 		C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC31A89DAEC00867496 /* AppDelegate.m */; };
 		C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC61A89DAEC00867496 /* QuizViewController.m */; };
@@ -74,6 +75,8 @@
 		C10F0AA21A9DB42000350ACD /* take.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = take.caf; sourceTree = "<group>"; };
 		C11EE55D1A8C241C00393FC1 /* PopScaleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopScaleButton.h; sourceTree = "<group>"; };
 		C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopScaleButton.m; sourceTree = "<group>"; };
+		C13B50E51A9DEA730086B840 /* CustomDraggableModalTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDraggableModalTransitionAnimator.h; sourceTree = "<group>"; };
+		C13B50E61A9DEA730086B840 /* CustomDraggableModalTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDraggableModalTransitionAnimator.m; sourceTree = "<group>"; };
 		C13B92661A8DA22B00F37C82 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C13B92671A8DBC6700F37C82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C1400EBB1A89DAEC00867496 /* QuizKorean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizKorean.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +166,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C13B50E41A9DEA5A0086B840 /* CustomModalTransition */ = {
+			isa = PBXGroup;
+			children = (
+				C13B50E51A9DEA730086B840 /* CustomDraggableModalTransitionAnimator.h */,
+				C13B50E61A9DEA730086B840 /* CustomDraggableModalTransitionAnimator.m */,
+			);
+			name = CustomModalTransition;
+			sourceTree = "<group>";
+		};
 		C1400EB21A89DAEC00867496 = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +198,7 @@
 		C1400EBD1A89DAEC00867496 /* QuizKorean */ = {
 			isa = PBXGroup;
 			children = (
+				C13B50E41A9DEA5A0086B840 /* CustomModalTransition */,
 				C1705DD71A905800005129C6 /* iRate */,
 				C1B2A7E41A8AD21C00FC80C2 /* AFNetworking */,
 				C1B2A8011A8AE48C00FC80C2 /* Categories */,
@@ -511,6 +524,7 @@
 				C1400EF61A89E77B00867496 /* PopAnimationButton.m in Sources */,
 				C1B2A8001A8AD21C00FC80C2 /* AFURLSessionManager.m in Sources */,
 				C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */,
+				C13B50E71A9DEA730086B840 /* CustomDraggableModalTransitionAnimator.m in Sources */,
 				C1B2A7F91A8AD21C00FC80C2 /* AFHTTPRequestOperationManager.m in Sources */,
 				C1400EC11A89DAEC00867496 /* main.m in Sources */,
 				C1B2A7FF1A8AD21C00FC80C2 /* AFURLResponseSerialization.m in Sources */,
