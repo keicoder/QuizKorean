@@ -27,6 +27,8 @@
 @property (nonatomic, strong) Quiz *quiz;
 @property (nonatomic, assign) NSUInteger indexOfCorrectAnswer;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconViewWidthConstraint;
+
 @property (weak, nonatomic) IBOutlet UIView *questionContainerView;
 
 @property (weak, nonatomic) IBOutlet UIView *infoView;
@@ -98,6 +100,13 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self showIconWithAnimation:NO];
+}
+
+
 #pragma mark - Get the stored NSUserDefaults data
 
 - (void)getScoreAndRoundDataFromNSUserDefaults
@@ -149,8 +158,7 @@
 
 - (void)fetchJSONData
 {
-    [self setDefaultIcon:NO];
-    
+	[self showIconWithAnimation:NO];
     [self allowUserInteraction:YES];
     
 	self.quiz = [[Quiz alloc] init];
@@ -252,9 +260,6 @@
 								[defaults setInteger:_round forKey:@"_round"];
                                 [defaults setInteger:_score forKey:@"_score"];
 								[defaults synchronize];
-                                
-                                [self setDefaultIcon:YES];
-							
 							}];
 						}];
 					}];
@@ -328,6 +333,7 @@
 - (IBAction)nextButtonTapped:(id)sender
 {
 	_round -= 1;
+	[self setIconViewImageToNil];
 	[self fetchJSONData];
 }
 
@@ -363,10 +369,7 @@
     }
     
     NSLog (@"self.indexOfCorrectAnswer: %ld\n", (unsigned long)self.indexOfCorrectAnswer);
-    
-    CGFloat delay = 1.0;
-    CGFloat duration = 1.0;
-    
+	
     if ([touch.view isEqual:(UIView *)self.answerView1]) {
         NSLog(@"self.answerView1 Tapped");
         
@@ -375,13 +378,11 @@
             [self checkToPlaySoundEffect];
             [self increaseScore];
             NSLog(@"Correct : You earned score");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
             [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
@@ -393,13 +394,11 @@
             [self checkToPlaySoundEffect];
             [self increaseScore];
             NSLog(@"Correct : You earned score");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
             [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
@@ -410,13 +409,11 @@
             [self checkToPlaySoundEffect];
             [self increaseScore];
             NSLog(@"Correct : You earned score");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
             [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
         }
         
     } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
@@ -427,15 +424,15 @@
             [self checkToPlaySoundEffect];
             [self increaseScore];
             NSLog(@"Correct : You earned score");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
             [self updateLabels];
             
         } else {
             
             NSLog(@"No, try again");
-            [self showIconAtIndex:self.indexOfCorrectAnswer delay:delay duration:duration];
         }
     }
+	
+	[self showIconWithAnimation:YES];
 }
 
 
@@ -453,67 +450,64 @@
 
 #pragma mark - Show icon when user touches answer
 
-- (void)showIconAtIndex:(NSUInteger)index delay:(CGFloat)delay duration:(CGFloat)duration
+- (void)showIconWithAnimation:(BOOL)show
 {
-    [self allowUserInteraction:NO];
-    
-    index = self.indexOfCorrectAnswer;
-    
+	[self setIconViewImageToNil];
+	
+	if (show == NO) {
+		self.iconViewWidthConstraint.constant = 10.0;
+	} else if (show == YES) {
+		self.iconViewWidthConstraint.constant = 50.0;
+	}
+	
+	CGFloat duration = 0.3f;
+	CGFloat delay = 0.3f;
+	[UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+		
+		[self.view layoutIfNeeded];
+		
+	} completion:^(BOOL finished) {
+		
+		[UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+			
+			[self showIconAtIndex:self.indexOfCorrectAnswer];
+			
+		} completion:^(BOOL finished) { }];
+	}];
+}
+
+
+- (void)showIconAtIndex:(NSUInteger)index
+{
     switch (index) {
-        case 1: {
-            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.iconImageView1.image = kIconImageForCorrectAnswer;
-                self.iconImageView2.image = kIconImageForFalseAnswer;
-                self.iconImageView3.image = kIconImageForFalseAnswer;
-                self.iconImageView4.image = kIconImageForFalseAnswer;
-            }completion:^(BOOL finished) { }]; }
+        case 1:
+			self.iconImageView1.image = kIconImageForCorrectAnswer;
+			self.iconImageView2.image = kIconImageForFalseAnswer;
+			self.iconImageView3.image = kIconImageForFalseAnswer;
+			self.iconImageView4.image = kIconImageForFalseAnswer;
+            break;
+			
+        case 2:
+			self.iconImageView1.image = kIconImageForFalseAnswer;
+			self.iconImageView2.image = kIconImageForCorrectAnswer;
+			self.iconImageView3.image = kIconImageForFalseAnswer;
+			self.iconImageView4.image = kIconImageForFalseAnswer;
             break;
             
-        case 2: {
-            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.iconImageView1.image = kIconImageForFalseAnswer;
-                self.iconImageView2.image = kIconImageForCorrectAnswer;
-                self.iconImageView3.image = kIconImageForFalseAnswer;
-                self.iconImageView4.image = kIconImageForFalseAnswer;
-            }completion:^(BOOL finished) {
-                
-                [UIView animateWithDuration:duration animations:^{
-                    
-                }completion:^(BOOL finished) { }];
-                
-            }]; }
+        case 3:
+			self.iconImageView1.image = kIconImageForFalseAnswer;
+			self.iconImageView2.image = kIconImageForFalseAnswer;
+			self.iconImageView3.image = kIconImageForCorrectAnswer;
+			self.iconImageView4.image = kIconImageForFalseAnswer;
             break;
-            
-        case 3: {
-            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.iconImageView1.image = kIconImageForFalseAnswer;
-                self.iconImageView2.image = kIconImageForFalseAnswer;
-                self.iconImageView3.image = kIconImageForCorrectAnswer;
-                self.iconImageView4.image = kIconImageForFalseAnswer;
-            }completion:^(BOOL finished) {
-                
-                [UIView animateWithDuration:duration animations:^{
-                    
-                }completion:^(BOOL finished) { }];
-                
-            }]; }
+			
+        case 4:
+			self.iconImageView1.image = kIconImageForFalseAnswer;
+			self.iconImageView2.image = kIconImageForFalseAnswer;
+			self.iconImageView3.image = kIconImageForFalseAnswer;
+			self.iconImageView4.image = kIconImageForCorrectAnswer;
             break;
-            
-        case 4: {
-            [UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.iconImageView1.image = kIconImageForFalseAnswer;
-                self.iconImageView2.image = kIconImageForFalseAnswer;
-                self.iconImageView3.image = kIconImageForFalseAnswer;
-                self.iconImageView4.image = kIconImageForCorrectAnswer;
-            }completion:^(BOOL finished) {
-                
-                [UIView animateWithDuration:duration animations:^{
-                    
-                }completion:^(BOOL finished) { }];
-                
-            }]; }
-            break;
-            
+			
         default:
             break;
     }
@@ -529,22 +523,12 @@
 }
 
 
-- (void)setDefaultIcon:(BOOL)deFaultIcon
+- (void)setIconViewImageToNil
 {
-    UIColor *color = [UIColor whiteColor];
-    UIImage *image = [UIImage imageForChangingColor:@"polygon" color:color];
-    
-    if (deFaultIcon == YES) {
-        self.iconImageView1.image = image;
-        self.iconImageView2.image = image;
-        self.iconImageView3.image = image;
-        self.iconImageView4.image = image;
-    } else {
-        self.iconImageView1.image = nil;
-        self.iconImageView2.image = nil;
-        self.iconImageView3.image = nil;
-        self.iconImageView4.image = nil;
-    }
+	self.iconImageView1.image = nil;
+	self.iconImageView2.image = nil;
+	self.iconImageView3.image = nil;
+	self.iconImageView4.image = nil;
 }
 
 
@@ -623,10 +607,11 @@
     self.answerView4.layer.cornerRadius = answerViewCornerRadius;
 	
     //Icon View Color
-    self.iconView1.backgroundColor = colorNormal;
-    self.iconView2.backgroundColor = colorNormal;
-    self.iconView3.backgroundColor = colorNormal;
-    self.iconView4.backgroundColor = colorNormal;
+	UIColor *iconViewColorNormal = [UIColor colorWithRed:0.192 green:0.372 blue:0.481 alpha:1.000];
+    self.iconView1.backgroundColor = iconViewColorNormal;
+    self.iconView2.backgroundColor = iconViewColorNormal;
+    self.iconView3.backgroundColor = iconViewColorNormal;
+    self.iconView4.backgroundColor = iconViewColorNormal;
     
 	//Info View Buttons
 	UIImage *menuImageNormal = [UIImage imageForChangingColor:@"menu" color:darkBrown];
