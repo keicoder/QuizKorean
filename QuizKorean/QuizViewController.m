@@ -630,7 +630,7 @@
 	UIColor *clearColor = [UIColor clearColor];
 	UIColor *lightRed = [UIColor colorWithRed:0.993 green:0.391 blue:0.279 alpha:1.000];
 	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
-	UIColor *questionViewColor = [UIColor colorWithRed:0.504 green:0.655 blue:0.388 alpha:1.000];
+	UIColor *questionViewColor = whiteColor; //[UIColor colorWithRed:0.504 green:0.655 blue:0.388 alpha:1.000];
 	
 	//View
     CGFloat questionViewCornerRadius = 12.0;
@@ -646,7 +646,7 @@
     self.questionView.layer.cornerRadius = questionViewCornerRadius;
 	
 	//Label
-	self.questionLabel.textColor = whiteColor; //darkBrown;
+	self.questionLabel.textColor = darkBrown; //whiteColor; //darkBrown;
 	self.answerLabel1.textColor = whiteColor;
 	self.answerLabel2.textColor = whiteColor;
 	self.answerLabel3.textColor = whiteColor;

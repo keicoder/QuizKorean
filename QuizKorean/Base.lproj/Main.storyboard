@@ -83,9 +83,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.84303140640258789" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="Frz-bv-XhI">
-                                                <variation key="heightClass=compact" constant="0.0"/>
-                                            </constraint>
+                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" id="5LH-pQ-f8t"/>
                                             <constraint firstItem="Jrf-zq-wX4" firstAttribute="leading" secondItem="56j-nG-sKf" secondAttribute="trailing" constant="2" id="IPK-Ic-9fM"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="leading" secondItem="9KZ-iy-uuD" secondAttribute="trailing" constant="2" id="LNl-uj-43w"/>
                                             <constraint firstAttribute="centerX" secondItem="56j-nG-sKf" secondAttribute="centerX" id="O1X-KC-8qE">
@@ -94,16 +92,14 @@
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="Jrf-zq-wX4" secondAttribute="centerY" id="Of2-MK-YZM"/>
                                             <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="10" id="dU2-ua-XyD"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="9KZ-iy-uuD" secondAttribute="centerY" id="grV-BZ-ccU"/>
-                                            <constraint firstItem="3WH-Na-3Va" firstAttribute="top" secondItem="14k-HL-lre" secondAttribute="top" constant="16" id="jtA-7J-hIc">
-                                                <variation key="heightClass=compact" constant="0.0"/>
-                                            </constraint>
                                             <constraint firstAttribute="height" constant="60" id="oAM-yP-gFI">
-                                                <variation key="heightClass=compact" constant="44"/>
+                                                <variation key="heightClass=compact" constant="60"/>
                                             </constraint>
                                             <constraint firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" constant="-8" id="p7r-Te-2hY">
                                                 <variation key="heightClass=compact" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="nqj-wP-fyw" firstAttribute="leading" secondItem="14k-HL-lre" secondAttribute="leading" constant="10" id="q3m-1K-dAc"/>
+                                            <constraint firstItem="3WH-Na-3Va" firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" id="zqI-J6-oIF"/>
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O9I-44-t4E" userLabel="QuestionScrollView">
