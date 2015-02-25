@@ -28,6 +28,11 @@
 #define kColorForImageViewWhenCorrect	[UIColor colorWithRed:1 green:0.53 blue:0.25 alpha:1]
 #define kColorForViewWhenCorrect		[UIColor colorWithRed:0.99 green:0.64 blue:0.4 alpha:1]
 
+#define kIconViewWidthIpadNormal	30
+#define kIconViewWidthIpadExpand	80
+#define kIconViewWidthIphoneNormal	10
+#define kIconViewWidthIphoneExpand	50
+
 
 @interface QuizViewController () <UIGestureRecognizerDelegate>
 
@@ -84,7 +89,9 @@
 	Quiz *_quiz4;
 	
 	NSString *_soundEffect;
-    
+    BOOL _canPlaySoundEffect;
+	BOOL _chooseCorrectAnswer;
+	
 	NSInteger _score;
 	NSInteger _round;
 }
@@ -111,7 +118,12 @@
 {
 	[super viewWillAppear:animated];
 	[self setIconViewImageToNil];
-	[self adjustIconViewWidth:10];
+	
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+		[self adjustIconViewWidth:kIconViewWidthIpadNormal];
+	} else {
+		[self adjustIconViewWidth:kIconViewWidthIphoneNormal];
+	}
 }
 
 
@@ -166,7 +178,12 @@
 
 - (void)fetchJSONData
 {
-	[self adjustIconViewWidth:10];
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+		[self adjustIconViewWidth:kIconViewWidthIpadNormal];
+	} else {
+		[self adjustIconViewWidth:kIconViewWidthIphoneNormal];
+	}
+	
     [self allowUserInteraction:YES];
     
 	self.quiz = [[Quiz alloc] init];
@@ -302,32 +319,53 @@
 
 #pragma mark - Get the stored NSUserDefaults data and check to play SoundEffect
 
-- (void)checkToPlaySoundEffect
+- (BOOL)checkToCanPlaySoundEffect
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	_soundEffect = [defaults objectForKey:@"_soundEffect"];
 	NSLog (@"_soundEffect: %@\n", _soundEffect);
 	
 	if (_soundEffect == nil) {
+		
 		_soundEffect = @"효과음 > 켜짐";
-		[self playCorrectSound];
+		_canPlaySoundEffect = YES;
+		
 	} else if ([_soundEffect isEqualToString: @"효과음 > 켜짐"]) {
-		[self playCorrectSound];
+		
+		_canPlaySoundEffect = YES;
+		
 	} else if ([_soundEffect isEqualToString: @"효과음 > 꺼짐"]) {
-		NSLog(@"No SoundEffect");
+		
+		_canPlaySoundEffect = NO;
 	}
 	
 	NSLog (@"_soundEffect: %@\n", _soundEffect);
+	NSLog (@"_canPlaySoundEffect: %hhd\n", _canPlaySoundEffect);
+	
+	return _canPlaySoundEffect;
 }
 
 
-- (void)playCorrectSound
+- (void)playSound
 {
-	NSString *correctPath = [[NSBundle mainBundle] pathForResource:@"correct" ofType:@"caf"];
-	NSURL *correctURL = [NSURL fileURLWithPath:correctPath];
-	SystemSoundID correctSoundID;
-	AudioServicesCreateSystemSoundID((__bridge CFURLRef)correctURL, &correctSoundID);
-	AudioServicesPlaySystemSound(correctSoundID);
+	if (_canPlaySoundEffect == YES) {
+		
+		if (_chooseCorrectAnswer == YES) {
+			NSString *path = [[NSBundle mainBundle] pathForResource:@"correct" ofType:@"caf"];
+			NSURL *URL = [NSURL fileURLWithPath:path];
+			SystemSoundID soundID;
+			AudioServicesCreateSystemSoundID((__bridge CFURLRef)URL, &soundID);
+			AudioServicesPlaySystemSound(soundID);
+			
+		} else {
+			
+			NSString *path = [[NSBundle mainBundle] pathForResource:@"ding" ofType:@"caf"];
+			NSURL *URL = [NSURL fileURLWithPath:path];
+			SystemSoundID soundID;
+			AudioServicesCreateSystemSoundID((__bridge CFURLRef)URL, &soundID);
+			AudioServicesPlaySystemSound(soundID);
+		}
+	}
 }
 
 
@@ -365,12 +403,18 @@
 - (void)gestureViewTapped:(UITouch *)touch
 {
 	[self allowUserInteraction:NO];
-	[self adjustIconViewWidth:50];
+	
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+		[self adjustIconViewWidth:kIconViewWidthIpadExpand];
+	} else {
+		[self adjustIconViewWidth:kIconViewWidthIphoneExpand];
+	}
 	
     NSString *correct = @"정답";
     
     self.indexOfCorrectAnswer = 0;
-    
+	_chooseCorrectAnswer = NO; //초기화
+	
     if ([_quiz1.correct isEqualToString:correct]) {
         self.indexOfCorrectAnswer = 1;
     } else if ([_quiz2.correct isEqualToString:correct]) {
@@ -383,12 +427,13 @@
     
     NSLog (@"self.indexOfCorrectAnswer: %ld\n", (unsigned long)self.indexOfCorrectAnswer);
 	
+	[self checkToCanPlaySoundEffect]; //Return BOOL value _canPlaySoundEffect
+	
 	if ([touch.view isEqual:(UIView *)self.answerView1]) {
 		NSLog(@"self.answerView1 Tapped");
 		
 		if ([_quiz1.correct isEqualToString:correct]) {
-			
-			[self checkToPlaySoundEffect];
+			_chooseCorrectAnswer = YES;
 			[self increaseScore];
 		}
 		
@@ -397,8 +442,7 @@
 		NSLog(@"self.answerView2 Tapped");
 		
 		if ([_quiz2.correct isEqualToString:correct]) {
-			
-			[self checkToPlaySoundEffect];
+			_chooseCorrectAnswer = YES;
 			[self increaseScore];
 		}
 		
@@ -406,8 +450,7 @@
 		NSLog(@"self.answerView3 Tapped");
 		
 		if ([_quiz3.correct isEqualToString:correct]) {
-			
-			[self checkToPlaySoundEffect];
+			_chooseCorrectAnswer = YES;
 			[self increaseScore];
 		}
 		
@@ -415,11 +458,12 @@
 		NSLog(@"self.answerView4 Tapped");
 		
 		if ([_quiz4.correct isEqualToString:correct]) {
-			
-			[self checkToPlaySoundEffect];
+			_chooseCorrectAnswer = YES;
 			[self increaseScore];
 		}
 	}
+	
+	[self playSound];
 	
 	CGFloat duration = 0.25f;
 	CGFloat delay = 0.25f;
@@ -458,7 +502,7 @@
 		
 	} completion:^(BOOL finished) {
 	
-		if (self.iconViewWidthConstraint.constant >= 40) {
+		if (self.iconViewWidthConstraint.constant >= kIconViewWidthIphoneExpand) {
 			
 			//Post a notification when done adjusting icon view width
 			[[NSNotificationCenter defaultCenter] postNotificationName: @"DidAdjustIconViewWidthNotification" object:nil userInfo:nil];

@@ -12,6 +12,9 @@
 		328948DE1A944D790024F74D /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 328948DD1A944D790024F74D /* PopView.m */; };
 		328948E11A9452290024F74D /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328948E01A9452290024F74D /* PopViewController.m */; };
 		329D53EB1A9889030053CF0A /* PopAnimationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329D53EA1A9889030053CF0A /* PopAnimationImageView.m */; };
+		C10F0A9D1A9DB3AD00350ACD /* ding.caf in Resources */ = {isa = PBXBuildFile; fileRef = C10F0A9C1A9DB3AD00350ACD /* ding.caf */; };
+		C10F0AA11A9DB3DA00350ACD /* fail.caf in Resources */ = {isa = PBXBuildFile; fileRef = C10F0AA01A9DB3DA00350ACD /* fail.caf */; };
+		C10F0AA31A9DB42000350ACD /* take.caf in Resources */ = {isa = PBXBuildFile; fileRef = C10F0AA21A9DB42000350ACD /* take.caf */; };
 		C11EE55F1A8C241C00393FC1 /* PopScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */; };
 		C1400EC11A89DAEC00867496 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC01A89DAEC00867496 /* main.m */; };
 		C1400EC41A89DAEC00867496 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1400EC31A89DAEC00867496 /* AppDelegate.m */; };
@@ -66,6 +69,9 @@
 		4335BFEC03F1675186383896 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C41846C9C4A9A3FF714D22 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A93D3854E72A579DC09E0303 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C10F0A9C1A9DB3AD00350ACD /* ding.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ding.caf; sourceTree = "<group>"; };
+		C10F0AA01A9DB3DA00350ACD /* fail.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fail.caf; sourceTree = "<group>"; };
+		C10F0AA21A9DB42000350ACD /* take.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = take.caf; sourceTree = "<group>"; };
 		C11EE55D1A8C241C00393FC1 /* PopScaleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopScaleButton.h; sourceTree = "<group>"; };
 		C11EE55E1A8C241C00393FC1 /* PopScaleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopScaleButton.m; sourceTree = "<group>"; };
 		C13B92661A8DA22B00F37C82 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -285,6 +291,9 @@
 		C1B2A7DD1A8AD10F00FC80C2 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				C10F0AA21A9DB42000350ACD /* take.caf */,
+				C10F0AA01A9DB3DA00350ACD /* fail.caf */,
+				C10F0A9C1A9DB3AD00350ACD /* ding.caf */,
 				C1B2A7DE1A8AD12C00FC80C2 /* correct.caf */,
 			);
 			name = Sound;
@@ -426,9 +435,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C10F0A9D1A9DB3AD00350ACD /* ding.caf in Resources */,
 				C1400ECA1A89DAEC00867496 /* Main.storyboard in Resources */,
 				C1400ECF1A89DAEC00867496 /* LaunchScreen.xib in Resources */,
+				C10F0AA11A9DB3DA00350ACD /* fail.caf in Resources */,
 				C1400ECC1A89DAEC00867496 /* Images.xcassets in Resources */,
+				C10F0AA31A9DB42000350ACD /* take.caf in Resources */,
 				C1705DDB1A905800005129C6 /* iRate.bundle in Resources */,
 				C1B2A7DF1A8AD12C00FC80C2 /* correct.caf in Resources */,
 			);
