@@ -90,7 +90,7 @@
 	[super viewDidLoad];
     [self allowUserInteraction:YES];
     [self configureUI];
-	[self addObserverForParseJSONDictionaryNotification];
+	[self addNotificationObserverForParseJSONAndAdjustIconViewWidth];
 	[self fetchJSONData];
 	[self getScoreAndRoundDataFromNSUserDefaults];
     [self addTapGestureOnTheView:self.answerView1];
@@ -103,7 +103,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[self showIconWithAnimation:NO];
+	[self setIconViewImageToNil];
+	[self adjustIconViewWidth:10];
 }
 
 
@@ -158,7 +159,7 @@
 
 - (void)fetchJSONData
 {
-	[self showIconWithAnimation:NO];
+	[self adjustIconViewWidth:10];
     [self allowUserInteraction:YES];
     
 	self.quiz = [[Quiz alloc] init];
@@ -188,10 +189,11 @@
 
 #pragma mark - Listening Notification
 
-- (void)addObserverForParseJSONDictionaryNotification
+- (void)addNotificationObserverForParseJSONAndAdjustIconViewWidth
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFinishedNotification:) name:@"ParseJSONDictionaryFinishedNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFailedNotification:) name:@"ParseJSONDictionaryFailedNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAdjustIconViewWidth:) name:@"DidAdjustIconViewWidthNotification" object:nil];
 }
 
 
@@ -205,7 +207,7 @@
         } else if (!(self.quiz.quizArray[0] || self.quiz.quizArray[1] || self.quiz.quizArray[2] || self.quiz.quizArray[3])) {
             [self fetchJSONData];
         
-        } else {
+		} else {
 			
 			_quiz1 = self.quiz.quizArray[0];
 			_quiz2 = self.quiz.quizArray[1];
@@ -370,69 +372,55 @@
     
     NSLog (@"self.indexOfCorrectAnswer: %ld\n", (unsigned long)self.indexOfCorrectAnswer);
 	
-    if ([touch.view isEqual:(UIView *)self.answerView1]) {
-        NSLog(@"self.answerView1 Tapped");
-        
-        if ([_quiz1.correct isEqualToString:correct]) {
-            
-            [self checkToPlaySoundEffect];
-            [self increaseScore];
-            NSLog(@"Correct : You earned score");
-            [self updateLabels];
-            
-        } else {
-            
-            NSLog(@"No, try again");
-        }
-        
-    } else if ([touch.view isEqual:(UIView *)self.answerView2]) {
-        
-        NSLog(@"self.answerView2 Tapped");
-        
-        if ([_quiz2.correct isEqualToString:correct]) {
-            
-            [self checkToPlaySoundEffect];
-            [self increaseScore];
-            NSLog(@"Correct : You earned score");
-            [self updateLabels];
-            
-        } else {
-            
-            NSLog(@"No, try again");
-        }
-        
-    } else if ([touch.view isEqual:(UIView *)self.answerView3]) {
-        NSLog(@"self.answerView3 Tapped");
-        
-        if ([_quiz3.correct isEqualToString:correct]) {
-            
-            [self checkToPlaySoundEffect];
-            [self increaseScore];
-            NSLog(@"Correct : You earned score");
-            [self updateLabels];
-            
-        } else {
-            
-            NSLog(@"No, try again");
-        }
-        
-    } else if ([touch.view isEqual:(UIView *)self.answerView4]) {
-        NSLog(@"self.answerView4 Tapped");
-        
-        if ([_quiz4.correct isEqualToString:correct]) {
-            
-            [self checkToPlaySoundEffect];
-            [self increaseScore];
-            NSLog(@"Correct : You earned score");
-            [self updateLabels];
-            
-        } else {
-            
-            NSLog(@"No, try again");
-        }
-    }
+	if ([touch.view isEqual:(UIView *)self.answerView1]) {
+		NSLog(@"self.answerView1 Tapped");
+		
+		if ([_quiz1.correct isEqualToString:correct]) {
+			
+			[self checkToPlaySoundEffect];
+			[self increaseScore];
+		}
+		
+	} else if ([touch.view isEqual:(UIView *)self.answerView2]) {
+		
+		NSLog(@"self.answerView2 Tapped");
+		
+		if ([_quiz2.correct isEqualToString:correct]) {
+			
+			[self checkToPlaySoundEffect];
+			[self increaseScore];
+		}
+		
+	} else if ([touch.view isEqual:(UIView *)self.answerView3]) {
+		NSLog(@"self.answerView3 Tapped");
+		
+		if ([_quiz3.correct isEqualToString:correct]) {
+			
+			[self checkToPlaySoundEffect];
+			[self increaseScore];
+		}
+		
+	} else if ([touch.view isEqual:(UIView *)self.answerView4]) {
+		NSLog(@"self.answerView4 Tapped");
+		
+		if ([_quiz4.correct isEqualToString:correct]) {
+			
+			[self checkToPlaySoundEffect];
+			[self increaseScore];
+			
+		}
+	}
 	
-	[self showIconWithAnimation:YES];
+	[self adjustIconViewWidth:50];
+	
+	CGFloat duration = 0.25f;
+	CGFloat delay = 0.25f;
+	
+	[UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+		
+		[self updateLabels];
+		
+	} completion:^(BOOL finished) { }];
 }
 
 
@@ -450,15 +438,9 @@
 
 #pragma mark - Show icon when user touches answer
 
-- (void)showIconWithAnimation:(BOOL)show
+- (void)adjustIconViewWidth:(CGFloat)width
 {
-	[self setIconViewImageToNil];
-	
-	if (show == NO) {
-		self.iconViewWidthConstraint.constant = 10.0;
-	} else if (show == YES) {
-		self.iconViewWidthConstraint.constant = 50.0;
-	}
+	self.iconViewWidthConstraint.constant = width;
 	
 	CGFloat duration = 0.3f;
 	CGFloat delay = 0.3f;
@@ -467,17 +449,32 @@
 		[self.view layoutIfNeeded];
 		
 	} completion:^(BOOL finished) {
-		
-		[UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
+	
+		if (self.iconViewWidthConstraint.constant >= 40) {
 			
-			[self showIconAtIndex:self.indexOfCorrectAnswer];
-			
-		} completion:^(BOOL finished) { }];
+			//Post a notification when done adjusting icon view width
+			[[NSNotificationCenter defaultCenter] postNotificationName: @"DidAdjustIconViewWidthNotification" object:nil userInfo:nil];
+		}
 	}];
 }
 
 
-- (void)showIconAtIndex:(NSUInteger)index
+- (void)didAdjustIconViewWidth:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidAdjustIconViewWidthNotification"])
+	{
+		CGFloat duration = 0.25f;
+		
+		[UIView animateWithDuration:duration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
+			
+			[self showIconImageAtIndex:self.indexOfCorrectAnswer];
+			
+		} completion:^(BOOL finished) { }];
+	}
+}
+
+
+- (void)showIconImageAtIndex:(NSUInteger)index
 {
     switch (index) {
         case 1:
