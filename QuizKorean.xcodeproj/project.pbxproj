@@ -46,6 +46,7 @@
 		C1B2A8001A8AD21C00FC80C2 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A7F71A8AD21C00FC80C2 /* AFURLSessionManager.m */; };
 		C1B2A8041A8AE48C00FC80C2 /* UIImage+ChangeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B2A8031A8AE48C00FC80C2 /* UIImage+ChangeColor.m */; };
 		C1E4F52E1A8C7E0200A924F7 /* PopAnimationClearButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E4F52D1A8C7E0200A924F7 /* PopAnimationClearButton.m */; };
+		C1FE66921A9F01330095D1B9 /* InspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE66911A9F01330095D1B9 /* InspectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,8 @@
 		C1B2A8031A8AE48C00FC80C2 /* UIImage+ChangeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ChangeColor.m"; sourceTree = "<group>"; };
 		C1E4F52C1A8C7E0200A924F7 /* PopAnimationClearButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopAnimationClearButton.h; sourceTree = "<group>"; };
 		C1E4F52D1A8C7E0200A924F7 /* PopAnimationClearButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopAnimationClearButton.m; sourceTree = "<group>"; };
+		C1FE66901A9F01330095D1B9 /* InspectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectionViewController.h; sourceTree = "<group>"; };
+		C1FE66911A9F01330095D1B9 /* InspectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +251,8 @@
 				C1400EE61A89DBB400867496 /* MenuViewController.m */,
 				C1400EC51A89DAEC00867496 /* QuizViewController.h */,
 				C1400EC61A89DAEC00867496 /* QuizViewController.m */,
+				C1FE66901A9F01330095D1B9 /* InspectionViewController.h */,
+				C1FE66911A9F01330095D1B9 /* InspectionViewController.m */,
 				321E17D11A9C1A57006E3FDA /* ProgressViewController.h */,
 				321E17D21A9C1A57006E3FDA /* ProgressViewController.m */,
 				C1400EF01A89E3C800867496 /* SettingsViewController.h */,
@@ -513,6 +518,7 @@
 				329D53EB1A9889030053CF0A /* PopAnimationImageView.m in Sources */,
 				C1400EC71A89DAEC00867496 /* QuizViewController.m in Sources */,
 				C1B2A7FB1A8AD21C00FC80C2 /* AFNetworkReachabilityManager.m in Sources */,
+				C1FE66921A9F01330095D1B9 /* InspectionViewController.m in Sources */,
 				C1400EEA1A89DC5E00867496 /* AboutViewController.m in Sources */,
 				328948E11A9452290024F74D /* PopViewController.m in Sources */,
 				328948DE1A944D790024F74D /* PopView.m in Sources */,

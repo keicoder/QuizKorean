@@ -7,12 +7,26 @@
 //
 
 #import "ProgressViewController.h"
-#import "GradientView.h"
-#import "UIImage+ChangeColor.h"
+#import "PopAnimationClearButton.h"
+#import "SettingsViewController.h"
+
 
 @interface ProgressViewController () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *progressView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *starImage1;
+@property (weak, nonatomic) IBOutlet UIImageView *starImage2;
+@property (weak, nonatomic) IBOutlet UIImageView *starImage3;
+@property (weak, nonatomic) IBOutlet UIImageView *starImage4;
+@property (weak, nonatomic) IBOutlet UIImageView *starImage5;
+
+@property (weak, nonatomic) IBOutlet PopAnimationClearButton *dismissButton;
+@property (weak, nonatomic) IBOutlet PopAnimationClearButton *settingsButton;
+@property (weak, nonatomic) IBOutlet PopAnimationClearButton *nextButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @end
 
@@ -35,6 +49,18 @@
 	[self dismissViewControllerAnimated:YES completion:^{
 		NSLog(@"Progress view dismissed");
 	}];
+}
+
+- (IBAction)settingsButtonTapped:(id)sender
+{
+	SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+	[self showViewController:controller sender:sender];
+}
+
+
+- (IBAction)nextButtonTapped:(id)sender
+{
+	
 }
 
 
