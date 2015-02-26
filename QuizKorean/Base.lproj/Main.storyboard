@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D87h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qhu-wo-ihA">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Quiz View Controller-->
@@ -455,55 +456,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cl-Kh-Gfn" userLabel="ContainerView">
-                                <rect key="frame" x="40" y="60" width="520" height="480"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cl-Kh-Gfn" userLabel="ProgressView">
+                                <rect key="frame" x="60" y="90" width="480" height="420"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XR0-9u-HIX" userLabel="PopView" customClass="PopView">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="480"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K23-Ql-q8X">
-                                                <rect key="frame" x="233" y="225" width="54" height="30"/>
-                                                <state key="normal" title="Dismiss">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="dismissButtonTapped:" destination="plI-t5-dSX" eventType="touchUpInside" id="Zzu-eZ-3Bz"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.32644865743873996" green="0.83118764848255178" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="K23-Ql-q8X" secondAttribute="centerX" id="9XG-gH-q4p"/>
-                                            <constraint firstAttribute="centerY" secondItem="K23-Ql-q8X" secondAttribute="centerY" id="SpT-EY-dcW"/>
-                                        </constraints>
-                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K23-Ql-q8X">
+                                        <rect key="frame" x="238" y="442" width="54" height="30"/>
+                                        <state key="normal" title="Dismiss">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dismissButtonTapped:" destination="plI-t5-dSX" eventType="touchUpInside" id="Zzu-eZ-3Bz"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="XR0-9u-HIX" secondAttribute="bottom" id="3uU-s0-GV0"/>
-                                    <constraint firstItem="XR0-9u-HIX" firstAttribute="top" secondItem="9cl-Kh-Gfn" secondAttribute="top" id="58E-KJ-089"/>
-                                    <constraint firstAttribute="centerY" secondItem="XR0-9u-HIX" secondAttribute="centerY" id="HIL-4s-oR4"/>
-                                    <constraint firstItem="XR0-9u-HIX" firstAttribute="leading" secondItem="9cl-Kh-Gfn" secondAttribute="leading" id="NDC-CL-SOP"/>
-                                    <constraint firstAttribute="centerX" secondItem="XR0-9u-HIX" secondAttribute="centerX" id="XAR-cp-5NR"/>
-                                    <constraint firstAttribute="trailing" secondItem="XR0-9u-HIX" secondAttribute="trailing" id="cur-jv-y8e"/>
-                                </constraints>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="9cl-Kh-Gfn" secondAttribute="centerX" id="OS7-bK-5Ot"/>
-                            <constraint firstItem="ohd-VZ-T8F" firstAttribute="top" secondItem="9cl-Kh-Gfn" secondAttribute="bottom" constant="40" id="ZX2-m4-hRM"/>
-                            <constraint firstAttribute="centerY" secondItem="9cl-Kh-Gfn" secondAttribute="centerY" id="rKo-we-Hiw"/>
-                            <constraint firstAttribute="trailing" secondItem="9cl-Kh-Gfn" secondAttribute="trailing" constant="40" id="ygb-nM-GjE"/>
-                            <constraint firstItem="9cl-Kh-Gfn" firstAttribute="top" secondItem="bMR-0Q-2Dy" secondAttribute="bottom" constant="40" id="yst-H7-zGT"/>
-                            <constraint firstItem="9cl-Kh-Gfn" firstAttribute="leading" secondItem="EPa-qG-ofV" secondAttribute="leading" constant="40" id="zuR-uD-NQS"/>
+                            <constraint firstAttribute="centerX" secondItem="9cl-Kh-Gfn" secondAttribute="centerX" id="5eW-96-kb0"/>
+                            <constraint firstAttribute="centerY" secondItem="9cl-Kh-Gfn" secondAttribute="centerY" id="dTc-b7-HAX"/>
+                            <constraint firstItem="9cl-Kh-Gfn" firstAttribute="width" secondItem="EPa-qG-ofV" secondAttribute="width" multiplier="0.8" id="dyW-35-mMC"/>
+                            <constraint firstItem="9cl-Kh-Gfn" firstAttribute="height" secondItem="EPa-qG-ofV" secondAttribute="height" multiplier="0.7" id="jOn-eG-Cg0"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ZX2-m4-hRM"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="popView" destination="XR0-9u-HIX" id="TRh-sH-bOL"/>
+                        <outlet property="progressView" destination="9cl-Kh-Gfn" id="r0A-jJ-cf0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44k-m3-B8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -537,18 +514,28 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4l-r8-NGo" userLabel="X Button">
                                         <rect key="frame" x="240" y="0.0" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="1Lq-cd-LJu"/>
-                                            <constraint firstAttribute="width" constant="40" id="ZNX-nN-Edk"/>
+                                            <constraint firstAttribute="height" constant="40" id="1Lq-cd-LJu">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="40" id="ZNX-nN-Edk">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="X">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
+                                        </variation>
                                         <connections>
                                             <action selector="dismissButtonTapped:" destination="YCz-Po-SkY" eventType="touchUpInside" id="P6z-3O-Qgv"/>
                                         </connections>
@@ -561,8 +548,12 @@
                                     <constraint firstAttribute="trailing" secondItem="f1P-d3-zqV" secondAttribute="trailing" constant="20" id="EgA-RH-Sdl"/>
                                     <constraint firstAttribute="centerY" secondItem="f1P-d3-zqV" secondAttribute="centerY" id="GuQ-Du-Jbi"/>
                                     <constraint firstAttribute="centerX" secondItem="6gH-qo-mxq" secondAttribute="centerX" id="HD7-6w-Caz"/>
-                                    <constraint firstAttribute="height" constant="280" id="HE8-lt-dcg"/>
-                                    <constraint firstAttribute="width" constant="280" id="dIj-P3-jkw"/>
+                                    <constraint firstAttribute="height" constant="280" id="HE8-lt-dcg">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="500"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="280" id="dIj-P3-jkw">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="500"/>
+                                    </constraint>
                                     <constraint firstAttribute="centerX" secondItem="f1P-d3-zqV" secondAttribute="centerX" id="gt0-DN-O21"/>
                                     <constraint firstItem="R4l-r8-NGo" firstAttribute="top" secondItem="pj1-Yk-ecs" secondAttribute="top" id="lLr-Te-xVb"/>
                                     <constraint firstAttribute="trailing" secondItem="R4l-r8-NGo" secondAttribute="trailing" id="xgB-w1-Z4g"/>

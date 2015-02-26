@@ -140,8 +140,8 @@
 	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
 	self.animator.dragable = YES;
 	self.animator.bounces = YES;
-	self.animator.behindViewAlpha = 0.8f;
-	self.animator.behindViewScale = 1.0f;
+	self.animator.behindViewAlpha = 0.7f;
+	self.animator.behindViewScale = 0.9f;
 	self.animator.transitionDuration = 0.4f;
 	self.animator.direction = ModalTransitonDirectionLeft;
 	
@@ -634,7 +634,7 @@
 #pragma mark - ConfigureUI
 
 - (void)configureUI
-{
+{	
 	NSString *blank = @"";
 	
     //Label Text

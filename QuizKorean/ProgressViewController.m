@@ -9,11 +9,10 @@
 #import "ProgressViewController.h"
 #import "GradientView.h"
 #import "UIImage+ChangeColor.h"
-#import "PopView.h"
 
 @interface ProgressViewController () <UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet PopView *popView;
+@property (weak, nonatomic) IBOutlet UIView *progressView;
 
 @end
 
@@ -23,6 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	[self configureUI];
 	[self addTapGuesture];
 }
 
@@ -46,7 +46,7 @@
 	gestureRecognizer.cancelsTouchesInView = NO;
 	gestureRecognizer.delegate = self;
 	
-	[self.popView addGestureRecognizer:gestureRecognizer];
+	[self.progressView addGestureRecognizer:gestureRecognizer];
 }
 
 
@@ -54,7 +54,15 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-	return (touch.view == self.popView);
+	return (touch.view == self.progressView);
+}
+
+
+#pragma mark - Configure UI
+
+- (void)configureUI
+{
+	self.progressView.layer.cornerRadius = 10.0;
 }
 
 
