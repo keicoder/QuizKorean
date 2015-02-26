@@ -16,6 +16,7 @@
 #import "PopView.h"
 #import "CustomDraggableModalTransitionAnimator.h"
 #import "ProgressViewController.h"
+#import "InspectionViewController.h"
 
 
 #define debug 1
@@ -134,6 +135,26 @@
 - (IBAction)tmpButtonTapped:(id)sender
 {
 	ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
+	
+	controller.modalPresentationStyle = UIModalPresentationCustom;
+	
+	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+	self.animator.dragable = YES;
+	self.animator.bounces = YES;
+	self.animator.behindViewAlpha = 0.7f;
+	self.animator.behindViewScale = 0.9f;
+	self.animator.transitionDuration = 0.4f;
+	self.animator.direction = ModalTransitonDirectionLeft;
+	
+	controller.transitioningDelegate = self.animator;
+	
+	[self presentViewController:controller animated:YES completion:nil];
+}
+
+
+- (IBAction)tmpButton2Tapped:(id)sender
+{
+	InspectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"InspectionViewController"];
 	
 	controller.modalPresentationStyle = UIModalPresentationCustom;
 	

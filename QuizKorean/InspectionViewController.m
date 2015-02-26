@@ -7,31 +7,93 @@
 //
 
 #import "InspectionViewController.h"
+#import "PopAnimationClearButton.h"
+#import "SettingsViewController.h"
 
-@interface InspectionViewController ()
+
+@interface InspectionViewController () <UIGestureRecognizerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView *inspectionView;
+@property (weak, nonatomic) IBOutlet UIView *iconView;
+
+@property (weak, nonatomic) IBOutlet PopAnimationClearButton *dismissButton;
+@property (weak, nonatomic) IBOutlet PopAnimationClearButton *settingsButton;
+@property (weak, nonatomic) IBOutlet PopAnimationClearButton *nextButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *inspectionLabel;
 
 @end
 
+
 @implementation InspectionViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	[self configureUI];
+	[self addTapGuesture];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - Button and Touch Action
+
+- (IBAction)dismissButtonTapped:(id)sender
+{
+	NSLog(@"self.popView did receive touch");
+	[self dismissViewControllerAnimated:YES completion:^{
+		NSLog(@"Progress view dismissed");
+	}];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)settingsButtonTapped:(id)sender
+{
+	SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+	[self showViewController:controller sender:sender];
 }
-*/
+
+
+- (IBAction)nextButtonTapped:(id)sender
+{
+	
+}
+
+
+#pragma mark - Tap Guesture
+
+- (void)addTapGuesture
+{
+	UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissButtonTapped:)];
+	gestureRecognizer.cancelsTouchesInView = NO;
+	gestureRecognizer.delegate = self;
+	
+	[self.inspectionView addGestureRecognizer:gestureRecognizer];
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+	return (touch.view == self.inspectionView);
+}
+
+
+#pragma mark - Configure UI
+
+- (void)configureUI
+{
+	CGFloat cornerRadius = CGRectGetHeight(self.iconView.bounds)/2;
+	self.iconView.layer.cornerRadius = cornerRadius;
+	self.inspectionView.layer.cornerRadius = 10.0;
+}
+
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+	NSLog(@"dealloc %@", self);
+}
+
 
 @end
