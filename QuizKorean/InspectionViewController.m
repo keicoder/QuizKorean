@@ -9,18 +9,16 @@
 #import "InspectionViewController.h"
 #import "PopAnimationClearButton.h"
 #import "SettingsViewController.h"
+#import "PopAnimationImageView.h"
 
 
 @interface InspectionViewController () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *inspectionView;
 @property (weak, nonatomic) IBOutlet UIView *iconView;
-
-@property (weak, nonatomic) IBOutlet PopAnimationClearButton *dismissButton;
-@property (weak, nonatomic) IBOutlet PopAnimationClearButton *settingsButton;
+@property (weak, nonatomic) IBOutlet PopAnimationImageView *iconImageView;
+@property (weak, nonatomic) IBOutlet PopAnimationClearButton *menuButton;
 @property (weak, nonatomic) IBOutlet PopAnimationClearButton *nextButton;
-
-@property (weak, nonatomic) IBOutlet UILabel *inspectionLabel;
 
 @end
 

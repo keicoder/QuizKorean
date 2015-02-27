@@ -22,24 +22,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14k-HL-lre" userLabel="InfoView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldl-cp-NFk">
-                                                <rect key="frame" x="62" y="23" width="46" height="30"/>
-                                                <state key="normal" title="Button">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="tmpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KTi-U5-gjb"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsp-Ji-wCv">
-                                                <rect key="frame" x="130" y="23" width="46" height="30"/>
-                                                <state key="normal" title="Button">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="tmpButton2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xru-XS-LsK"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqj-wP-fyw" userLabel="MenuButton" customClass="PopAnimationClearButton">
                                                 <rect key="frame" x="10" y="16" width="44" height="44"/>
                                                 <constraints>
@@ -102,16 +84,12 @@
                                         <color key="backgroundColor" red="1" green="0.84303140640258789" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="nqj-wP-fyw" firstAttribute="centerY" secondItem="56j-nG-sKf" secondAttribute="centerY" id="5LH-pQ-f8t"/>
-                                            <constraint firstItem="nqj-wP-fyw" firstAttribute="centerY" secondItem="Ldl-cp-NFk" secondAttribute="centerY" id="FfT-1O-ueH"/>
                                             <constraint firstItem="Jrf-zq-wX4" firstAttribute="leading" secondItem="56j-nG-sKf" secondAttribute="trailing" constant="2" id="IPK-Ic-9fM"/>
-                                            <constraint firstItem="bsp-Ji-wCv" firstAttribute="leading" secondItem="Ldl-cp-NFk" secondAttribute="trailing" constant="22" id="IZW-uh-7dV"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="leading" secondItem="9KZ-iy-uuD" secondAttribute="trailing" constant="2" id="LNl-uj-43w"/>
                                             <constraint firstAttribute="centerX" secondItem="56j-nG-sKf" secondAttribute="centerX" id="O1X-KC-8qE">
                                                 <variation key="heightClass=compact" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="Jrf-zq-wX4" secondAttribute="centerY" id="Of2-MK-YZM"/>
-                                            <constraint firstItem="Ldl-cp-NFk" firstAttribute="centerY" secondItem="bsp-Ji-wCv" secondAttribute="centerY" id="YbZ-xD-18a"/>
-                                            <constraint firstItem="Ldl-cp-NFk" firstAttribute="leading" secondItem="nqj-wP-fyw" secondAttribute="trailing" constant="8" id="ZQ7-ex-He6"/>
                                             <constraint firstAttribute="trailing" secondItem="3WH-Na-3Va" secondAttribute="trailing" constant="10" id="dU2-ua-XyD"/>
                                             <constraint firstItem="56j-nG-sKf" firstAttribute="centerY" secondItem="9KZ-iy-uuD" secondAttribute="centerY" id="grV-BZ-ccU"/>
                                             <constraint firstAttribute="height" constant="60" id="oAM-yP-gFI">
@@ -469,35 +447,51 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0L-le-XOC" userLabel="InspectionView">
                                 <rect key="frame" x="150" y="240" width="300" height="120"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yat-qF-UZH" userLabel="HomeButton" customClass="PopAnimationClearButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yat-qF-UZH" userLabel="MenuButton" customClass="PopAnimationClearButton">
                                         <rect key="frame" x="20" y="30" width="60" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="9SI-Em-1Mh"/>
-                                            <constraint firstAttribute="height" constant="60" id="DvE-DU-mr2"/>
+                                            <constraint firstAttribute="width" constant="60" id="9SI-Em-1Mh">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="60" id="DvE-DU-mr2">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
-                                        <state key="normal" image="menu">
+                                        <state key="normal" image="menuIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFg-Ms-yit" userLabel="IconView">
                                         <rect key="frame" x="115" y="25" width="70" height="70"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correctCircle" translatesAutoresizingMaskIntoConstraints="NO" id="N5Y-IA-iVI" userLabel="CorrectImageView" customClass="PopAnimationImageView">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="falseCircle" translatesAutoresizingMaskIntoConstraints="NO" id="N5Y-IA-iVI" userLabel="IconImageView" customClass="PopAnimationImageView">
                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="N5Y-IA-iVI" firstAttribute="height" secondItem="hFg-Ms-yit" secondAttribute="height" id="IRa-CL-4mV"/>
-                                            <constraint firstAttribute="height" constant="70" id="ZjO-4a-Xgp"/>
+                                            <constraint firstAttribute="height" constant="70" id="ZjO-4a-Xgp">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                             <constraint firstAttribute="centerX" secondItem="N5Y-IA-iVI" secondAttribute="centerX" id="ovi-8x-UB1"/>
                                             <constraint firstItem="N5Y-IA-iVI" firstAttribute="width" secondItem="hFg-Ms-yit" secondAttribute="width" id="snr-UZ-Al5"/>
                                             <constraint firstAttribute="centerY" secondItem="N5Y-IA-iVI" secondAttribute="centerY" id="t48-WC-wo6"/>
-                                            <constraint firstAttribute="width" constant="70" id="uTZ-Fq-enA"/>
+                                            <constraint firstAttribute="width" constant="70" id="uTZ-Fq-enA">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77C-VK-Sly" userLabel="NextButton" customClass="PopAnimationClearButton">
                                         <rect key="frame" x="220" y="30" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Ok0-Eu-f0D">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="60" id="v0w-dR-gy8">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                            </constraint>
+                                        </constraints>
                                         <state key="normal" image="arrow-right">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -508,16 +502,22 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.18011994645967411" green="0.35997668660253168" blue="0.45442359249329756" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="77C-VK-Sly" firstAttribute="leading" secondItem="hFg-Ms-yit" secondAttribute="trailing" constant="35" id="7g2-tb-vch"/>
+                                    <constraint firstItem="77C-VK-Sly" firstAttribute="leading" secondItem="hFg-Ms-yit" secondAttribute="trailing" constant="35" id="7g2-tb-vch">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                     <constraint firstItem="yat-qF-UZH" firstAttribute="centerY" secondItem="hFg-Ms-yit" secondAttribute="centerY" id="A4V-kw-aDr"/>
                                     <constraint firstAttribute="centerX" secondItem="hFg-Ms-yit" secondAttribute="centerX" id="Cri-hj-cWY"/>
-                                    <constraint firstItem="hFg-Ms-yit" firstAttribute="leading" secondItem="yat-qF-UZH" secondAttribute="trailing" constant="35" id="LjW-id-4pL"/>
+                                    <constraint firstItem="hFg-Ms-yit" firstAttribute="leading" secondItem="yat-qF-UZH" secondAttribute="trailing" constant="35" id="LjW-id-4pL">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                     <constraint firstItem="77C-VK-Sly" firstAttribute="centerY" secondItem="hFg-Ms-yit" secondAttribute="centerY" id="OFA-Dc-NQ9"/>
                                     <constraint firstAttribute="centerY" secondItem="hFg-Ms-yit" secondAttribute="centerY" id="SC6-Vj-QRD"/>
-                                    <constraint firstItem="77C-VK-Sly" firstAttribute="width" secondItem="yat-qF-UZH" secondAttribute="width" id="aMy-Ei-1Ot"/>
-                                    <constraint firstAttribute="width" constant="300" id="gOG-pU-hLx"/>
-                                    <constraint firstItem="77C-VK-Sly" firstAttribute="height" secondItem="yat-qF-UZH" secondAttribute="height" id="kO7-nG-hg8"/>
-                                    <constraint firstAttribute="height" constant="120" id="w9R-9W-F9e"/>
+                                    <constraint firstAttribute="width" constant="300" id="gOG-pU-hLx">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="400"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="120" id="w9R-9W-F9e">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="130"/>
+                                    </constraint>
                                 </constraints>
                             </view>
                         </subviews>
@@ -527,8 +527,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="iconImageView" destination="N5Y-IA-iVI" id="Spk-7P-aug"/>
                         <outlet property="iconView" destination="hFg-Ms-yit" id="Qqy-OH-Eai"/>
                         <outlet property="inspectionView" destination="e0L-le-XOC" id="Mbw-Ik-PzD"/>
+                        <outlet property="menuButton" destination="yat-qF-UZH" id="e1d-MS-rWq"/>
                         <outlet property="nextButton" destination="77C-VK-Sly" id="kQQ-rF-CLE"/>
                     </connections>
                 </viewController>
@@ -1301,14 +1303,15 @@
         <image name="arrow-right" width="44" height="44"/>
         <image name="circleBack" width="44" height="44"/>
         <image name="correct" width="45" height="34"/>
-        <image name="correctCircle" width="70" height="70"/>
         <image name="false" width="43" height="43"/>
+        <image name="falseCircle" width="100" height="100"/>
         <image name="gear" width="44" height="44"/>
         <image name="handHeart" width="55" height="42"/>
         <image name="headphone" width="44" height="44"/>
         <image name="home" width="46" height="46"/>
         <image name="megaphone" width="44" height="43"/>
         <image name="menu" width="43" height="35"/>
+        <image name="menuIcon" width="88" height="88"/>
         <image name="pencil" width="36" height="36"/>
         <image name="play" width="46" height="56"/>
         <image name="sendmail" width="44" height="44"/>

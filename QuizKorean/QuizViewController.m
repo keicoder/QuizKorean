@@ -132,46 +132,6 @@
 }
 
 
-- (IBAction)tmpButtonTapped:(id)sender
-{
-	ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
-	
-	controller.modalPresentationStyle = UIModalPresentationCustom;
-	
-	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-	self.animator.dragable = YES;
-	self.animator.bounces = YES;
-	self.animator.behindViewAlpha = 0.7f;
-	self.animator.behindViewScale = 0.9f;
-	self.animator.transitionDuration = 0.4f;
-	self.animator.direction = ModalTransitonDirectionLeft;
-	
-	controller.transitioningDelegate = self.animator;
-	
-	[self presentViewController:controller animated:YES completion:nil];
-}
-
-
-- (IBAction)tmpButton2Tapped:(id)sender
-{
-	InspectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"InspectionViewController"];
-	
-	controller.modalPresentationStyle = UIModalPresentationCustom;
-	
-	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-	self.animator.dragable = YES;
-	self.animator.bounces = YES;
-	self.animator.behindViewAlpha = 0.7f;
-	self.animator.behindViewScale = 0.9f;
-	self.animator.transitionDuration = 0.4f;
-	self.animator.direction = ModalTransitonDirectionLeft;
-	
-	controller.transitioningDelegate = self.animator;
-	
-	[self presentViewController:controller animated:YES completion:nil];
-}
-
-
 #pragma mark - Get the stored NSUserDefaults data
 
 - (void)getScoreAndRoundDataFromNSUserDefaults
@@ -507,7 +467,9 @@
 	[self playSound];
 	
 	CGFloat duration = 0.25f;
-	CGFloat delay = 0.25f;
+	CGFloat delay = 0.5f;
+	
+	[self performSelector:@selector(showInspectionView) withObject:nil afterDelay:delay];
 	
 	[UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
 		
@@ -649,6 +611,48 @@
 	[self changeColorOfViewWhenCorrect:self.answerView3 withColor:kColorForViewNormal];
 	[self changeColorOfViewWhenCorrect:self.iconView4 withColor:kColorForIconViewNormal];
 	[self changeColorOfViewWhenCorrect:self.answerView4 withColor:kColorForViewNormal];
+}
+
+
+#pragma mark - 중간 점검 화면
+
+- (void)showInspectionView
+{
+	InspectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"InspectionViewController"];
+	
+	controller.modalPresentationStyle = UIModalPresentationCustom;
+	
+	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+	self.animator.dragable = YES;
+	self.animator.bounces = YES;
+	self.animator.behindViewAlpha = 0.88f;
+	self.animator.behindViewScale = 0.92f;
+	self.animator.transitionDuration = 0.4f;
+	self.animator.direction = ModalTransitonDirectionLeft;
+	
+	controller.transitioningDelegate = self.animator;
+	
+	[self presentViewController:controller animated:YES completion:nil];
+}
+
+
+- (void)showProgressView
+{
+	ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
+	
+	controller.modalPresentationStyle = UIModalPresentationCustom;
+	
+	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+	self.animator.dragable = YES;
+	self.animator.bounces = YES;
+	self.animator.behindViewAlpha = 0.88f;
+	self.animator.behindViewScale = 0.92f;
+	self.animator.transitionDuration = 0.4f;
+	self.animator.direction = ModalTransitonDirectionLeft;
+	
+	controller.transitioningDelegate = self.animator;
+	
+	[self presentViewController:controller animated:YES completion:nil];
 }
 
 
