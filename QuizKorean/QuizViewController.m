@@ -467,7 +467,7 @@
 		}
 	}
 	
-	[self playSound];
+	[self performSelector:@selector(playSound) withObject:nil afterDelay:0.7];
 	
 	CGFloat duration = 0.25f;
 	CGFloat delay = 0.5f;
