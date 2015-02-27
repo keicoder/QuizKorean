@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PopAnimationImageView.h"
 
 @interface InspectionViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet PopAnimationImageView *iconImageView;
 
 @end

@@ -8,15 +8,14 @@
 
 #import "InspectionViewController.h"
 #import "PopAnimationClearButton.h"
-#import "SettingsViewController.h"
-#import "PopAnimationImageView.h"
+#import "QuizViewController.h"
 
 
 @interface InspectionViewController () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *inspectionView;
+
 @property (weak, nonatomic) IBOutlet UIView *iconView;
-@property (weak, nonatomic) IBOutlet PopAnimationImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet PopAnimationClearButton *menuButton;
 @property (weak, nonatomic) IBOutlet PopAnimationClearButton *nextButton;
 
@@ -35,24 +34,26 @@
 
 #pragma mark - Button and Touch Action
 
-- (IBAction)dismissButtonTapped:(id)sender
-{
-	NSLog(@"self.popView did receive touch");
-	[self dismissViewControllerAnimated:YES completion:^{
-		NSLog(@"Progress view dismissed");
-	}];
-}
 
-- (IBAction)settingsButtonTapped:(id)sender
+- (IBAction)menuButtonTapped:(id)sender
 {
-	SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-	[self showViewController:controller sender:sender];
+	[self dismissViewControllerAnimated:YES completion:^{
+		
+		//Post a notification when InspectionView's menu button tapped
+		[[NSNotificationCenter defaultCenter] postNotificationName: @"DidTappedInspectionViewsMenuButtonNotification" object:nil userInfo:nil];
+		
+	}];
 }
 
 
 - (IBAction)nextButtonTapped:(id)sender
 {
-	
+	[self dismissViewControllerAnimated:YES completion:^{
+		
+		//Post a notification when InspectionView's next button tapped
+		[[NSNotificationCenter defaultCenter] postNotificationName: @"DidTappedInspectionViewsNextButtonNotification" object:nil userInfo:nil];
+		
+	}];
 }
 
 
@@ -60,7 +61,7 @@
 
 - (void)addTapGuesture
 {
-	UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissButtonTapped:)];
+	UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nextButtonTapped:)];
 	gestureRecognizer.cancelsTouchesInView = NO;
 	gestureRecognizer.delegate = self;
 	

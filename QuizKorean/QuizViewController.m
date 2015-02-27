@@ -223,6 +223,8 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFinishedNotification:) name:@"ParseJSONDictionaryFinishedNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFailedNotification:) name:@"ParseJSONDictionaryFailedNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAdjustIconViewWidth:) name:@"DidAdjustIconViewWidthNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedInspectionViewsNextButton:) name:@"DidTappedInspectionViewsNextButtonNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedInspectionViewsMenuButton:) name:@"DidTappedInspectionViewsMenuButtonNotification" object:nil];
 }
 
 
@@ -623,7 +625,7 @@
 	controller.modalPresentationStyle = UIModalPresentationCustom;
 	
 	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-	self.animator.dragable = YES;
+	self.animator.dragable = NO;
 	self.animator.bounces = YES;
 	self.animator.behindViewAlpha = 0.88f;
 	self.animator.behindViewScale = 0.92f;
@@ -631,6 +633,16 @@
 	self.animator.direction = ModalTransitonDirectionLeft;
 	
 	controller.transitioningDelegate = self.animator;
+	
+	NSLog (@"_chooseCorrectAnswer: %d\n", _chooseCorrectAnswer);
+	
+	if (_chooseCorrectAnswer == YES) {
+		UIImage *image = [UIImage imageNamed:@"correctCircle"];
+		controller.iconImageView.image = image;
+	} else if (_chooseCorrectAnswer == NO) {
+		UIImage *image = [UIImage imageNamed:@"falseCircle"];
+		controller.iconImageView.image = image;
+	}
 	
 	[self presentViewController:controller animated:YES completion:nil];
 }
@@ -643,7 +655,7 @@
 	controller.modalPresentationStyle = UIModalPresentationCustom;
 	
 	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-	self.animator.dragable = YES;
+	self.animator.dragable = NO;
 	self.animator.bounces = YES;
 	self.animator.behindViewAlpha = 0.88f;
 	self.animator.behindViewScale = 0.92f;
@@ -653,6 +665,26 @@
 	controller.transitioningDelegate = self.animator;
 	
 	[self presentViewController:controller animated:YES completion:nil];
+}
+
+
+#pragma mark 중간 점검 화면 notification call-back action
+
+- (void)didTappedInspectionViewsNextButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedInspectionViewsNextButtonNotification"])
+	{
+		[self nextButtonTapped:self];
+	}
+}
+
+
+- (void)didTappedInspectionViewsMenuButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedInspectionViewsMenuButtonNotification"])
+	{
+		[self homeButtonTapped:self];
+	}
 }
 
 

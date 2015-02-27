@@ -10,5 +10,7 @@
 
 @interface QuizViewController : UIViewController
 
+- (IBAction)nextButtonTapped:(id)sender;
+
 @end
 
