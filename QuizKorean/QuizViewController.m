@@ -629,8 +629,8 @@
 	self.animator.dragable = NO;
 	self.animator.bounces = YES;
 	self.animator.behindViewAlpha = 0.88f;
-	self.animator.behindViewScale = 0.92f;
-	self.animator.transitionDuration = 0.4f;
+	self.animator.behindViewScale = 1.0f; //0.92f;
+	self.animator.transitionDuration = 0.5f;
 	self.animator.direction = ModalTransitonDirectionLeft;
 	
 	controller.transitioningDelegate = self.animator;
@@ -651,8 +651,8 @@
 	self.animator.dragable = NO;
 	self.animator.bounces = YES;
 	self.animator.behindViewAlpha = 0.88f;
-	self.animator.behindViewScale = 0.92f;
-	self.animator.transitionDuration = 0.4f;
+	self.animator.behindViewScale = 1.0f; //0.92f;
+	self.animator.transitionDuration = 0.5f;
 	self.animator.direction = ModalTransitonDirectionLeft;
 	
 	controller.transitioningDelegate = self.animator;

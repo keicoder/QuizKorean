@@ -168,6 +168,9 @@
                                                             <constraint firstAttribute="width" constant="20" id="Vgw-Kz-6U5"/>
                                                             <constraint firstAttribute="height" constant="20" id="bzX-1O-ICj"/>
                                                         </constraints>
+                                                        <variation key="heightClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="10" y="33" width="20" height="20"/>
+                                                        </variation>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.10116989113149681" green="0.79545454545454541" blue="0.49795410589834366" alpha="1" colorSpace="calibratedRGB"/>
@@ -244,6 +247,9 @@
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="false" translatesAutoresizingMaskIntoConstraints="NO" id="ZoN-tU-B03" userLabel="IconImageView3">
                                                         <rect key="frame" x="10" y="21" width="20" height="20"/>
+                                                        <variation key="heightClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="10" y="33" width="20" height="20"/>
+                                                        </variation>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.95707070707070707" green="0.80975241771130679" blue="0.16687255800207279" alpha="1" colorSpace="calibratedRGB"/>
@@ -1189,8 +1195,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="handHeart" translatesAutoresizingMaskIntoConstraints="NO" id="VFa-aU-YKP" customClass="PopAnimationImageView">
-                                <rect key="frame" x="275" y="170" width="50" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="VFa-aU-YKP" userLabel="LogoImageView" customClass="PopAnimationImageView">
+                                <rect key="frame" x="275" y="140" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="3Ya-nN-WwB"/>
                                     <constraint firstAttribute="height" constant="50" id="rr9-N0-on7"/>
@@ -1275,7 +1281,8 @@
                         <constraints>
                             <constraint firstItem="lsW-6p-Kov" firstAttribute="width" secondItem="3ZM-3Y-vqj" secondAttribute="width" id="1um-ZA-xPW"/>
                             <constraint firstItem="lsW-6p-Kov" firstAttribute="leading" secondItem="3ZM-3Y-vqj" secondAttribute="leading" id="23f-9w-8v8"/>
-                            <constraint firstItem="qgr-1r-HjR" firstAttribute="top" secondItem="VFa-aU-YKP" secondAttribute="bottom" constant="20" id="8qf-tp-V0u">
+                            <constraint firstItem="qgr-1r-HjR" firstAttribute="top" secondItem="VFa-aU-YKP" secondAttribute="bottom" constant="50" id="8qf-tp-V0u">
+                                <variation key="heightClass=compact" constant="20"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="50"/>
                             </constraint>
                             <constraint firstItem="lsW-6p-Kov" firstAttribute="top" secondItem="3ZM-3Y-vqj" secondAttribute="bottom" constant="20" id="91k-pt-4Ki"/>
@@ -1305,11 +1312,11 @@
         <image name="3oclock" width="44" height="44"/>
         <image name="arrow-right" width="44" height="44"/>
         <image name="circleBack" width="44" height="44"/>
+        <image name="clock" width="61" height="61"/>
         <image name="correct" width="45" height="34"/>
         <image name="correctCircle" width="100" height="100"/>
         <image name="false" width="43" height="43"/>
         <image name="gear" width="44" height="44"/>
-        <image name="handHeart" width="55" height="42"/>
         <image name="headphone" width="44" height="44"/>
         <image name="home" width="46" height="46"/>
         <image name="megaphone" width="44" height="43"/>
