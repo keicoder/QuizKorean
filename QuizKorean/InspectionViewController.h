@@ -11,6 +11,6 @@
 
 @interface InspectionViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet PopAnimationImageView *iconImageView;
+@property (nonatomic, assign) BOOL didSelectCorrectAnswer;
 
 @end

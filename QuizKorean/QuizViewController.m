@@ -41,6 +41,7 @@
 
 @property (nonatomic, strong) Quiz *quiz;
 @property (nonatomic, assign) NSUInteger indexOfCorrectAnswer;
+@property (nonatomic, assign) BOOL didSelectCorrectAnswer;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconViewWidthConstraint;
 
@@ -95,7 +96,6 @@
 	
 	NSString *_soundEffect;
     BOOL _canPlaySoundEffect;
-	BOOL _chooseCorrectAnswer;
 	
 	NSInteger _score;
 	NSInteger _round;
@@ -353,7 +353,7 @@
 {
 	if (_canPlaySoundEffect == YES) {
 		
-		if (_chooseCorrectAnswer == YES) {
+		if (self.didSelectCorrectAnswer == YES) {
 			NSString *path = [[NSBundle mainBundle] pathForResource:@"correct" ofType:@"caf"];
 			NSURL *URL = [NSURL fileURLWithPath:path];
 			SystemSoundID soundID;
@@ -416,7 +416,6 @@
     NSString *correct = @"정답";
     
     self.indexOfCorrectAnswer = 0;
-	_chooseCorrectAnswer = NO; //초기화
 	
     if ([_quiz1.correct isEqualToString:correct]) {
         self.indexOfCorrectAnswer = 1;
@@ -430,13 +429,15 @@
     
     NSLog (@"self.indexOfCorrectAnswer: %ld\n", (unsigned long)self.indexOfCorrectAnswer);
 	
+	self.didSelectCorrectAnswer = NO; //초기화
+	
 	[self checkToCanPlaySoundEffect]; //Return BOOL value _canPlaySoundEffect
 	
 	if ([touch.view isEqual:(UIView *)self.answerView1]) {
 		NSLog(@"self.answerView1 Tapped");
 		
 		if ([_quiz1.correct isEqualToString:correct]) {
-			_chooseCorrectAnswer = YES;
+			self.didSelectCorrectAnswer = YES;
 			[self increaseScore];
 		}
 		
@@ -445,7 +446,7 @@
 		NSLog(@"self.answerView2 Tapped");
 		
 		if ([_quiz2.correct isEqualToString:correct]) {
-			_chooseCorrectAnswer = YES;
+			self.didSelectCorrectAnswer = YES;
 			[self increaseScore];
 		}
 		
@@ -453,7 +454,7 @@
 		NSLog(@"self.answerView3 Tapped");
 		
 		if ([_quiz3.correct isEqualToString:correct]) {
-			_chooseCorrectAnswer = YES;
+			self.didSelectCorrectAnswer = YES;
 			[self increaseScore];
 		}
 		
@@ -461,7 +462,7 @@
 		NSLog(@"self.answerView4 Tapped");
 		
 		if ([_quiz4.correct isEqualToString:correct]) {
-			_chooseCorrectAnswer = YES;
+			self.didSelectCorrectAnswer = YES;
 			[self increaseScore];
 		}
 	}
@@ -634,15 +635,7 @@
 	
 	controller.transitioningDelegate = self.animator;
 	
-	NSLog (@"_chooseCorrectAnswer: %d\n", _chooseCorrectAnswer);
-	
-	if (_chooseCorrectAnswer == YES) {
-		UIImage *image = [UIImage imageNamed:@"correctCircle"];
-		controller.iconImageView.image = image;
-	} else if (_chooseCorrectAnswer == NO) {
-		UIImage *image = [UIImage imageNamed:@"falseCircle"];
-		controller.iconImageView.image = image;
-	}
+	controller.didSelectCorrectAnswer = self.didSelectCorrectAnswer;
 	
 	[self presentViewController:controller animated:YES completion:nil];
 }

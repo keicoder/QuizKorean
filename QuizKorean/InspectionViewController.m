@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *inspectionView;
 
 @property (weak, nonatomic) IBOutlet UIView *iconView;
+@property (weak, nonatomic) IBOutlet PopAnimationImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet PopAnimationClearButton *menuButton;
 @property (weak, nonatomic) IBOutlet PopAnimationClearButton *nextButton;
 
@@ -29,11 +30,27 @@
 	[super viewDidLoad];
 	[self configureUI];
 	[self addTapGuesture];
+	[self showSuitableImageOnTheIconImageView];
+}
+
+
+#pragma mark - Show suitable image on the IconImageView
+
+- (void)showSuitableImageOnTheIconImageView
+{
+	self.iconImageView.image = nil;
+	
+	if (self.didSelectCorrectAnswer == YES) {
+		UIImage *image = [UIImage imageNamed:@"correctCircle"];
+		self.iconImageView.image = image;
+	} else {
+		UIImage *image = [UIImage imageNamed:@"falseCircle"];
+		self.iconImageView.image = image;
+	}
 }
 
 
 #pragma mark - Button and Touch Action
-
 
 - (IBAction)menuButtonTapped:(id)sender
 {
