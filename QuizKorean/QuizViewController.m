@@ -263,7 +263,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedSettingsButton:) name:@"DidTappedSettingsButtonNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedMenuButton:) name:@"DidTappedMenuButtonNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedNextButton:) name:@"DidTappedNextButtonNotification" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStoredScoreForProgressViewsLabel:) name:@"ResetStoredScoreNotification" object:nil];
 }
 
 
@@ -723,6 +722,7 @@
 {
 	if ([[notification name] isEqualToString:@"DidTappedMenuButtonNotification"])
 	{
+		[self StartNextRound];
 		[self homeButtonTapped:self];
 	}
 }
@@ -733,15 +733,6 @@
 	if ([[notification name] isEqualToString:@"DidTappedNextButtonNotification"])
 	{
 		[self StartNextRound];
-	}
-}
-
-
-- (void)resetStoredScoreForProgressViewsLabel:(NSNotification *)notification
-{
-	if ([[notification name] isEqualToString:@"ResetStoredScoreNotification"])
-	{
-		_storedScoreForProgressViewsLable = 0;
 	}
 }
 

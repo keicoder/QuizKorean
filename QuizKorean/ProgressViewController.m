@@ -77,30 +77,45 @@
 
 - (void)updateStarImageView
 {
-	NSLog (@"_storedScoreForProgressViewsLable: %ld\n", (long)_storedScoreForProgressViewsLable);
+	UIImage *starWhite = [UIImage imageNamed:@"starWhite"];
+	UIImage *starGold = [UIImage imageNamed:@"starGold"];
 	
 	if (_storedScoreForProgressViewsLable == 1) {
-		self.starImage2.image = nil;
-		self.starImage3.image = nil;
-		self.starImage4.image = nil;
-		self.starImage5.image = nil;
+		self.starImage1.image = starGold;
+		self.starImage2.image = starWhite;
+		self.starImage3.image = starWhite;
+		self.starImage4.image = starWhite;
+		self.starImage5.image = starWhite;
 	} else if (_storedScoreForProgressViewsLable == 2) {
-		self.starImage3.image = nil;
-		self.starImage4.image = nil;
-		self.starImage5.image = nil;
+		self.starImage1.image = starGold;
+		self.starImage2.image = starGold;
+		self.starImage3.image = starWhite;
+		self.starImage4.image = starWhite;
+		self.starImage5.image = starWhite;
 	} else if (_storedScoreForProgressViewsLable == 3) {
-		self.starImage4.image = nil;
-		self.starImage5.image = nil;
+		self.starImage1.image = starGold;
+		self.starImage2.image = starGold;
+		self.starImage3.image = starGold;
+		self.starImage4.image = starWhite;
+		self.starImage5.image = starWhite;
 	} else if (_storedScoreForProgressViewsLable == 4) {
-		self.starImage5.image = nil;
+		self.starImage1.image = starGold;
+		self.starImage2.image = starGold;
+		self.starImage3.image = starGold;
+		self.starImage4.image = starGold;
+		self.starImage5.image = starWhite;
 	} else if (_storedScoreForProgressViewsLable == 5) {
-		
+		self.starImage1.image = starGold;
+		self.starImage2.image = starGold;
+		self.starImage3.image = starGold;
+		self.starImage4.image = starGold;
+		self.starImage5.image = starGold;
 	} else {
-		self.starImage1.image = nil;
-		self.starImage2.image = nil;
-		self.starImage3.image = nil;
-		self.starImage4.image = nil;
-		self.starImage5.image = nil;
+		self.starImage1.image = starWhite;
+		self.starImage2.image = starWhite;
+		self.starImage3.image = starWhite;
+		self.starImage4.image = starWhite;
+		self.starImage5.image = starWhite;
 	}
 }
 
@@ -139,7 +154,6 @@
 	[self dismissViewControllerAnimated:YES completion:^{
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName: @"DidTappedNextButtonNotification" object:nil userInfo:nil];
-		[[NSNotificationCenter defaultCenter] postNotificationName: @"ResetStoredScoreNotification" object:nil userInfo:nil];
 	}];
 	
 }
