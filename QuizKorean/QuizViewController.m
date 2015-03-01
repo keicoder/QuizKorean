@@ -170,6 +170,10 @@
 	_totalRound += 1;
 	_inspectionRound += 1;
 	
+	if (_inspectionRound > 5) {
+		_inspectionRound = 0;
+	}
+	
 	if (self.didSelectCorrectAnswer == YES) {
 		_totalScore += 1;
 		_inspectionScore += 1;
@@ -497,7 +501,7 @@
 
 - (void)showInspectionOrProgressView
 {
-	if (_inspectionRound > 4) {
+	if (_inspectionRound == 5) {
 		
 		ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
 		
