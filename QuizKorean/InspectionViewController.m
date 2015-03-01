@@ -41,15 +41,17 @@
 }
 
 
+#pragma mark - 애니메이션
+
 - (void)animateIconImageView
 {
 	CGFloat duration = 0.15f;
 	[UIView animateWithDuration:duration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-		self.iconImageView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+		self.iconImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
 		self.iconImageView.transform = CGAffineTransformMakeRotation(M_PI/4);
 	} completion:^(BOOL finished) {
 		[UIView animateWithDuration:duration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
-			self.iconImageView.transform = CGAffineTransformMakeScale(0.9, 0.9);
+			self.iconImageView.transform = CGAffineTransformMakeScale(0.8, 0.8);
 		} completion:^(BOOL finished) {
 			[UIView animateWithDuration:duration delay:0.0 options: UIViewAnimationOptionCurveEaseInOut animations:^{
 				self.iconImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);

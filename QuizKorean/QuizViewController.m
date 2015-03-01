@@ -98,7 +98,7 @@
     BOOL _canPlaySoundEffect;
 	
 	NSInteger _score;
-	NSInteger _round;
+	NSInteger _totalRound;
 }
 
 
@@ -137,23 +137,23 @@
 - (void)getScoreAndRoundDataFromNSUserDefaults
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger round = [defaults integerForKey:@"_round"];
-	NSLog (@"round: %ld\n", (long)round);
+	NSInteger totalRound = [defaults integerForKey:@"_totalRound"];
+	NSLog (@"totalRound: %ld\n", (long)totalRound);
     
     NSInteger score = [defaults integerForKey:@"_score"];
     NSLog (@"score: %ld\n", (long)score);
 	
-	if (round <= 0) {
-		_round = -1;
-	} else if (round > 0) {
-		_round = (int)round - 1;
+	if (!totalRound) {
+		_totalRound = 0;
+	} else {
+		_totalRound = (int)totalRound;
 	}
     
-    if (score <= 0) {
-        _score = 0;
-    } else if (score > 0) {
-        _score = (int)score;
-    }
+//    if (score <= 0) {
+//        _score = 0;
+//    } else if (score > 0) {
+//        _score = (int)score;
+//    }
 }
 
 
@@ -161,13 +161,13 @@
 
 - (void)startNewRound
 {
-	_round += 1;
+	_totalRound += 1;
 }
 
 
 - (void)increaseScore
 {
-    _score += 1; //스코어 1점 증가
+    _score += 1;
 }
 
 
@@ -175,7 +175,7 @@
 {
 	self.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)_score];
 	self.slashLabel.text = @"/";
-	self.roundLabel.text = [NSString stringWithFormat:@"%ld", (long)_round];
+	self.roundLabel.text = [NSString stringWithFormat:@"%ld", (long)_totalRound];
 }
 
 
@@ -280,7 +280,6 @@
 								NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
 							}completion:^(BOOL finished) {
 								
-								[self startNewRound];
 								[self updateLabels];
 								
 								[UIView animateWithDuration:duration animations:^{
@@ -290,7 +289,7 @@
 								}completion:^(BOOL finished) { }];
 								
 								NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-								[defaults setInteger:_round forKey:@"_round"];
+								[defaults setInteger:_totalRound forKey:@"_totalRound"];
                                 [defaults setInteger:_score forKey:@"_score"];
 								[defaults synchronize];
 							}];
@@ -382,7 +381,6 @@
 
 - (IBAction)nextButtonTapped:(id)sender
 {
-	_round -= 1;
 	[self setIconViewImageToNil];
 	[self fetchJSONData];
 	[self changeColorOfViewToNormal];
@@ -476,7 +474,8 @@
 	
 	[UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
 		
-		[self updateLabels];
+		[self startNewRound];
+//		[self updateLabels];
 		
 	} completion:^(BOOL finished) { }];
 }
