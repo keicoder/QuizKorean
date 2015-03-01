@@ -40,8 +40,10 @@
 	NSString *_soundEffect;
 	
 	NSUserDefaults *_defaults;
-	NSInteger _score;
-	NSInteger _round;
+	NSInteger _totalRound;
+	NSInteger _totalScore;
+	NSInteger _inspectionRound;
+	NSInteger _inspectionScore;
 }
 
 
@@ -91,10 +93,15 @@
 
 - (void)getTheScoreAndRoundData
 {
-	_score = [_defaults integerForKey:@"_score"];
-	_round = [_defaults integerForKey:@"_round"];
-	NSLog (@"score value before: %ld\n", (long)_score);
-	NSLog (@"round value before: %ld\n", (long)_round);
+	_totalRound = [_defaults integerForKey:@"_totalRound"];
+	_totalScore = [_defaults integerForKey:@"_totalScore"];
+	_inspectionRound = [_defaults integerForKey:@"_inspectionRound"];
+	_inspectionScore = [_defaults integerForKey:@"_inspectionScore"];
+	
+	NSLog (@"_totalRound value before: %ld\n", (long)_totalRound);
+	NSLog (@"_totalScore value before: %ld\n", (long)_totalScore);
+	NSLog (@"_inspectionRound value before: %ld\n", (long)_inspectionRound);
+	NSLog (@"_inspectionScore value before: %ld\n", (long)_inspectionScore);
 }
 
 
@@ -193,14 +200,21 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"예" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        
-        _score = 0;
-        _round = 0;
-        NSLog (@"score value after reset: %ld\n", (long)_score);
-        NSLog (@"round value after reset: %ld\n", (long)_round);
-        
-        [_defaults setInteger:_score forKey:@"_score"];
-        [_defaults setInteger:_round forKey:@"_round"];
+		
+        _totalRound = 0;
+        _totalScore = 0;
+		_inspectionRound = 0;
+		_inspectionScore = 0;
+		
+		NSLog (@"_totalRound value after reset: %ld\n", (long)_totalRound);
+		NSLog (@"_totalScore value after reset: %ld\n", (long)_totalScore);
+		NSLog (@"_inspectionRound value after reset: %ld\n", (long)_inspectionRound);
+		NSLog (@"_inspectionScore value after reset: %ld\n", (long)_inspectionScore);
+		
+		[_defaults setInteger:_totalRound forKey:@"_totalRound"];
+        [_defaults setInteger:_totalScore forKey:@"_totalScore"];
+		[_defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
+		[_defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
         [_defaults synchronize];
         
         NSLog(@"OK Button Tapped");

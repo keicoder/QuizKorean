@@ -17,6 +17,7 @@
 #import "CustomDraggableModalTransitionAnimator.h"
 #import "ProgressViewController.h"
 #import "InspectionViewController.h"
+#import "SettingsViewController.h"
 
 
 #define debug 1
@@ -49,7 +50,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *roundLabel;
 @property (weak, nonatomic) IBOutlet UILabel *slashLabel;
@@ -97,8 +98,10 @@
 	NSString *_soundEffect;
     BOOL _canPlaySoundEffect;
 	
-	NSInteger _score;
 	NSInteger _totalRound;
+	NSInteger _totalScore;
+	NSInteger _inspectionRound;
+	NSInteger _inspectionScore;
 }
 
 
@@ -137,45 +140,69 @@
 - (void)getScoreAndRoundDataFromNSUserDefaults
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger totalRound = [defaults integerForKey:@"_totalRound"];
-	NSLog (@"totalRound: %ld\n", (long)totalRound);
-    
-    NSInteger score = [defaults integerForKey:@"_score"];
-    NSLog (@"score: %ld\n", (long)score);
+	_totalRound = [defaults integerForKey:@"_totalRound"];
+	NSLog (@"_totalRound: %ld\n", (long)_totalRound);
 	
-	if (!totalRound) {
+	_totalScore = [defaults integerForKey:@"_totalScore"];
+	NSLog (@"_totalScore: %ld\n", (long)_totalScore);
+	
+	_inspectionRound = [defaults integerForKey:@"_inspectionRound"];
+	NSLog (@"_inspectionRound: %ld\n", (long)_inspectionRound);
+	
+	_inspectionScore = [defaults integerForKey:@"_inspectionScore"];
+	NSLog (@"_inspectionScore: %ld\n", (long)_inspectionScore);
+	
+	if (!_totalRound) {
 		_totalRound = 0;
-	} else {
-		_totalRound = (int)totalRound;
 	}
-    
-//    if (score <= 0) {
-//        _score = 0;
-//    } else if (score > 0) {
-//        _score = (int)score;
-//    }
+	
+	if (!_inspectionRound) {
+		_inspectionRound = 0;
+	}
+	
+    if (!_totalScore) {
+        _totalScore = 0;
+    }
+	
+	if (!_inspectionScore) {
+		_inspectionScore = 0;
+	}
 }
 
 
 #pragma mark - Game Logic
 
-- (void)startNewRound
+- (void)StartNextRound
 {
-	_totalRound += 1;
+	[self setIconViewImageToNil];
+	[self fetchJSONData];
+	[self changeColorOfViewToNormal];
 }
 
 
-- (void)increaseScore
+- (void)updateRound
 {
-    _score += 1;
+	_totalRound += 1;
+	_inspectionRound += 1;
+	_inspectionRound = _inspectionRound % 5;
+	if (_inspectionRound == 0) {
+		_inspectionScore = 0;
+	}
+}
+
+
+- (void)updateScore
+{
+    _totalScore += 1;
+	_inspectionScore += 1;
 }
 
 
 - (void)updateLabels
 {
-	self.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)_score];
+	self.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)_inspectionScore];
 	self.slashLabel.text = @"/";
-	self.roundLabel.text = [NSString stringWithFormat:@"%ld", (long)_totalRound];
+	self.roundLabel.text = [NSString stringWithFormat:@"%ld", (long)_inspectionRound];
 }
 
 
@@ -290,7 +317,9 @@
 								
 								NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 								[defaults setInteger:_totalRound forKey:@"_totalRound"];
-                                [defaults setInteger:_score forKey:@"_score"];
+								[defaults setInteger:_totalScore forKey:@"_totalScore"];
+								[defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
+								[defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
 								[defaults synchronize];
 							}];
 						}];
@@ -379,11 +408,10 @@
 }
 
 
-- (IBAction)nextButtonTapped:(id)sender
+- (IBAction)settingsButtonTapped:(id)sender
 {
-	[self setIconViewImageToNil];
-	[self fetchJSONData];
-	[self changeColorOfViewToNormal];
+	SettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+	[self showViewController:controller sender:nil];
 }
 
 
@@ -436,7 +464,7 @@
 		
 		if ([_quiz1.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self increaseScore];
+			[self updateScore];
 		}
 		
 	} else if ([touch.view isEqual:(UIView *)self.answerView2]) {
@@ -445,7 +473,7 @@
 		
 		if ([_quiz2.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self increaseScore];
+			[self updateScore];
 		}
 		
 	} else if ([touch.view isEqual:(UIView *)self.answerView3]) {
@@ -453,7 +481,7 @@
 		
 		if ([_quiz3.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self increaseScore];
+			[self updateScore];
 		}
 		
 	} else if ([touch.view isEqual:(UIView *)self.answerView4]) {
@@ -461,23 +489,16 @@
 		
 		if ([_quiz4.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self increaseScore];
+			[self updateScore];
 		}
 	}
 	
 	[self performSelector:@selector(playSound) withObject:nil afterDelay:0.7];
 	
-	CGFloat duration = 0.25f;
+	[self updateRound];
+	
 	CGFloat delay = 0.5f;
-	
-	[self performSelector:@selector(showInspectionView) withObject:nil afterDelay:delay];
-	
-	[UIView animateWithDuration:duration delay:delay options: UIViewAnimationOptionCurveEaseInOut animations:^{
-		
-		[self startNewRound];
-//		[self updateLabels];
-		
-	} completion:^(BOOL finished) { }];
+	[self performSelector:@selector(showInspectionOrProgressView) withObject:nil afterDelay:delay];
 }
 
 
@@ -618,45 +639,49 @@
 
 #pragma mark - 중간 점검 화면
 
-- (void)showInspectionView
+- (void)showInspectionOrProgressView
 {
-	InspectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"InspectionViewController"];
-	
-	controller.modalPresentationStyle = UIModalPresentationCustom;
-	
-	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-	self.animator.dragable = NO;
-	self.animator.bounces = YES;
-	self.animator.behindViewAlpha = 0.88f;
-	self.animator.behindViewScale = 1.0f; //0.92f;
-	self.animator.transitionDuration = 0.5f;
-	self.animator.direction = ModalTransitonDirectionLeft;
-	
-	controller.transitioningDelegate = self.animator;
-	
-	controller.didSelectCorrectAnswer = self.didSelectCorrectAnswer;
-	
-	[self presentViewController:controller animated:YES completion:nil];
-}
-
-
-- (void)showProgressView
-{
-	ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
-	
-	controller.modalPresentationStyle = UIModalPresentationCustom;
-	
-	self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-	self.animator.dragable = NO;
-	self.animator.bounces = YES;
-	self.animator.behindViewAlpha = 0.88f;
-	self.animator.behindViewScale = 1.0f; //0.92f;
-	self.animator.transitionDuration = 0.5f;
-	self.animator.direction = ModalTransitonDirectionLeft;
-	
-	controller.transitioningDelegate = self.animator;
-	
-	[self presentViewController:controller animated:YES completion:nil];
+	if (_inspectionRound == 0) {
+		
+		ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
+		
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+		self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+		self.animator.dragable = NO;
+		self.animator.bounces = YES;
+		self.animator.behindViewAlpha = 0.88f;
+		self.animator.behindViewScale = 1.0f; //0.92f;
+		self.animator.transitionDuration = 0.5f;
+		self.animator.direction = ModalTransitonDirectionLeft;
+		
+		controller.transitioningDelegate = self.animator;
+		
+		[self presentViewController:controller animated:YES completion:nil];
+		
+	} else {
+		
+		InspectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"InspectionViewController"];
+		
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+		self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+		self.animator.dragable = NO;
+		self.animator.bounces = YES;
+		self.animator.behindViewAlpha = 0.88f;
+		self.animator.behindViewScale = 1.0f; //0.92f;
+		self.animator.transitionDuration = 0.5f;
+		self.animator.direction = ModalTransitonDirectionLeft;
+		
+		controller.transitioningDelegate = self.animator;
+		
+		controller.didSelectCorrectAnswer = self.didSelectCorrectAnswer;
+		
+		[self presentViewController:controller animated:YES completion:^{
+			
+			[self updateLabels];
+		}];
+	}
 }
 
 
@@ -666,7 +691,7 @@
 {
 	if ([[notification name] isEqualToString:@"DidTappedInspectionViewsNextButtonNotification"])
 	{
-		[self nextButtonTapped:self];
+		[self StartNextRound];
 	}
 }
 
@@ -773,10 +798,10 @@
 	[self.menuButton setImage:menuImageNormal forState:UIControlStateNormal];
 	[self.menuButton setImage:menuImageHighlight forState:UIControlStateHighlighted];
 	
-	UIImage *settingsImageNormal = [UIImage imageForChangingColor:@"arrow-right" color:darkBrown];
-	UIImage *settingsImageHighlight = [UIImage imageForChangingColor:@"arrow-right" color:lightRed];
-	[self.nextButton setImage:settingsImageNormal forState:UIControlStateNormal];
-	[self.nextButton setImage:settingsImageHighlight forState:UIControlStateHighlighted];
+	UIImage *settingsImageNormal = [UIImage imageForChangingColor:@"settings" color:darkBrown];
+	UIImage *settingsImageHighlight = [UIImage imageForChangingColor:@"settings" color:lightRed];
+	[self.settingsButton setImage:settingsImageNormal forState:UIControlStateNormal];
+	[self.settingsButton setImage:settingsImageHighlight forState:UIControlStateHighlighted];
 }
 
 
