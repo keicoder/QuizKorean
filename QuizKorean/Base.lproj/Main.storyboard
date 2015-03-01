@@ -624,7 +624,7 @@
                                             <constraint firstItem="bx3-n3-Yus" firstAttribute="height" secondItem="b3L-rY-KeF" secondAttribute="height" id="zSy-I0-l6P"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="점수 90" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afc-t8-6tv">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="점수 90" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Afc-t8-6tv">
                                         <rect key="frame" x="20" y="98" width="260" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="YaB-aH-D2z"/>
@@ -636,7 +636,7 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10문제 중 10문제를 맞혔습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjP-lk-3FO">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10문제 중 10문제를 맞혔습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tjP-lk-3FO">
                                         <rect key="frame" x="20" y="143" width="260" height="45"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -667,7 +667,7 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 </variation>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7o-QH-huA" userLabel="HomeButton" customClass="PopAnimationClearButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7o-QH-huA" userLabel="MenuButton" customClass="PopAnimationClearButton">
                                                 <rect key="frame" x="107" y="2" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="46" id="TK5-Qz-NOe">
@@ -678,12 +678,15 @@
                                                     </constraint>
                                                 </constraints>
                                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                                <state key="normal" image="home">
+                                                <state key="normal" image="menu">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="menuButtonTapped:" destination="plI-t5-dSX" eventType="touchUpInside" id="w2f-Wt-npG"/>
+                                                </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학습 종료" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6a-Ut-eKH">
-                                                <rect key="frame" x="107" y="48" width="45" height="14"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나가기" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6a-Ut-eKH">
+                                                <rect key="frame" x="114" y="48" width="32" height="14"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -777,11 +780,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="descriptionLabel" destination="tjP-lk-3FO" id="NK3-tU-Qyu"/>
-                        <outlet property="dismissButton" destination="6ol-Vo-vI4" id="4Rs-IM-ZbM"/>
+                        <outlet property="dismissButton" destination="6ol-Vo-vI4" id="69Z-kZ-GGx"/>
+                        <outlet property="inspectionDescriptionLabel" destination="tjP-lk-3FO" id="rVl-YK-bmC"/>
+                        <outlet property="inspectionScoreLabel" destination="Afc-t8-6tv" id="wH4-jp-z6A"/>
+                        <outlet property="menuButton" destination="g7o-QH-huA" id="lEr-Mb-vAi"/>
                         <outlet property="nextButton" destination="NVX-J5-yxm" id="ECM-hY-Ek2"/>
                         <outlet property="progressView" destination="9cl-Kh-Gfn" id="r0A-jJ-cf0"/>
-                        <outlet property="scoreLabel" destination="Afc-t8-6tv" id="FAn-8S-FC7"/>
                         <outlet property="settingsButton" destination="4Ou-QJ-1q6" id="5yE-tS-s5m"/>
                         <outlet property="starImage1" destination="0Se-gk-1wS" id="UhQ-Fg-HML"/>
                         <outlet property="starImage2" destination="b3L-rY-KeF" id="nds-HO-A3a"/>
@@ -1318,7 +1322,6 @@
         <image name="false" width="43" height="43"/>
         <image name="gear" width="44" height="44"/>
         <image name="headphone" width="44" height="44"/>
-        <image name="home" width="46" height="46"/>
         <image name="megaphone" width="44" height="43"/>
         <image name="menu" width="43" height="35"/>
         <image name="menuIcon" width="88" height="88"/>

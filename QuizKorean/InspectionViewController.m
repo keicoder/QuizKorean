@@ -84,8 +84,7 @@
 {
 	[self dismissViewControllerAnimated:YES completion:^{
 		
-		//Post a notification when InspectionView's menu button tapped
-		[[NSNotificationCenter defaultCenter] postNotificationName: @"DidTappedInspectionViewsMenuButtonNotification" object:nil userInfo:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName: @"DidTappedMenuButtonNotification" object:nil userInfo:nil];
 		
 	}];
 }
@@ -95,8 +94,7 @@
 {
 	[self dismissViewControllerAnimated:YES completion:^{
 		
-		//Post a notification when InspectionView's next button tapped
-		[[NSNotificationCenter defaultCenter] postNotificationName: @"DidTappedInspectionViewsNextButtonNotification" object:nil userInfo:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName: @"DidTappedNextButtonNotification" object:nil userInfo:nil];
 		
 	}];
 }

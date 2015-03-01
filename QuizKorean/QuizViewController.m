@@ -102,6 +102,7 @@
 	NSInteger _totalScore;
 	NSInteger _inspectionRound;
 	NSInteger _inspectionScore;
+	NSInteger _storedScoreForProgressViewsLable;
 }
 
 
@@ -152,6 +153,9 @@
 	_inspectionScore = [defaults integerForKey:@"_inspectionScore"];
 	NSLog (@"_inspectionScore: %ld\n", (long)_inspectionScore);
 	
+	_storedScoreForProgressViewsLable = [defaults integerForKey:@"_storedScoreForProgressViewsLable"];
+	NSLog (@"_storedScoreForProgressViewsLable: %ld\n", (long)_storedScoreForProgressViewsLable);
+	
 	if (!_totalRound) {
 		_totalRound = 0;
 	}
@@ -166,6 +170,10 @@
 	
 	if (!_inspectionScore) {
 		_inspectionScore = 0;
+	}
+	
+	if (!_storedScoreForProgressViewsLable) {
+		_storedScoreForProgressViewsLable = 0;
 	}
 }
 
@@ -195,6 +203,7 @@
 {
     _totalScore += 1;
 	_inspectionScore += 1;
+	_storedScoreForProgressViewsLable += 1;
 }
 
 
@@ -250,8 +259,11 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFinishedNotification:) name:@"ParseJSONDictionaryFinishedNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveParseJSONDictionaryFailedNotification:) name:@"ParseJSONDictionaryFailedNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAdjustIconViewWidth:) name:@"DidAdjustIconViewWidthNotification" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedInspectionViewsNextButton:) name:@"DidTappedInspectionViewsNextButtonNotification" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedInspectionViewsMenuButton:) name:@"DidTappedInspectionViewsMenuButtonNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedDismissButton:) name:@"DidTappedDismissButtonNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedSettingsButton:) name:@"DidTappedSettingsButtonNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedMenuButton:) name:@"DidTappedMenuButtonNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didTappedNextButton:) name:@"DidTappedNextButtonNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStoredScore:) name:@"ResetStoredScoreNotification" object:nil];
 }
 
 
@@ -320,6 +332,7 @@
 								[defaults setInteger:_totalScore forKey:@"_totalScore"];
 								[defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
 								[defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
+								[defaults setInteger:_storedScoreForProgressViewsLable forKey:@"_storedScoreForProgressViewsLable"];
 								[defaults synchronize];
 							}];
 						}];
@@ -687,20 +700,48 @@
 
 #pragma mark 중간 점검 화면 notification call-back action
 
-- (void)didTappedInspectionViewsNextButton:(NSNotification *)notification
+- (void)didTappedDismissButton:(NSNotification *)notification
 {
-	if ([[notification name] isEqualToString:@"DidTappedInspectionViewsNextButtonNotification"])
+	if ([[notification name] isEqualToString:@"DidTappedDismissButtonNotification"])
 	{
 		[self StartNextRound];
 	}
 }
 
 
-- (void)didTappedInspectionViewsMenuButton:(NSNotification *)notification
+- (void)didTappedSettingsButton:(NSNotification *)notification
 {
-	if ([[notification name] isEqualToString:@"DidTappedInspectionViewsMenuButtonNotification"])
+	if ([[notification name] isEqualToString:@"DidTappedSettingsButtonNotification"])
+	{
+		[self StartNextRound];
+		[self settingsButtonTapped:self];
+	}
+}
+
+
+- (void)didTappedMenuButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedMenuButtonNotification"])
 	{
 		[self homeButtonTapped:self];
+	}
+}
+
+
+- (void)didTappedNextButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedNextButtonNotification"])
+	{
+		[self StartNextRound];
+	}
+}
+
+
+- (void)resetStoredScore:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"ResetStoredScoreNotification"])
+	{
+		_storedScoreForProgressViewsLable = 0;
 	}
 }
 
