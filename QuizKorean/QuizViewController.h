@@ -10,5 +10,8 @@
 
 @interface QuizViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger round;
+@property (nonatomic, assign) NSInteger score;
+
 @end
 

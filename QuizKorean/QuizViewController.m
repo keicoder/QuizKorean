@@ -97,11 +97,6 @@
 	
 	NSString *_soundEffect;
     BOOL _canPlaySoundEffect;
-	
-	NSInteger _totalRound;
-	NSInteger _totalScore;
-	NSInteger _inspectionRound;
-	NSInteger _inspectionScore;
 }
 
 
@@ -141,17 +136,11 @@
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	_totalRound = [defaults integerForKey:@"_totalRound"];
-	NSLog (@"_totalRound: %ld\n", (long)_totalRound);
+	self.round = [defaults integerForKey:@"round"];
+	NSLog (@"self.round: %ld\n", (long)self.round);
 	
-	_totalScore = [defaults integerForKey:@"_totalScore"];
-	NSLog (@"_totalScore: %ld\n", (long)_totalScore);
-	
-	_inspectionRound = [defaults integerForKey:@"_inspectionRound"];
-	NSLog (@"_inspectionRound: %ld\n", (long)_inspectionRound);
-	
-	_inspectionScore = [defaults integerForKey:@"_inspectionScore"];
-	NSLog (@"_inspectionScore: %ld\n", (long)_inspectionScore);
+	self.score = [defaults integerForKey:@"score"];
+	NSLog (@"self.score: %ld\n", (long)self.score);
 }
 
 
@@ -167,17 +156,11 @@
 
 - (void)updateRoundAndScore
 {
-	_totalRound += 1;
-	_inspectionRound += 1;
-	
-	if (_inspectionRound > 5) {
-		_inspectionRound = 0;
-	}
+	self.round += 1;
 	
 	if (self.didSelectCorrectAnswer == YES) {
-		_totalScore += 1;
-		_inspectionScore += 1;
-	}
+		self.score += 1;
+    }
 }
 
 
@@ -239,11 +222,12 @@
 		if ([_quiz1 isKindOfClass:[NSNull class]] || [_quiz2 isKindOfClass:[NSNull class]] || [_quiz3 isKindOfClass:[NSNull class]] || [_quiz4 isKindOfClass:[NSNull class]]) {
 			[self fetchJSONData];
 			
-        } else if (!(self.quiz.quizArray[0] || self.quiz.quizArray[1] || self.quiz.quizArray[2] || self.quiz.quizArray[3])) {
+        } else if (!(self.quiz.quizArray[0] || !self.quiz.quizArray[1] || !self.quiz.quizArray[2] || !self.quiz.quizArray[3])) {
             [self fetchJSONData];
         
-		} else {
-			
+		} else if (![self.quiz.quizArray[0] isKindOfClass:[Quiz class]] || ![self.quiz.quizArray[1] isKindOfClass:[Quiz class]] || ![self.quiz.quizArray[2] isKindOfClass:[Quiz class]] || ![self.quiz.quizArray[3] isKindOfClass:[Quiz class]]){
+                [self fetchJSONData];
+        } else {
 			_quiz1 = self.quiz.quizArray[0];
 			_quiz2 = self.quiz.quizArray[1];
 			_quiz3 = self.quiz.quizArray[2];
@@ -476,10 +460,8 @@
 	[self updateRoundAndScore];
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setInteger:_totalRound forKey:@"_totalRound"];
-	[defaults setInteger:_totalScore forKey:@"_totalScore"];
-	[defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
-	[defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
+	[defaults setInteger:self.round forKey:@"round"];
+	[defaults setInteger:self.score forKey:@"score"];
 	[defaults synchronize];
 	
 	[self performSelector:@selector(playSound) withObject:nil afterDelay:0.7];
@@ -501,7 +483,7 @@
 
 - (void)showInspectionOrProgressView
 {
-	if (_inspectionRound == 5) {
+	if (self.round % 5 == 0) {
 		
 		ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
 		

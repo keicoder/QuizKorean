@@ -31,6 +31,9 @@
 @property (weak, nonatomic) IBOutlet PopView *returnView;
 @property (weak, nonatomic) IBOutlet UILabel *soundEffectLabel;
 
+@property (nonatomic, assign) NSInteger round;
+@property (nonatomic, assign) NSInteger score;
+
 @end
 
 
@@ -40,10 +43,6 @@
 	NSString *_soundEffect;
 	
 	NSUserDefaults *_defaults;
-	NSInteger _totalRound;
-	NSInteger _totalScore;
-	NSInteger _inspectionRound;
-	NSInteger _inspectionScore;
 }
 
 
@@ -93,15 +92,11 @@
 
 - (void)getTheScoreAndRoundData
 {
-	_totalRound = [_defaults integerForKey:@"_totalRound"];
-	_totalScore = [_defaults integerForKey:@"_totalScore"];
-	_inspectionRound = [_defaults integerForKey:@"_inspectionRound"];
-	_inspectionScore = [_defaults integerForKey:@"_inspectionScore"];
+	self.round = [_defaults integerForKey:@"round"];
+	self.score = [_defaults integerForKey:@"score"];
 	
-	NSLog (@"_totalRound value before: %ld\n", (long)_totalRound);
-	NSLog (@"_totalScore value before: %ld\n", (long)_totalScore);
-	NSLog (@"_inspectionRound value before: %ld\n", (long)_inspectionRound);
-	NSLog (@"_inspectionScore value before: %ld\n", (long)_inspectionScore);
+	NSLog (@"self.round value before: %ld\n", (long)self.round);
+	NSLog (@"self.score value before: %ld\n", (long)self.score);
 }
 
 
@@ -201,21 +196,15 @@
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"예" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
 		
-        _totalRound = 0;
-        _totalScore = 0;
-		_inspectionRound = 0;
-		_inspectionScore = 0;
+        self.round = 0;
+        self.score = 0;
 		
-		NSLog (@"_totalRound value after reset: %ld\n", (long)_totalRound);
-		NSLog (@"_totalScore value after reset: %ld\n", (long)_totalScore);
-		NSLog (@"_inspectionRound value after reset: %ld\n", (long)_inspectionRound);
-		NSLog (@"_inspectionScore value after reset: %ld\n", (long)_inspectionScore);
-		
-		[_defaults setInteger:_totalRound forKey:@"_totalRound"];
-        [_defaults setInteger:_totalScore forKey:@"_totalScore"];
-		[_defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
-		[_defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
-        [_defaults synchronize];
+		[_defaults setInteger:self.round forKey:@"round"];
+        [_defaults setInteger:self.score forKey:@"score"];
+		[_defaults synchronize];
+        
+        NSLog (@"self.round value after reset: %ld\n", (long)self.round);
+        NSLog (@"self.score value after reset: %ld\n", (long)self.score);
         
         NSLog(@"OK Button Tapped");
         

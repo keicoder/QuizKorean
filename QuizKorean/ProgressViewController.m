@@ -22,8 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *starImage4;
 @property (weak, nonatomic) IBOutlet UIImageView *starImage5;
 
-@property (weak, nonatomic) IBOutlet UILabel *inspectionScoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *inspectionDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 
 @property (weak, nonatomic) IBOutlet PopAnimationClearButton *dismissButton;
 @property (weak, nonatomic) IBOutlet PopAnimationClearButton *settingsButton;
@@ -34,11 +33,6 @@
 
 
 @implementation ProgressViewController
-{
-	NSInteger _inspectionRound;
-	NSInteger _inspectionScore;
-}
-
 
 #pragma mark - View life cycle
 
@@ -56,47 +50,15 @@
 - (void)showQuizData
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger totalRound = [defaults integerForKey:@"_totalRound"];
-	NSLog (@"totalRound: %ld\n", (long)totalRound);
+	self.round = [defaults integerForKey:@"round"];
+	NSLog (@"self.round: %ld\n", (long)self.round);
 	
-	NSInteger totalScore = [defaults integerForKey:@"_totalScore"];
-	NSLog (@"totalScore: %ld\n", (long)totalScore);
+	self.score = [defaults integerForKey:@"score"];
+	NSLog (@"self.score: %ld\n", (long)self.score);
 	
-	_inspectionRound = 5;
-	
-	_inspectionScore = [defaults integerForKey:@"_inspectionScore"];
-	NSLog (@"_inspectionScore: %ld\n", (long)_inspectionScore);
-	
-	//Label 엡데이트
-	self.inspectionScoreLabel.text = [NSString stringWithFormat:@"최근 %ld문제중 %ld문제를 맞혔습니다.", (long)_inspectionRound, (long)_inspectionScore];
-	self.inspectionDescriptionLabel.text = [NSString stringWithFormat:@"(총 %ld문제중 %ld문제를 맞혔습니다.)", (long)totalRound  ,(long)totalScore];
+	self.infoLabel.text = [NSString stringWithFormat:@"%ld / %ld", (long)self.score, (long)self.round];
 	
 	[self updateStarImageView];
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-	[self setNSUserDefaultsValueToZero];
-	NSLog (@"viewWillDisappear > _inspectionRound: %ld\n", (long)_inspectionRound);
-	NSLog (@"viewWillDisappear > _inspectionScore: %ld\n", (long)_inspectionScore);
-}
-
-
-#pragma mark - Set Stored Score For ProgressView's Lable Value to Zero
-
-- (void)setNSUserDefaultsValueToZero
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	_inspectionRound = 0;
-	_inspectionScore = 0;
-	
-	[defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
-	[defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
-	
-	[defaults synchronize];
 }
 
 
@@ -163,43 +125,33 @@
 
 - (void)updateStarImageView
 {
-	UIImage *starGold = [UIImage imageNamed:@"starGold"];
+	UIImage *image = [UIImage imageNamed:@"starGold"];
 	
-	switch (_inspectionScore) {
-		
-		case 1:
-			self.starImage1.image = starGold;
-			break;
-			
-		case 2:
-			self.starImage1.image = starGold;
-			self.starImage2.image = starGold;
-			break;
-			
-		case 3:
-			self.starImage1.image = starGold;
-			self.starImage2.image = starGold;
-			self.starImage3.image = starGold;
-			break;
-			
-		case 4:
-			self.starImage1.image = starGold;
-			self.starImage2.image = starGold;
-			self.starImage3.image = starGold;
-			self.starImage4.image = starGold;
-			break;
-			
-		case 5:
-			self.starImage1.image = starGold;
-			self.starImage2.image = starGold;
-			self.starImage3.image = starGold;
-			self.starImage4.image = starGold;
-			self.starImage5.image = starGold;
-			break;
-			
-		default:
-			break;
-	}
+    float userScore = (float)self.score / (float)self.round;
+    NSLog (@"userScore: %f\n", userScore);
+    
+    
+    if (userScore <= 0.21) {
+        self.starImage1.image = image;
+    } else if (userScore <= 0.41) {
+        self.starImage1.image = image;
+        self.starImage2.image = image;
+    } else if (userScore <= 0.61) {
+        self.starImage1.image = image;
+        self.starImage2.image = image;
+        self.starImage3.image = image;
+    } else if (userScore <= 0.81) {
+        self.starImage1.image = image;
+        self.starImage2.image = image;
+        self.starImage3.image = image;
+        self.starImage4.image = image;
+    } else if (userScore > 0.81) {
+        self.starImage1.image = image;
+        self.starImage2.image = image;
+        self.starImage3.image = image;
+        self.starImage4.image = image;
+        self.starImage5.image = image;
+    }
 }
 
 
@@ -208,6 +160,13 @@
 - (void)configureUI
 {
 	self.progressView.layer.cornerRadius = 10.0;
+    
+    UIImage *image = [UIImage imageNamed:@"starWhite"];
+    self.starImage1.image = image;
+    self.starImage2.image = image;
+    self.starImage3.image = image;
+    self.starImage4.image = image;
+    self.starImage5.image = image;
 }
 
 
