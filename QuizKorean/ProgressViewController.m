@@ -35,9 +35,12 @@
 
 @implementation ProgressViewController
 {
-	NSInteger _storedScoreForProgressViewsLable;
+	NSInteger _inspectionRound;
+	NSInteger _inspectionScore;
 }
 
+
+#pragma mark - View life cycle
 
 - (void)viewDidLoad
 {
@@ -59,64 +62,41 @@
 	NSInteger totalScore = [defaults integerForKey:@"_totalScore"];
 	NSLog (@"totalScore: %ld\n", (long)totalScore);
 	
-	NSInteger inspectionRound = 5;
+	_inspectionRound = 5;
 	
-	NSInteger inspectionScore = [defaults integerForKey:@"_inspectionScore"];
-	NSLog (@"inspectionScore: %ld\n", (long)inspectionScore);
-	
-	_storedScoreForProgressViewsLable = [defaults integerForKey:@"_storedScoreForProgressViewsLable"];
-	NSLog (@"_storedScoreForProgressViewsLable: %ld\n", (long)_storedScoreForProgressViewsLable);
+	_inspectionScore = [defaults integerForKey:@"_inspectionScore"];
+	NSLog (@"_inspectionScore: %ld\n", (long)_inspectionScore);
 	
 	//Label 엡데이트
-	self.inspectionScoreLabel.text = [NSString stringWithFormat:@"최근 %ld문제중 %ld문제를 맞혔습니다.", (long)inspectionRound, (long)_storedScoreForProgressViewsLable];
+	self.inspectionScoreLabel.text = [NSString stringWithFormat:@"최근 %ld문제중 %ld문제를 맞혔습니다.", (long)_inspectionRound, (long)_inspectionScore];
 	self.inspectionDescriptionLabel.text = [NSString stringWithFormat:@"(총 %ld문제중 %ld문제를 맞혔습니다.)", (long)totalRound  ,(long)totalScore];
 	
 	[self updateStarImageView];
 }
 
 
-- (void)updateStarImageView
+- (void)viewWillDisappear:(BOOL)animated
 {
-	UIImage *starWhite = [UIImage imageNamed:@"starWhite"];
-	UIImage *starGold = [UIImage imageNamed:@"starGold"];
+	[super viewWillDisappear:animated];
+	[self setNSUserDefaultsValueToZero];
+	NSLog (@"viewWillDisappear > _inspectionRound: %ld\n", (long)_inspectionRound);
+	NSLog (@"viewWillDisappear > _inspectionScore: %ld\n", (long)_inspectionScore);
+}
+
+
+#pragma mark - Set Stored Score For ProgressView's Lable Value to Zero
+
+- (void)setNSUserDefaultsValueToZero
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if (_storedScoreForProgressViewsLable == 1) {
-		self.starImage1.image = starGold;
-		self.starImage2.image = starWhite;
-		self.starImage3.image = starWhite;
-		self.starImage4.image = starWhite;
-		self.starImage5.image = starWhite;
-	} else if (_storedScoreForProgressViewsLable == 2) {
-		self.starImage1.image = starGold;
-		self.starImage2.image = starGold;
-		self.starImage3.image = starWhite;
-		self.starImage4.image = starWhite;
-		self.starImage5.image = starWhite;
-	} else if (_storedScoreForProgressViewsLable == 3) {
-		self.starImage1.image = starGold;
-		self.starImage2.image = starGold;
-		self.starImage3.image = starGold;
-		self.starImage4.image = starWhite;
-		self.starImage5.image = starWhite;
-	} else if (_storedScoreForProgressViewsLable == 4) {
-		self.starImage1.image = starGold;
-		self.starImage2.image = starGold;
-		self.starImage3.image = starGold;
-		self.starImage4.image = starGold;
-		self.starImage5.image = starWhite;
-	} else if (_storedScoreForProgressViewsLable == 5) {
-		self.starImage1.image = starGold;
-		self.starImage2.image = starGold;
-		self.starImage3.image = starGold;
-		self.starImage4.image = starGold;
-		self.starImage5.image = starGold;
-	} else {
-		self.starImage1.image = starWhite;
-		self.starImage2.image = starWhite;
-		self.starImage3.image = starWhite;
-		self.starImage4.image = starWhite;
-		self.starImage5.image = starWhite;
-	}
+	_inspectionRound = 0;
+	_inspectionScore = 0;
+	
+	[defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
+	[defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
+	
+	[defaults synchronize];
 }
 
 
@@ -176,6 +156,50 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
 	return (touch.view == self.progressView);
+}
+
+
+#pragma mark - Update Star Image View
+
+- (void)updateStarImageView
+{
+	UIImage *starGold = [UIImage imageNamed:@"starGold"];
+	
+	switch (_inspectionScore) {
+		
+		case 1:
+			self.starImage1.image = starGold;
+			break;
+			
+		case 2:
+			self.starImage1.image = starGold;
+			self.starImage2.image = starGold;
+			break;
+			
+		case 3:
+			self.starImage1.image = starGold;
+			self.starImage2.image = starGold;
+			self.starImage3.image = starGold;
+			break;
+			
+		case 4:
+			self.starImage1.image = starGold;
+			self.starImage2.image = starGold;
+			self.starImage3.image = starGold;
+			self.starImage4.image = starGold;
+			break;
+			
+		case 5:
+			self.starImage1.image = starGold;
+			self.starImage2.image = starGold;
+			self.starImage3.image = starGold;
+			self.starImage4.image = starGold;
+			self.starImage5.image = starGold;
+			break;
+			
+		default:
+			break;
+	}
 }
 
 

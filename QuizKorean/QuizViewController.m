@@ -102,7 +102,6 @@
 	NSInteger _totalScore;
 	NSInteger _inspectionRound;
 	NSInteger _inspectionScore;
-	NSInteger _storedScoreForProgressViewsLable;
 }
 
 
@@ -115,7 +114,6 @@
     [self configureUI];
 	[self addNotificationObserverForParseJSONAndAdjustIconViewWidth];
 	[self fetchJSONData];
-	[self getScoreAndRoundDataFromNSUserDefaults];
     [self addTapGestureOnTheView:self.answerView1];
     [self addTapGestureOnTheView:self.answerView2];
     [self addTapGestureOnTheView:self.answerView3];
@@ -127,6 +125,7 @@
 {
 	[super viewWillAppear:animated];
 	[self setIconViewImageToNil];
+	[self getScoreAndRoundDataFromNSUserDefaults];
 	
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 		[self adjustIconViewWidth:kIconViewWidthIpadNormal];
@@ -141,6 +140,7 @@
 - (void)getScoreAndRoundDataFromNSUserDefaults
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
 	_totalRound = [defaults integerForKey:@"_totalRound"];
 	NSLog (@"_totalRound: %ld\n", (long)_totalRound);
 	
@@ -152,66 +152,28 @@
 	
 	_inspectionScore = [defaults integerForKey:@"_inspectionScore"];
 	NSLog (@"_inspectionScore: %ld\n", (long)_inspectionScore);
-	
-	_storedScoreForProgressViewsLable = [defaults integerForKey:@"_storedScoreForProgressViewsLable"];
-	NSLog (@"_storedScoreForProgressViewsLable: %ld\n", (long)_storedScoreForProgressViewsLable);
-	
-	if (!_totalRound) {
-		_totalRound = 0;
-	}
-	
-	if (!_inspectionRound) {
-		_inspectionRound = 0;
-	}
-	
-    if (!_totalScore) {
-        _totalScore = 0;
-    }
-	
-	if (!_inspectionScore) {
-		_inspectionScore = 0;
-	}
-	
-	if (!_storedScoreForProgressViewsLable) {
-		_storedScoreForProgressViewsLable = 0;
-	}
 }
 
 
 #pragma mark - Game Logic
 
-- (void)StartNextRound
+- (void)updateUIAndFetchJSONData
 {
 	[self setIconViewImageToNil];
-	[self fetchJSONData];
 	[self changeColorOfViewToNormal];
+	[self fetchJSONData];
 }
 
 
-- (void)updateRound
+- (void)updateRoundAndScore
 {
 	_totalRound += 1;
 	_inspectionRound += 1;
-	_inspectionRound = _inspectionRound % 5;
-	if (_inspectionRound == 0) {
-		_inspectionScore = 0;
+	
+	if (self.didSelectCorrectAnswer == YES) {
+		_totalScore += 1;
+		_inspectionScore += 1;
 	}
-}
-
-
-- (void)updateScore
-{
-    _totalScore += 1;
-	_inspectionScore += 1;
-	_storedScoreForProgressViewsLable += 1;
-}
-
-
-- (void)updateLabels
-{
-	self.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)_inspectionScore];
-	self.slashLabel.text = @"/";
-	self.roundLabel.text = [NSString stringWithFormat:@"%ld", (long)_inspectionRound];
 }
 
 
@@ -294,45 +256,51 @@
 			CGFloat alpha = 1.0f;
 			
 			[UIView animateWithDuration:duration animations:^{
+				
 				self.questionLabel.alpha = alpha;
 				self.questionLabel.text = _quiz1.question;
+				
 			}completion:^(BOOL finished) {
+				
 				[UIView animateWithDuration:duration animations:^{
+					
 					self.answerLabel1.alpha = alpha;
 					self.answerLabel1.text = _quiz1.answer;
 					NSLog (@"quiz1.correct: %@\n", _quiz1.correct);
+					
 				}completion:^(BOOL finished) {
+					
 					[UIView animateWithDuration:duration animations:^{
+						
 						self.answerLabel2.alpha = alpha;
 						self.answerLabel2.text = _quiz2.answer;
 						NSLog (@"quiz2.correct: %@\n", _quiz2.correct);
+						
 					}completion:^(BOOL finished) {
+						
 						[UIView animateWithDuration:duration animations:^{
+							
 							self.answerLabel3.alpha = alpha;
 							self.answerLabel3.text = _quiz3.answer;
 							NSLog (@"quiz3.correct: %@\n", _quiz3.correct);
+							
 						}completion:^(BOOL finished) {
+							
 							[UIView animateWithDuration:duration animations:^{
+								
 								self.answerLabel4.alpha = alpha;
 								self.answerLabel4.text = _quiz4.answer;
 								NSLog (@"quiz4.correct: %@\n", _quiz4.correct);
+								
 							}completion:^(BOOL finished) {
 								
-								[self updateLabels];
-								
 								[UIView animateWithDuration:duration animations:^{
+									
 									self.scoreLabel.alpha = alpha;
 									self.slashLabel.alpha = alpha;
 									self.roundLabel.alpha = alpha;
+									
 								}completion:^(BOOL finished) { }];
-								
-								NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-								[defaults setInteger:_totalRound forKey:@"_totalRound"];
-								[defaults setInteger:_totalScore forKey:@"_totalScore"];
-								[defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
-								[defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
-								[defaults setInteger:_storedScoreForProgressViewsLable forKey:@"_storedScoreForProgressViewsLable"];
-								[defaults synchronize];
 							}];
 						}];
 					}];
@@ -439,7 +407,7 @@
 }
 
 
-#pragma mark 정답/오답 버튼 액션
+#pragma mark - 정답/오답 버튼 액션
 
 - (void)gestureViewTapped:(UITouch *)touch
 {
@@ -476,7 +444,6 @@
 		
 		if ([_quiz1.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self updateScore];
 		}
 		
 	} else if ([touch.view isEqual:(UIView *)self.answerView2]) {
@@ -485,7 +452,6 @@
 		
 		if ([_quiz2.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self updateScore];
 		}
 		
 	} else if ([touch.view isEqual:(UIView *)self.answerView3]) {
@@ -493,7 +459,6 @@
 		
 		if ([_quiz3.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self updateScore];
 		}
 		
 	} else if ([touch.view isEqual:(UIView *)self.answerView4]) {
@@ -501,20 +466,22 @@
 		
 		if ([_quiz4.correct isEqualToString:correct]) {
 			self.didSelectCorrectAnswer = YES;
-			[self updateScore];
 		}
 	}
 	
+	[self updateRoundAndScore];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:_totalRound forKey:@"_totalRound"];
+	[defaults setInteger:_totalScore forKey:@"_totalScore"];
+	[defaults setInteger:_inspectionRound forKey:@"_inspectionRound"];
+	[defaults setInteger:_inspectionScore forKey:@"_inspectionScore"];
+	[defaults synchronize];
+	
 	[self performSelector:@selector(playSound) withObject:nil afterDelay:0.7];
-	
-	[self updateRound];
-	
-	CGFloat delay = 0.5f;
-	[self performSelector:@selector(showInspectionOrProgressView) withObject:nil afterDelay:delay];
+	[self performSelector:@selector(showInspectionOrProgressView) withObject:nil afterDelay:0.5];
 }
 
-
-#pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
@@ -523,6 +490,91 @@
     }
     
     return NO;
+}
+
+
+#pragma mark - 중간 점검 화면
+
+- (void)showInspectionOrProgressView
+{
+	if (_inspectionRound > 4) {
+		
+		ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
+		
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+		self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+		self.animator.dragable = NO;
+		self.animator.bounces = YES;
+		self.animator.behindViewAlpha = 0.88f;
+		self.animator.behindViewScale = 1.0f; //0.92f;
+		self.animator.transitionDuration = 0.5f;
+		self.animator.direction = ModalTransitonDirectionLeft;
+		
+		controller.transitioningDelegate = self.animator;
+		
+		[self presentViewController:controller animated:YES completion:nil];
+		
+	} else {
+		
+		InspectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"InspectionViewController"];
+		
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+		self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
+		self.animator.dragable = NO;
+		self.animator.bounces = YES;
+		self.animator.behindViewAlpha = 0.88f;
+		self.animator.behindViewScale = 1.0f; //0.92f;
+		self.animator.transitionDuration = 0.5f;
+		self.animator.direction = ModalTransitonDirectionLeft;
+		
+		controller.transitioningDelegate = self.animator;
+		
+		controller.didSelectCorrectAnswer = self.didSelectCorrectAnswer;
+		
+		[self presentViewController:controller animated:YES completion:^{ }];
+	}
+}
+
+
+#pragma mark notification call-back action
+
+- (void)didTappedDismissButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedDismissButtonNotification"])
+	{
+		[self updateUIAndFetchJSONData];
+	}
+}
+
+
+- (void)didTappedSettingsButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedSettingsButtonNotification"])
+	{
+		[self updateUIAndFetchJSONData];
+		[self settingsButtonTapped:self];
+	}
+}
+
+
+- (void)didTappedMenuButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedMenuButtonNotification"])
+	{
+		[self updateUIAndFetchJSONData];
+		[self homeButtonTapped:self];
+	}
+}
+
+
+- (void)didTappedNextButton:(NSNotification *)notification
+{
+	if ([[notification name] isEqualToString:@"DidTappedNextButtonNotification"])
+	{
+		[self updateUIAndFetchJSONData];
+	}
 }
 
 
@@ -646,94 +698,6 @@
 	[self changeColorOfViewWhenCorrect:self.answerView3 withColor:kColorForViewNormal];
 	[self changeColorOfViewWhenCorrect:self.iconView4 withColor:kColorForIconViewNormal];
 	[self changeColorOfViewWhenCorrect:self.answerView4 withColor:kColorForViewNormal];
-}
-
-
-#pragma mark - 중간 점검 화면
-
-- (void)showInspectionOrProgressView
-{
-	if (_inspectionRound == 0) {
-		
-		ProgressViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
-		
-		controller.modalPresentationStyle = UIModalPresentationCustom;
-		
-		self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-		self.animator.dragable = NO;
-		self.animator.bounces = YES;
-		self.animator.behindViewAlpha = 0.88f;
-		self.animator.behindViewScale = 1.0f; //0.92f;
-		self.animator.transitionDuration = 0.5f;
-		self.animator.direction = ModalTransitonDirectionLeft;
-		
-		controller.transitioningDelegate = self.animator;
-		
-		[self presentViewController:controller animated:YES completion:nil];
-		
-	} else {
-		
-		InspectionViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"InspectionViewController"];
-		
-		controller.modalPresentationStyle = UIModalPresentationCustom;
-		
-		self.animator = [[CustomDraggableModalTransitionAnimator alloc] initWithModalViewController:controller];
-		self.animator.dragable = NO;
-		self.animator.bounces = YES;
-		self.animator.behindViewAlpha = 0.88f;
-		self.animator.behindViewScale = 1.0f; //0.92f;
-		self.animator.transitionDuration = 0.5f;
-		self.animator.direction = ModalTransitonDirectionLeft;
-		
-		controller.transitioningDelegate = self.animator;
-		
-		controller.didSelectCorrectAnswer = self.didSelectCorrectAnswer;
-		
-		[self presentViewController:controller animated:YES completion:^{
-			
-			[self updateLabels];
-		}];
-	}
-}
-
-
-#pragma mark 중간 점검 화면 notification call-back action
-
-- (void)didTappedDismissButton:(NSNotification *)notification
-{
-	if ([[notification name] isEqualToString:@"DidTappedDismissButtonNotification"])
-	{
-		[self StartNextRound];
-	}
-}
-
-
-- (void)didTappedSettingsButton:(NSNotification *)notification
-{
-	if ([[notification name] isEqualToString:@"DidTappedSettingsButtonNotification"])
-	{
-		[self StartNextRound];
-		[self settingsButtonTapped:self];
-	}
-}
-
-
-- (void)didTappedMenuButton:(NSNotification *)notification
-{
-	if ([[notification name] isEqualToString:@"DidTappedMenuButtonNotification"])
-	{
-		[self StartNextRound];
-		[self homeButtonTapped:self];
-	}
-}
-
-
-- (void)didTappedNextButton:(NSNotification *)notification
-{
-	if ([[notification name] isEqualToString:@"DidTappedNextButtonNotification"])
-	{
-		[self StartNextRound];
-	}
 }
 
 

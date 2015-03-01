@@ -10,7 +10,5 @@
 
 @interface QuizViewController : UIViewController
 
-- (void)StartNextRound;
-
 @end
 
