@@ -27,10 +27,15 @@
 
 #define kColorForViewNormal				[UIColor colorWithRed:0.3 green:0.58 blue:0.75 alpha:1]
 #define kColorforViewHighlight			[UIColor colorWithRed:0.6 green:0.83 blue:0.84 alpha:1]
-#define kColorForIconViewNormal			[UIColor colorWithRed:0.192 green:0.372 blue:0.481 alpha:1.000]
+
+#define kColorForIconViewNormal1		[UIColor colorWithRed:0.57 green:0.77 blue:0.47 alpha:1]
+#define kColorForIconViewNormal2		[UIColor colorWithRed:0.45 green:0.78 blue:0.82 alpha:1]
+#define kColorForIconViewNormal3		[UIColor colorWithRed:0.87 green:0.86 blue:0.42 alpha:1]
+#define kColorForIconViewNormal4		[UIColor colorWithRed:0.4 green:0.67 blue:0.82 alpha:1]
 #define kColorForIconViewHighlight		[UIColor colorWithRed:0.465 green:0.641 blue:0.653 alpha:1.000]
-#define kColorForImageViewWhenCorrect	[UIColor colorWithRed:1 green:0.53 blue:0.25 alpha:1]
-#define kColorForViewWhenCorrect		[UIColor colorWithRed:0.99 green:0.64 blue:0.4 alpha:1]
+
+#define kColorForImageViewWhenCorrect	[UIColor colorWithRed:0.127 green:0.456 blue:0.147 alpha:1.000]
+#define kColorForViewWhenCorrect		[UIColor colorWithRed:0.19 green:0.67 blue:0.22 alpha:1]
 
 #define kIconViewWidthIpadNormal	30
 #define kIconViewWidthIpadExpand	80
@@ -607,35 +612,35 @@
     switch (index) {
         case 1:
 			self.iconImageView1.image = kIconImageForCorrectAnswer;
-			self.iconImageView2.image = kIconImageForFalseAnswer;
-			self.iconImageView3.image = kIconImageForFalseAnswer;
-			self.iconImageView4.image = kIconImageForFalseAnswer;
+//			self.iconImageView2.image = kIconImageForFalseAnswer;
+//			self.iconImageView3.image = kIconImageForFalseAnswer;
+//			self.iconImageView4.image = kIconImageForFalseAnswer;
 			[self changeColorOfViewWhenCorrect:self.iconView1 withColor:kColorForImageViewWhenCorrect];
 			[self changeColorOfViewWhenCorrect:self.answerView1 withColor:kColorForViewWhenCorrect];
             break;
 			
         case 2:
-			self.iconImageView1.image = kIconImageForFalseAnswer;
+//			self.iconImageView1.image = kIconImageForFalseAnswer;
 			self.iconImageView2.image = kIconImageForCorrectAnswer;
-			self.iconImageView3.image = kIconImageForFalseAnswer;
-			self.iconImageView4.image = kIconImageForFalseAnswer;
+//			self.iconImageView3.image = kIconImageForFalseAnswer;
+//			self.iconImageView4.image = kIconImageForFalseAnswer;
 			[self changeColorOfViewWhenCorrect:self.iconView2 withColor:kColorForImageViewWhenCorrect];
 			[self changeColorOfViewWhenCorrect:self.answerView2 withColor:kColorForViewWhenCorrect];
             break;
             
         case 3:
-			self.iconImageView1.image = kIconImageForFalseAnswer;
-			self.iconImageView2.image = kIconImageForFalseAnswer;
+//			self.iconImageView1.image = kIconImageForFalseAnswer;
+//			self.iconImageView2.image = kIconImageForFalseAnswer;
 			self.iconImageView3.image = kIconImageForCorrectAnswer;
-			self.iconImageView4.image = kIconImageForFalseAnswer;
+//			self.iconImageView4.image = kIconImageForFalseAnswer;
 			[self changeColorOfViewWhenCorrect:self.iconView3 withColor:kColorForImageViewWhenCorrect];
 			[self changeColorOfViewWhenCorrect:self.answerView3 withColor:kColorForViewWhenCorrect];
             break;
 			
         case 4:
-			self.iconImageView1.image = kIconImageForFalseAnswer;
-			self.iconImageView2.image = kIconImageForFalseAnswer;
-			self.iconImageView3.image = kIconImageForFalseAnswer;
+//			self.iconImageView1.image = kIconImageForFalseAnswer;
+//			self.iconImageView2.image = kIconImageForFalseAnswer;
+//			self.iconImageView3.image = kIconImageForFalseAnswer;
 			self.iconImageView4.image = kIconImageForCorrectAnswer;
 			[self changeColorOfViewWhenCorrect:self.iconView4 withColor:kColorForImageViewWhenCorrect];
 			[self changeColorOfViewWhenCorrect:self.answerView4 withColor:kColorForViewWhenCorrect];
@@ -676,13 +681,13 @@
 
 - (void)changeColorOfViewToNormal
 {
-	[self changeColorOfViewWhenCorrect:self.iconView1 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.iconView1 withColor:kColorForIconViewNormal1];
 	[self changeColorOfViewWhenCorrect:self.answerView1 withColor:kColorForViewNormal];
-	[self changeColorOfViewWhenCorrect:self.iconView2 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.iconView2 withColor:kColorForIconViewNormal2];
 	[self changeColorOfViewWhenCorrect:self.answerView2 withColor:kColorForViewNormal];
-	[self changeColorOfViewWhenCorrect:self.iconView3 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.iconView3 withColor:kColorForIconViewNormal3];
 	[self changeColorOfViewWhenCorrect:self.answerView3 withColor:kColorForViewNormal];
-	[self changeColorOfViewWhenCorrect:self.iconView4 withColor:kColorForIconViewNormal];
+	[self changeColorOfViewWhenCorrect:self.iconView4 withColor:kColorForIconViewNormal4];
 	[self changeColorOfViewWhenCorrect:self.answerView4 withColor:kColorForViewNormal];
 }
 
@@ -710,19 +715,18 @@
 	UIColor *clearColor = [UIColor clearColor];
 	UIColor *lightRed = [UIColor colorWithRed:0.993 green:0.391 blue:0.279 alpha:1.000];
 	UIColor *darkBrown = [UIColor colorWithWhite:0.149 alpha:1.000];
-	UIColor *questionViewColor = whiteColor; //[UIColor colorWithRed:0.504 green:0.655 blue:0.388 alpha:1.000];
 	
 	//View
     CGFloat questionViewCornerRadius = 12.0;
     
 	self.view.backgroundColor = whiteColor;
-    self.questionContainerView.backgroundColor = whiteColor;
-	self.answerContainerView.backgroundColor = whiteColor;
+    self.questionContainerView.backgroundColor = [UIColor colorWithRed:1 green:0.96 blue:0.93 alpha:1];
+	self.answerContainerView.backgroundColor = clearColor;
 	
 	self.infoView.backgroundColor = self.answerContainerView.backgroundColor;
 	
-	self.questionScrollView.backgroundColor = whiteColor;
-	self.questionView.backgroundColor = questionViewColor;
+	self.questionScrollView.backgroundColor = clearColor;
+	self.questionView.backgroundColor = clearColor;
     self.questionView.layer.cornerRadius = questionViewCornerRadius;
 	
 	//Label
@@ -760,18 +764,18 @@
     self.answerView4.layer.cornerRadius = answerViewCornerRadius;
 	
     //Icon View Color
-	self.iconView1.backgroundColor = kColorForIconViewNormal;
-    self.iconView2.backgroundColor = kColorForIconViewNormal;
-    self.iconView3.backgroundColor = kColorForIconViewNormal;
-    self.iconView4.backgroundColor = kColorForIconViewNormal;
+	self.iconView1.backgroundColor = kColorForIconViewNormal1;
+    self.iconView2.backgroundColor = kColorForIconViewNormal2;
+    self.iconView3.backgroundColor = kColorForIconViewNormal3;
+    self.iconView4.backgroundColor = kColorForIconViewNormal4;
 	
-	self.iconView1.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView1.backgroundColorNormal = kColorForIconViewNormal1;
 	self.iconView1.backgroundColorHighlight = kColorForIconViewHighlight;
-	self.iconView2.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView2.backgroundColorNormal = kColorForIconViewNormal2;
 	self.iconView2.backgroundColorHighlight = kColorForIconViewHighlight;
-	self.iconView3.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView3.backgroundColorNormal = kColorForIconViewNormal3;
 	self.iconView3.backgroundColorHighlight = kColorForIconViewHighlight;
-	self.iconView4.backgroundColorNormal = kColorForIconViewNormal;
+	self.iconView4.backgroundColorNormal = kColorForIconViewNormal4;
 	self.iconView4.backgroundColorHighlight = kColorForIconViewHighlight;
 	
 	//Info View Buttons
