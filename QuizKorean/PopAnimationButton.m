@@ -13,7 +13,7 @@
 
 
 #import "PopAnimationButton.h"
-#import <pop/POP.h>
+#import "pop/POP.h"
 
 
 @implementation PopAnimationButton

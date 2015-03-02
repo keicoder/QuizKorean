@@ -8,7 +8,7 @@
 
 
 #import "PopAnimationImageView.h"
-#import <pop/POP.h>
+#import "pop/POP.h"
 
 
 @implementation PopAnimationImageView

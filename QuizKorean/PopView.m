@@ -12,7 +12,7 @@
 
 
 #import "PopView.h"
-#import <pop/POP.h>
+#import "pop/POP.h"
 
 
 @implementation PopView

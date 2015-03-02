@@ -12,7 +12,7 @@
 
 
 #import "PopCustomScaleButton.h"
-#import <pop/POP.h>
+#import "pop/POP.h"
 
 
 @implementation PopCustomScaleButton

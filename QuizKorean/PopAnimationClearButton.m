@@ -12,7 +12,7 @@
 
 
 #import "PopAnimationClearButton.h"
-#import <pop/POP.h>
+#import "pop/POP.h"
 
 
 @implementation PopAnimationClearButton
