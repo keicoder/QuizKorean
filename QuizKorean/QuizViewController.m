@@ -500,7 +500,7 @@
 		self.animator.behindViewAlpha = 0.88f;
 		self.animator.behindViewScale = 1.0f; //0.92f;
 		self.animator.transitionDuration = 0.5f;
-		self.animator.direction = ModalTransitonDirectionLeft;
+		self.animator.direction = ModalTransitonDirectionBottom;
 		
 		controller.transitioningDelegate = self.animator;
 		
