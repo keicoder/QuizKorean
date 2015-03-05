@@ -36,7 +36,7 @@
 
 - (void)updateLabel
 {
-	self.aboutLabel.text = @"서울 열린 데이터 광장의 ‘우리말 문제’ Open API를 활용하여 우리말 맞춤법, 띄어쓰기, 외래어 표기법, 표준어 규정 등 한글정보를 문제 풀이 식으로 학습할 수 있는 앱입니다.\n\n앱에 대한 문의는 트위터 @hyun2012나, lovejun.soft@gmail.com으로 보내주세요.\n\nlovejunsoft 2014";
+	self.aboutLabel.text = @"서울 열린 데이터 광장의 ‘우리말 문제’ Open API를 활용하여 우리말 맞춤법, 띄어쓰기, 외래어 표기법, 표준어 규정 등 한글정보를 문제 풀이 식으로 학습할 수 있는 앱입니다.\n\n앱에 대한 문의는 트위터 @hyun2012나, lovejun.soft@gmail.com으로 보내주세요.\n\nKeiCoder 2015";
 }
 
 
